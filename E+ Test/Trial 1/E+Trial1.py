@@ -3,6 +3,7 @@
 # Importing eppy 
 from eppy import modeleditor
 from eppy.modeleditor import IDF
+import matplotlib.pyplot as plt
 import os
 # import sys
 # pathnameto_eppy = '/opt/homebrew/lib/python3.11/site-packages/eppy'
@@ -17,6 +18,8 @@ epwfile = "/Applications/EnergyPlus-23-2-0/WeatherData/USA_IL_Chicago-OHare.Intl
 
 idf = IDF(idfname, epwfile)
 idf.run()
+
+
 
 # eplusout.shd: Contains shading information for the building.
 # eplusout.bnd: Contains boundary condition information.
