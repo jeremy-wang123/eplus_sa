@@ -10,11 +10,11 @@ import os
 # pathnameto_eppy = '../'
 # sys.path.append(pathnameto_eppy)
 
-iddfile = "/Applications/EnergyPlus-23-2-0/Energy+.idd"
+iddfile = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd"
 IDF.setiddname(iddfile)
 
-idfname = "/Applications/EnergyPlus-23-2-0/ExampleFiles/BasicsFiles/Exercise1A.idf"
-epwfile = "/Applications/EnergyPlus-23-2-0/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
+idfname = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/ExampleFiles/BasicsFiles/Exercise1A.idf"
+epwfile = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/WeatherData/USA_IL_Chicago-OHare.Intl.AP.725300_TMY3.epw"
 
 idf = IDF(idfname, epwfile)
 idf.run()
