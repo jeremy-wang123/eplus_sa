@@ -1248,7 +1248,7 @@ People,
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
     3,                        !- Number of People
-    4.270238e-02,             !- People per Floor Area
+    ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
     ,                         !- Sensible Heat Fraction
@@ -1283,7 +1283,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    35.418030091972454,       !- Design Level
+    500,                      !- Design Level
     ,                         !- Watts per Zone Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1294,8 +1294,8 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE Infil 1,      !- Name
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
-    Flow/Area,                !- Design Flow Rate Calculation Method
-    1.4878838777680585,       !- Design Flow Rate
+    flow/zone,                !- Design Flow Rate Calculation Method
+    0.01,                     !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1728,6 +1728,182 @@ NodeList,
 OutdoorAir:Node,
     Outdoor Condenser Air Node,    !- Name
     1;                        !- Height Above Ground
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    ,                         !- Heater Fuel Type
+    ,                         !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    ,                         !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    ,                         !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    ,                         !- Use Side Inlet Node Name
+    ,                         !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    ,                         !- Source Side Inlet Node Name
+    ,                         !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    ,                         !- Heater Fuel Type
+    ,                         !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    ,                         !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    ,                         !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    ,                         !- Use Side Inlet Node Name
+    ,                         !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    ,                         !- Source Side Inlet Node Name
+    ,                         !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    ,                         !- Heater Fuel Type
+    ,                         !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    ,                         !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    ,                         !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
+    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
+    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    ,                         !- Heater Fuel Type
+    ,                         !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    ,                         !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    ,                         !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
+    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
+    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
 
 AvailabilityManager:Scheduled,
     Reheat System 1 Avail,    !- Name
