@@ -1,7 +1,7 @@
 !- Darwin Line endings 
 
 Version,
-    23.2;                     !- Version Identifier
+    24.1;                     !- Version Identifier
 
 SimulationControl,
     Yes,                      !- Do Zone Sizing Calculation
@@ -276,7 +276,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    22.0;                     !- Field 4
+    20.592523065031237;       !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -284,7 +284,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    26.6;                     !- Field 4
+    25.983840341687895;       !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -1248,14 +1248,14 @@ People,
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
     3,                        !- Number of People
-    4.270238e-02,             !- People per Floor Area
+    4.458981e-02,             !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
     ,                         !- Sensible Heat Fraction
     Activity Sch,             !- Activity Level Schedule Name
     3.82e-08,                 !- Carbon Dioxide Generation Rate
     ,                         !- Enable ASHRAE 55 Comfort Warnings
-    zoneaveraged,             !- Mean Radiant Temperature Calculation Type
+    EnclosureAveraged,        !- Mean Radiant Temperature Calculation Type
     ,                         !- Surface NameAngle Factor List Name
     Work Eff Sch,             !- Work Efficiency Schedule Name
     ClothingInsulationSchedule,    !- Clothing Insulation Calculation Method
@@ -1270,7 +1270,7 @@ Lights,
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
     1000,                     !- Lighting Level
-    ,                         !- Watts per Zone Floor Area
+    ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
     0.2,                      !- Fraction Radiant
@@ -1283,8 +1283,8 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    35.418030091972454,       !- Design Level
-    ,                         !- Watts per Zone Floor Area
+    6.053617158975488,        !- Design Level
+    ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
     0.3,                      !- Fraction Radiant
@@ -1295,7 +1295,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     Flow/Area,                !- Design Flow Rate Calculation Method
-    1.4878838777680585,       !- Design Flow Rate
+    4.270500e-01,             !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1647,6 +1647,7 @@ AirLoopHVAC:UnitarySystem,
     ,                         !- No Load Fraction of Autosized Heating Supply Air Flow Rate
     ,                         !- No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation
     ,                         !- No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation
+    ,                         !- No Load Supply Air Flow Rate Control Set To Low Speed
     45,                       !- Maximum Supply Air Temperature
     4.44444444444444,         !- Maximum Outdoor DryBulb Temperature for Supplemental Heater Operation
     ,                         !- Outdoor DryBulb Temperature Sensor Node Name
@@ -1728,6 +1729,50 @@ NodeList,
 OutdoorAir:Node,
     Outdoor Condenser Air Node,    !- Name
     1;                        !- Height Above Ground
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    ,                         !- Heater Fuel Type
+    ,                         !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    ,                         !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    ,                         !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
+    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
+    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    1.924551e-07,             !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
 
 AvailabilityManager:Scheduled,
     Reheat System 1 Avail,    !- Name

@@ -1,14 +1,14 @@
 !- Darwin Line endings 
 
 Version,
-    23.2;                     !- Version Identifier
+    24.1;                     !- Version Identifier
 
 SimulationControl,
-    Yes,                      !- Do Zone Sizing Calculation
-    Yes,                      !- Do System Sizing Calculation
+    No,                       !- Do Zone Sizing Calculation
+    No,                       !- Do System Sizing Calculation
     No,                       !- Do Plant Sizing Calculation
-    No,                       !- Run Simulation for Sizing Periods
-    Yes,                      !- Run Simulation for Weather File Run Periods
+    Yes,                      !- Run Simulation for Sizing Periods
+    No,                       !- Run Simulation for Weather File Run Periods
     No,                       !- Do HVAC Sizing Simulation for Sizing Periods
     1;                        !- Maximum Number of HVAC Sizing Simulation Passes
 
@@ -17,7 +17,7 @@ Building,
     0,                        !- North Axis
     Suburbs,                  !- Terrain
     0.001,                    !- Loads Convergence Tolerance Value
-    0.006,                    !- Temperature Convergence Tolerance Value
+    0.005,                    !- Temperature Convergence Tolerance Value
     FullInteriorAndExterior,    !- Solar Distribution
     25,                       !- Maximum Number of Warmup Days
     6;                        !- Minimum Number of Warmup Days
@@ -263,6 +263,30 @@ Schedule:Compact,
     0.05;                     !- Field 15
 
 Schedule:Compact,
+    ReportSch,                !- Name
+    on/off,                   !- Schedule Type Limits Name
+    Through: 1/20,            !- Field 1
+    For: AllDays,             !- Field 2
+    Until:  24:00,            !- Field 3
+    0.0,                      !- Field 4
+    Through: 1/21,            !- Field 5
+    For: AllDays,             !- Field 6
+    Until:  24:00,            !- Field 7
+    1.0,                      !- Field 8
+    Through: 7/20,            !- Field 9
+    For: AllDays,             !- Field 10
+    Until:  24:00,            !- Field 11
+    0.0,                      !- Field 12
+    Through: 7/21,            !- Field 13
+    For: AllDays,             !- Field 14
+    Until:  24:00,            !- Field 15
+    1.0,                      !- Field 16
+    Through: 12/31,           !- Field 17
+    For: AllDays,             !- Field 18
+    Until:  24:00,            !- Field 19
+    0.0;                      !- Field 20
+
+Schedule:Compact,
     HVACAvailSched,           !- Name
     Fraction,                 !- Schedule Type Limits Name
     Through: 12/31,           !- Field 1
@@ -309,11 +333,6 @@ Schedule:Compact,
     For: Alldays,             !- Field 2
     Until: 24:00,             !- Field 3
     1.00;                     !- Field 4
-
-Schedule:Constant,
-    Always Off Discrete,      !- Name
-    Any Number,               !- Schedule Type Limits Name
-    0;                        !- Hourly Value
 
 Material,
     A1 - 1 IN STUCCO,         !- Name
@@ -1255,7 +1274,7 @@ People,
     Activity Sch,             !- Activity Level Schedule Name
     3.82e-08,                 !- Carbon Dioxide Generation Rate
     ,                         !- Enable ASHRAE 55 Comfort Warnings
-    zoneaveraged,             !- Mean Radiant Temperature Calculation Type
+    EnclosureAveraged,        !- Mean Radiant Temperature Calculation Type
     ,                         !- Surface NameAngle Factor List Name
     Work Eff Sch,             !- Work Efficiency Schedule Name
     ClothingInsulationSchedule,    !- Clothing Insulation Calculation Method
@@ -1270,7 +1289,7 @@ Lights,
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
     1000,                     !- Lighting Level
-    ,                         !- Watts per Zone Floor Area
+    ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
     0.2,                      !- Fraction Radiant
@@ -1284,7 +1303,7 @@ ElectricEquipment,
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
     500,                      !- Design Level
-    ,                         !- Watts per Zone Floor Area
+    ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
     0.3,                      !- Fraction Radiant
@@ -1353,74 +1372,6 @@ ZoneVentilation:DesignFlowRate,
     ,                         !- Maximum Indoor Temperature
     ,                         !- Maximum Indoor Temperature Schedule Name
     1;                        !- Delta Temperature
-
-Sizing:Zone,
-    LIVING ZONE,              !- Zone or ZoneList Name
-    SupplyAirTemperature,     !- Zone Cooling Design Supply Air Temperature Input Method
-    12.8,                     !- Zone Cooling Design Supply Air Temperature
-    11.11,                    !- Zone Cooling Design Supply Air Temperature Difference
-    SupplyAirTemperature,     !- Zone Heating Design Supply Air Temperature Input Method
-    50,                       !- Zone Heating Design Supply Air Temperature
-    ,                         !- Zone Heating Design Supply Air Temperature Difference
-    0.008,                    !- Zone Cooling Design Supply Air Humidity Ratio
-    0.008,                    !- Zone Heating Design Supply Air Humidity Ratio
-    ,                         !- Design Specification Outdoor Air Object Name
-    ,                         !- Zone Heating Sizing Factor
-    ,                         !- Zone Cooling Sizing Factor
-    DesignDay,                !- Cooling Design Air Flow Method
-    0,                        !- Cooling Design Air Flow Rate
-    ,                         !- Cooling Minimum Air Flow per Zone Floor Area
-    ,                         !- Cooling Minimum Air Flow
-    0,                        !- Cooling Minimum Air Flow Fraction
-    DesignDay,                !- Heating Design Air Flow Method
-    0,                        !- Heating Design Air Flow Rate
-    ,                         !- Heating Maximum Air Flow per Zone Floor Area
-    ,                         !- Heating Maximum Air Flow
-    0,                        !- Heating Maximum Air Flow Fraction
-    ,                         !- Design Specification Zone Air Distribution Object Name
-    No,                       !- Account for Dedicated Outdoor Air System
-    NeutralSupplyAir,         !- Dedicated Outdoor Air System Control Strategy
-    autosize,                 !- Dedicated Outdoor Air Low Setpoint Temperature for Design
-    autosize;                 !- Dedicated Outdoor Air High Setpoint Temperature for Design
-
-Sizing:System,
-    Typical Residential System,    !- AirLoop Name
-    Sensible,                 !- Type of Load to Size On
-    autosize,                 !- Design Outdoor Air Flow Rate
-    1,                        !- Central Heating Maximum System Air Flow Ratio
-    7,                        !- Preheat Design Temperature
-    0.008,                    !- Preheat Design Humidity Ratio
-    11,                       !- Precool Design Temperature
-    0.008,                    !- Precool Design Humidity Ratio
-    12,                       !- Central Cooling Design Supply Air Temperature
-    50,                       !- Central Heating Design Supply Air Temperature
-    NonCoincident,            !- Type of Zone Sum to Use
-    No,                       !- 100 Outdoor Air in Cooling
-    No,                       !- 100 Outdoor Air in Heating
-    0.008,                    !- Central Cooling Design Supply Air Humidity Ratio
-    0.008,                    !- Central Heating Design Supply Air Humidity Ratio
-    DesignDay,                !- Cooling Supply Air Flow Rate Method
-    ,                         !- Cooling Supply Air Flow Rate
-    ,                         !- Cooling Supply Air Flow Rate Per Floor Area
-    ,                         !- Cooling Fraction of Autosized Cooling Supply Air Flow Rate
-    ,                         !- Cooling Supply Air Flow Rate Per Unit Cooling Capacity
-    DesignDay,                !- Heating Supply Air Flow Rate Method
-    ,                         !- Heating Supply Air Flow Rate
-    ,                         !- Heating Supply Air Flow Rate Per Floor Area
-    ,                         !- Heating Fraction of Autosized Heating Supply Air Flow Rate
-    ,                         !- Heating Fraction of Autosized Cooling Supply Air Flow Rate
-    ,                         !- Heating Supply Air Flow Rate Per Unit Heating Capacity
-    ,                         !- System Outdoor Air Method
-    1,                        !- Zone Maximum Outdoor Air Fraction
-    CoolingDesignCapacity,    !- Cooling Design Capacity Method
-    autosize,                 !- Cooling Design Capacity
-    ,                         !- Cooling Design Capacity Per Floor Area
-    ,                         !- Fraction of Autosized Cooling Design Capacity
-    HeatingDesignCapacity,    !- Heating Design Capacity Method
-    autosize,                 !- Heating Design Capacity
-    ,                         !- Heating Design Capacity Per Floor Area
-    ,                         !- Fraction of Autosized Heating Design Capacity
-    OnOff;                    !- Central Cooling Capacity Control Method
 
 ZoneControl:Thermostat,
     Zone Thermostat,          !- Name
@@ -1549,26 +1500,21 @@ Coil:Cooling:DX:MultiSpeed,
     0.1,                      !- Speed 2 Evaporative Condenser Air Flow Rate
     60;                       !- Speed 2 Rated Evaporative Condenser Pump Power Consumption
 
-Coil:Heating:Electric:MultiStage,
+Coil:Heating:Fuel,
     Supp Heating Coil 1,      !- Name
     HVACAvailSched,           !- Availability Schedule Name
+    NaturalGas,               !- Fuel Type
+    0.8,                      !- Burner Efficiency
+    55000,                    !- Nominal Capacity
     SuppHeating Coil Air Inlet Node,    !- Air Inlet Node Name
-    Air Loop Outlet Node,     !- Air Outlet Node Name
-    ,                         !- Temperature Setpoint Node Name
-    3,                        !- Number of Stages
-    1,                        !- Stage 1 Efficiency
-    autosize,                 !- Stage 1 Nominal Capacity
-    1,                        !- Stage 2 Efficiency
-    autosize,                 !- Stage 2 Nominal Capacity
-    1,                        !- Stage 3 Efficiency
-    autosize;                 !- Stage 3 Nominal Capacity
+    Air Loop Outlet Node;     !- Air Outlet Node Name
 
 Coil:Heating:DX:MultiSpeed,
     Heat Pump DX Heating Coil 1,    !- Name
     HVACAvailSched,           !- Availability Schedule Name
     Heating Coil Air Inlet Node,    !- Air Inlet Node Name
     SuppHeating Coil Air Inlet Node,    !- Air Outlet Node Name
-    -20,                      !- Minimum Outdoor DryBulb Temperature for Compressor Operation
+    -13.88889,                !- Minimum Outdoor DryBulb Temperature for Compressor Operation
     -8.8,                     !- Outdoor DryBulb Temperature to Turn On Compressor
     200,                      !- Crankcase Heater Capacity
     ,                         !- Crankcase Heater Capacity Function of Temperature Curve Name
@@ -1583,7 +1529,7 @@ Coil:Heating:DX:MultiSpeed,
     Electricity,              !- Fuel Type
     4,                        !- Region number for Calculating HSPF
     2,                        !- Number of Speeds
-    autosize,                 !- Speed 1 Gross Rated Heating Capacity
+    10164,                    !- Speed 1 Gross Rated Heating Capacity
     4.235,                    !- Speed 1 Gross Rated Heating COP
     0.6135,                   !- Speed 1 Rated Air Flow Rate
     573.3,                    !- 2017 Speed 1 Rated Supply Air Fan Power Per Volume Flow Rate
@@ -1595,7 +1541,7 @@ Coil:Heating:DX:MultiSpeed,
     HPACHeatPLFFPLR Speed 1,    !- Speed 1 Part Load Fraction Correlation Curve Name
     0.2,                      !- Speed 1 Rated Waste Heat Fraction of Power Input
     HAPCHeatWHFT Speed 1,     !- Speed 1 Waste Heat Function of Temperature Curve Name
-    autosize,                 !- Speed 2 Gross Rated Heating Capacity
+    13866,                    !- Speed 2 Gross Rated Heating Capacity
     3.9,                      !- Speed 2 Gross Rated Heating COP
     0.7551,                   !- Speed 2 Rated Air Flow Rate
     673.3,                    !- 2017 Speed 2 Rated Supply Air Fan Power Per Volume Flow Rate
@@ -1608,67 +1554,42 @@ Coil:Heating:DX:MultiSpeed,
     0.2,                      !- Speed 2 Rated Waste Heat Fraction of Power Input
     HAPCHeatWHFT Speed 2;     !- Speed 2 Waste Heat Function of Temperature Curve Name
 
-AirLoopHVAC:UnitarySystem,
+AirLoopHVAC:UnitaryHeatPump:AirToAir:MultiSpeed,
     TwoSpeed Heat Pump 1,     !- Name
-    Load,                     !- Control Type
-    LIVING ZONE,              !- Controlling Zone or Thermostat Location
-    None,                     !- Dehumidification Control Type
     HVACAvailSched,           !- Availability Schedule Name
     AIR LOOP INLET NODE,      !- Air Inlet Node Name
     Air Loop Outlet Node,     !- Air Outlet Node Name
-    Fan:OnOff,                !- Supply Fan Object Type
-    Supply Fan 1,             !- Supply Fan Name
-    BlowThrough,              !- Fan Placement
-    Always Off Discrete,      !- Supply Air Fan Operating Mode Schedule Name
+    LIVING ZONE,              !- Controlling Zone or Thermostat Location
+    Fan:OnOff,                !- Supply Air Fan Object Type
+    Supply Fan 1,             !- Supply Air Fan Name
+    BlowThrough,              !- Supply Air Fan Placement
+    CyclingFanSchedule,       !- Supply Air Fan Operating Mode Schedule Name
     Coil:Heating:DX:MultiSpeed,    !- Heating Coil Object Type
     Heat Pump DX Heating Coil 1,    !- Heating Coil Name
-    1,                        !- DX Heating Coil Sizing Ratio
+    -8,                       !- Minimum Outdoor DryBulb Temperature for Compressor Operation
     Coil:Cooling:DX:MultiSpeed,    !- Cooling Coil Object Type
     ACDXCoil 1,               !- Cooling Coil Name
-    No,                       !- Use DOAS DX Cooling Coil
-    2,                        !- Minimum Supply Air Temperature
-    SensibleOnlyLoadControl,    !- Latent Load Control
-    Coil:Heating:Electric:MultiStage,    !- Supplemental Heating Coil Object Type
+    Coil:Heating:Fuel,        !- Supplemental Heating Coil Object Type
     Supp Heating Coil 1,      !- Supplemental Heating Coil Name
-    SupplyAirFlowRate,        !- Cooling Supply Air Flow Rate Method
-    autosize,                 !- Cooling Supply Air Flow Rate
-    ,                         !- Cooling Supply Air Flow Rate Per Floor Area
-    ,                         !- Cooling Fraction of Autosized Cooling Supply Air Flow Rate
-    ,                         !- Cooling Supply Air Flow Rate Per Unit of Capacity
-    SupplyAirFlowRate,        !- Heating Supply Air Flow Rate Method
-    autosize,                 !- Heating Supply Air Flow Rate
-    ,                         !- Heating Supply Air Flow Rate Per Floor Area
-    ,                         !- Heating Fraction of Autosized Heating Supply Air Flow Rate
-    ,                         !- Heating Supply Air Flow Rate Per Unit of Capacity
-    ,                         !- No Load Supply Air Flow Rate Method
-    0,                        !- No Load Supply Air Flow Rate
-    ,                         !- No Load Supply Air Flow Rate Per Floor Area
-    ,                         !- No Load Fraction of Autosized Cooling Supply Air Flow Rate
-    ,                         !- No Load Fraction of Autosized Heating Supply Air Flow Rate
-    ,                         !- No Load Supply Air Flow Rate Per Unit of Capacity During Cooling Operation
-    ,                         !- No Load Supply Air Flow Rate Per Unit of Capacity During Heating Operation
-    45,                       !- Maximum Supply Air Temperature
-    4.44444444444444,         !- Maximum Outdoor DryBulb Temperature for Supplemental Heater Operation
-    ,                         !- Outdoor DryBulb Temperature Sensor Node Name
-    0,                        !- Ancillary OnCycle Electric Power
-    0,                        !- Ancillary OffCycle Electric Power
-    ,                         !- Design Heat Recovery Water Flow Rate
-    ,                         !- Maximum Temperature for Heat Recovery
+    70,                       !- Maximum Supply Air Temperature from Supplemental Heater
+    21,                       !- Maximum Outdoor DryBulb Temperature for Supplemental Heater Operation
+    0,                        !- Auxiliary OnCycle Electric Power
+    0,                        !- Auxiliary OffCycle Electric Power
+    0,                        !- Design Heat Recovery Water Flow Rate
+    80,                       !- Maximum Temperature for Heat Recovery
     ,                         !- Heat Recovery Water Inlet Node Name
     ,                         !- Heat Recovery Water Outlet Node Name
-    UnitarySystemPerformance:Multispeed,    !- Design Specification Multispeed Object Type
-    Unitary System Performance Multispeed 1;    !- Design Specification Multispeed Object Name
-
-UnitarySystemPerformance:Multispeed,
-    Unitary System Performance Multispeed 1,    !- Name
+    0.2,                      !- No Load Supply Air Flow Rate
     2,                        !- Number of Speeds for Heating
     2,                        !- Number of Speeds for Cooling
-    No,                       !- Single Mode Operation
-    ,                         !- No Load Supply Air Flow Rate Ratio
-    0.8,                      !- Heating Speed 1 Supply Air Flow Ratio
-    0.86,                     !- Cooling Speed 1 Supply Air Flow Ratio
-    1,                        !- Heating Speed 2 Supply Air Flow Ratio
-    1;                        !- Cooling Speed 2 Supply Air Flow Ratio
+    0.6135,                   !- Heating Speed 1 Supply Air Flow Rate
+    0.7551,                   !- Heating Speed 2 Supply Air Flow Rate
+    ,                         !- Heating Speed 3 Supply Air Flow Rate
+    ,                         !- Heating Speed 4 Supply Air Flow Rate
+    0.6135,                   !- Cooling Speed 1 Supply Air Flow Rate
+    0.7551,                   !- Cooling Speed 2 Supply Air Flow Rate
+    ,                         !- Cooling Speed 3 Supply Air Flow Rate
+    ;                         !- Cooling Speed 4 Supply Air Flow Rate
 
 AirLoopHVAC,
     Typical Residential System,    !- Name
@@ -1707,7 +1628,7 @@ AirLoopHVAC:ReturnPath,
 Branch,
     Air Loop Main Branch,     !- Name
     ,                         !- Pressure Drop Curve Name
-    AirLoopHVAC:UnitarySystem,    !- Component 1 Object Type
+    AirLoopHVAC:UnitaryHeatPump:AirToAir:MultiSpeed,    !- Component 1 Object Type
     TwoSpeed Heat Pump 1,     !- Component 1 Name
     Air Loop Inlet Node,      !- Component 1 Inlet Node Name
     Air Loop Outlet Node;     !- Component 1 Outlet Node Name
@@ -1740,8 +1661,8 @@ WATERHEATER:MIXED,
     1000,                     !- Heater Minimum Capacity
     0,                        !- Heater Ignition Minimum Flow Rate
     0,                        !- Heater Ignition Delay
-    ,                         !- Heater Fuel Type
-    ,                         !- Heater Thermal Efficiency
+    Electricity,              !- Heater Fuel Type
+    0.92,                     !- Heater Thermal Efficiency
     ,                         !- Part Load Factor Curve Name
     0,                        !- Off Cycle Parasitic Fuel Consumption Rate
     ,                         !- Off Cycle Parasitic Fuel Type
@@ -1749,139 +1670,7 @@ WATERHEATER:MIXED,
     0,                        !- On Cycle Parasitic Fuel Consumption Rate
     ,                         !- On Cycle Parasitic Fuel Type
     0,                        !- On Cycle Parasitic Heat Fraction to Tank
-    ,                         !- Ambient Temperature Indicator
-    ,                         !- Ambient Temperature Schedule Name
-    ,                         !- Ambient Temperature Zone Name
-    ,                         !- Ambient Temperature Outdoor Air Node Name
-    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- Off Cycle Loss Fraction to Zone
-    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- On Cycle Loss Fraction to Zone
-    ,                         !- Peak Use Flow Rate
-    ,                         !- Use Flow Rate Fraction Schedule Name
-    ,                         !- Cold Water Supply Temperature Schedule Name
-    ,                         !- Use Side Inlet Node Name
-    ,                         !- Use Side Outlet Node Name
-    1,                        !- Use Side Effectiveness
-    ,                         !- Source Side Inlet Node Name
-    ,                         !- Source Side Outlet Node Name
-    1,                        !- Source Side Effectiveness
-    autosize,                 !- Use Side Design Flow Rate
-    autosize,                 !- Source Side Design Flow Rate
-    1.5,                      !- Indirect Water Heating Recovery Time
-    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
-    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
-    General;                  !- EndUse Subcategory
-
-WATERHEATER:MIXED,
-    New Water Heater,         !- Name
-    0.15,                     !- Tank Volume
-    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
-    0,                        !- Deadband Temperature Difference
-    ,                         !- Maximum Temperature Limit
-    Cycle,                    !- Heater Control Type
-    2000,                     !- Heater Maximum Capacity
-    1000,                     !- Heater Minimum Capacity
-    0,                        !- Heater Ignition Minimum Flow Rate
-    0,                        !- Heater Ignition Delay
-    ,                         !- Heater Fuel Type
-    ,                         !- Heater Thermal Efficiency
-    ,                         !- Part Load Factor Curve Name
-    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
-    ,                         !- Off Cycle Parasitic Fuel Type
-    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
-    0,                        !- On Cycle Parasitic Fuel Consumption Rate
-    ,                         !- On Cycle Parasitic Fuel Type
-    0,                        !- On Cycle Parasitic Heat Fraction to Tank
-    ,                         !- Ambient Temperature Indicator
-    ,                         !- Ambient Temperature Schedule Name
-    ,                         !- Ambient Temperature Zone Name
-    ,                         !- Ambient Temperature Outdoor Air Node Name
-    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- Off Cycle Loss Fraction to Zone
-    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- On Cycle Loss Fraction to Zone
-    ,                         !- Peak Use Flow Rate
-    ,                         !- Use Flow Rate Fraction Schedule Name
-    ,                         !- Cold Water Supply Temperature Schedule Name
-    ,                         !- Use Side Inlet Node Name
-    ,                         !- Use Side Outlet Node Name
-    1,                        !- Use Side Effectiveness
-    ,                         !- Source Side Inlet Node Name
-    ,                         !- Source Side Outlet Node Name
-    1,                        !- Source Side Effectiveness
-    autosize,                 !- Use Side Design Flow Rate
-    autosize,                 !- Source Side Design Flow Rate
-    1.5,                      !- Indirect Water Heating Recovery Time
-    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
-    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
-    General;                  !- EndUse Subcategory
-
-WATERHEATER:MIXED,
-    New Water Heater,         !- Name
-    0.15,                     !- Tank Volume
-    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
-    0,                        !- Deadband Temperature Difference
-    ,                         !- Maximum Temperature Limit
-    Cycle,                    !- Heater Control Type
-    2000,                     !- Heater Maximum Capacity
-    1000,                     !- Heater Minimum Capacity
-    0,                        !- Heater Ignition Minimum Flow Rate
-    0,                        !- Heater Ignition Delay
-    ,                         !- Heater Fuel Type
-    ,                         !- Heater Thermal Efficiency
-    ,                         !- Part Load Factor Curve Name
-    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
-    ,                         !- Off Cycle Parasitic Fuel Type
-    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
-    0,                        !- On Cycle Parasitic Fuel Consumption Rate
-    ,                         !- On Cycle Parasitic Fuel Type
-    0,                        !- On Cycle Parasitic Heat Fraction to Tank
-    ,                         !- Ambient Temperature Indicator
-    ,                         !- Ambient Temperature Schedule Name
-    ,                         !- Ambient Temperature Zone Name
-    ,                         !- Ambient Temperature Outdoor Air Node Name
-    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- Off Cycle Loss Fraction to Zone
-    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
-    1,                        !- On Cycle Loss Fraction to Zone
-    ,                         !- Peak Use Flow Rate
-    ,                         !- Use Flow Rate Fraction Schedule Name
-    ,                         !- Cold Water Supply Temperature Schedule Name
-    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
-    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
-    1,                        !- Use Side Effectiveness
-    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
-    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
-    1,                        !- Source Side Effectiveness
-    autosize,                 !- Use Side Design Flow Rate
-    autosize,                 !- Source Side Design Flow Rate
-    1.5,                      !- Indirect Water Heating Recovery Time
-    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
-    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
-    General;                  !- EndUse Subcategory
-
-WATERHEATER:MIXED,
-    New Water Heater,         !- Name
-    0.15,                     !- Tank Volume
-    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
-    0,                        !- Deadband Temperature Difference
-    ,                         !- Maximum Temperature Limit
-    Cycle,                    !- Heater Control Type
-    2000,                     !- Heater Maximum Capacity
-    1000,                     !- Heater Minimum Capacity
-    0,                        !- Heater Ignition Minimum Flow Rate
-    0,                        !- Heater Ignition Delay
-    ,                         !- Heater Fuel Type
-    ,                         !- Heater Thermal Efficiency
-    ,                         !- Part Load Factor Curve Name
-    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
-    ,                         !- Off Cycle Parasitic Fuel Type
-    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
-    0,                        !- On Cycle Parasitic Fuel Consumption Rate
-    ,                         !- On Cycle Parasitic Fuel Type
-    0,                        !- On Cycle Parasitic Heat Fraction to Tank
-    ,                         !- Ambient Temperature Indicator
+    Zone,                     !- Ambient Temperature Indicator
     ,                         !- Ambient Temperature Schedule Name
     ,                         !- Ambient Temperature Zone Name
     ,                         !- Ambient Temperature Outdoor Air Node Name
@@ -2342,67 +2131,68 @@ OutputControl:Table:Style,
 Output:Variable,
     *,                        !- Key Value
     Cooling Coil Total Cooling Energy,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Heating Coil Heating Energy,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Heating Coil Heating Energy,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Zone Air Temperature,     !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Zone Air System Sensible Heating Energy,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Zone Air System Sensible Cooling Energy,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Unitary System DX Coil Cycling Ratio,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Unitary System DX Coil Speed Ratio,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Unitary System DX Coil Speed Level,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Zone Thermostat Heating Setpoint Temperature,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Variable,
     *,                        !- Key Value
     Zone Thermostat Cooling Setpoint Temperature,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
-
-Output:Variable,
-    SuppHeating Coil Air Inlet Node,    !- Key Value
-    System Node Temperature,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
-
-Output:Variable,
-    Air Loop Outlet Node,     !- Key Value
-    System Node Temperature,    !- Variable Name
-    TimeStep;                 !- Reporting Frequency
+    TimeStep,                 !- Reporting Frequency
+    ReportSch;                !- Schedule Name
 
 Output:Meter:MeterFileOnly,
     Electricity:Facility,     !- Key Name
