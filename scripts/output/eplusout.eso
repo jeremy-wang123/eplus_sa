@@ -1,0 +1,22 @@
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.05.24 16:55
+1,5,Environment Title[],Latitude[deg],Longitude[deg],Time Zone[],Elevation[m]
+2,8,Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],Hour[],StartMinute[],EndMinute[],DayType
+3,5,Cumulative Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],DayType  ! When Daily Report Variables Requested
+4,2,Cumulative Days of Simulation[],Month[]  ! When Monthly Report Variables Requested
+5,1,Cumulative Days of Simulation[] ! When Run Period Report Variables Requested
+6,1,Calendar Year of Simulation[] ! When Annual Report Variables Requested
+250,1,LIVING ZONE,Zone Air Temperature [C] !TimeStep,REPORTSCH
+251,1,LIVING ZONE,Zone Air System Sensible Heating Energy [J] !TimeStep,REPORTSCH
+336,1,LIVING ZONE,Zone Air System Sensible Cooling Energy [J] !TimeStep,REPORTSCH
+385,1,LIVING ZONE,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep,REPORTSCH
+386,1,LIVING ZONE,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep,REPORTSCH
+387,1,GARAGE ZONE,Zone Air Temperature [C] !TimeStep,REPORTSCH
+388,1,GARAGE ZONE,Zone Air System Sensible Heating Energy [J] !TimeStep,REPORTSCH
+425,1,GARAGE ZONE,Zone Air System Sensible Cooling Energy [J] !TimeStep,REPORTSCH
+450,1,GARAGE ZONE,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep,REPORTSCH
+451,1,GARAGE ZONE,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep,REPORTSCH
+452,1,ATTIC ZONE,Zone Air Temperature [C] !TimeStep,REPORTSCH
+453,1,ATTIC ZONE,Zone Air System Sensible Heating Energy [J] !TimeStep,REPORTSCH
+490,1,ATTIC ZONE,Zone Air System Sensible Cooling Energy [J] !TimeStep,REPORTSCH
+515,1,ATTIC ZONE,Zone Thermostat Heating Setpoint Temperature [C] !TimeStep,REPORTSCH
+516,1,ATTIC ZONE,Zone Thermostat Cooling Setpoint Temperature [C] !TimeStep,REPORTSCH
