@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.05.24 16:48,
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.10 10:06,
 Var Type (reported time step),Var Report Type,Variable Name [Units]
 Zone,Meter,Electricity:Facility [J]
 Zone,Meter,Electricity:Building [J]
