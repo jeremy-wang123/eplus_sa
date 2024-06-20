@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.10 10:06,
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.19 21:06,
    ** Warning ** GetSimpleAirModelInputs: ZoneInfiltration:DesignFlowRate="LIVING ZONE INFIL 1", Design Flow Rate Calculation Method specifies Flow Rate per Floor Area, but that field is blank.  0 Infiltration will result.
    ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Setpoint Temperature Schedule Name not found = HOT WATER SETPOINT TEMP
    ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Ambient Temperature Zone not found = APPROPRIATE ZONE NAME
@@ -35,4 +35,4 @@ Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.10 10:06,
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 3 Warning; 4 Severe Errors; Elapsed Time=00hr 00min  0.16sec
+   ************* EnergyPlus Completed Successfully-- 3 Warning; 4 Severe Errors; Elapsed Time=00hr 00min  0.14sec

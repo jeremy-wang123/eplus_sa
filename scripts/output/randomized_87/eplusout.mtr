@@ -1,0 +1,52 @@
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.19 21:16
+1,5,Environment Title[],Latitude[deg],Longitude[deg],Time Zone[],Elevation[m]
+2,8,Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],Hour[],StartMinute[],EndMinute[],DayType
+3,5,Cumulative Day of Simulation[],Month[],Day of Month[],DST Indicator[1=yes 0=no],DayType  ! When Daily Meters Requested
+4,2,Cumulative Days of Simulation[],Month[]  ! When Monthly Meters Requested
+5,1,Cumulative Days of Simulation[] ! When Run Period Meters Requested
+6,1,Calendar Year of Simulation[] ! When Annual Meters Requested
+11,9,Electricity:Facility [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+23,9,Electricity:Building [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+59,9,InteriorLights:Electricity [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+521,9,Electricity:HVAC [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+637,9,NaturalGas:Facility [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+649,9,NaturalGas:HVAC [J] !Monthly [Value,Min,Day,Hour,Minute,Max,Day,Hour,Minute]
+13,11,Electricity:Facility [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+25,11,Electricity:Building [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+61,11,InteriorLights:Electricity [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+523,11,Electricity:HVAC [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+639,11,NaturalGas:Facility [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+651,11,NaturalGas:HVAC [J] !RunPeriod [Value,Min,Month,Day,Hour,Minute,Max,Month,Day,Hour,Minute]
+End of Data Dictionary
+1,CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,  41.98, -87.92,  -6.00, 201.00
+4,1, 1
+11,49767387.42857141,305334.85714285716,21, 1,10,408891.42857142864,21, 1,20
+23,4320000.0,30000.0,21, 1,10,30000.0,21, 1,10
+59,4320000.0,30000.0,21, 1,10,30000.0,21, 1,10
+521,45447387.428571425,275334.85714285716,21, 1,10,378891.42857142864,21, 1,20
+637,847288917.6683043,5236804.872695679,21, 1,10,7154943.571555194,21,24,50
+649,847288917.6683043,5236804.872695679,21, 1,10,7154943.571555194,21,24,50
+5,1
+13,49767387.42857141,305334.85714285716, 1,21, 1,10,408891.42857142864, 1,21, 1,20
+25,4320000.0,30000.0, 1,21, 1,10,30000.0, 1,21, 1,10
+61,4320000.0,30000.0, 1,21, 1,10,30000.0, 1,21, 1,10
+523,45447387.428571425,275334.85714285716, 1,21, 1,10,378891.42857142864, 1,21, 1,20
+639,847288917.6683043,5236804.872695679, 1,21, 1,10,7154943.571555194, 1,21,24,50
+651,847288917.6683043,5236804.872695679, 1,21, 1,10,7154943.571555194, 1,21,24,50
+1,CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,  41.98, -87.92,  -6.00, 201.00
+4,1, 7
+11,74088862.78689466,99644.03639922358,21, 9,30,1382667.8437866564,21,17,40
+23,10508630.823069239,99999999999999.0,21, 1,10,107316.56168261066,21, 1,60
+59,4320000.0,99999999999999.0,21, 1,10,-99999999999999.0,21, 1,10
+521,63580231.96382543,0.0,21, 1,10,1352667.8437866564,21,17,40
+637,0.0,0.0,21, 1,10,-99999999999999.0,21,24,50
+649,0.0,0.0,21, 1,10,-99999999999999.0,21,24,50
+5,1
+13,74088862.78689466,99644.03639922358, 7,21, 9,30,1382667.8437866564, 7,21,17,40
+25,10508630.823069239,99999999999999.0, 1,21, 1,10,107316.56168261066, 7,21, 1,60
+61,4320000.0,99999999999999.0, 1,21, 1,10,-99999999999999.0, 1,21, 1,10
+523,63580231.96382543,0.0, 7,21, 1,10,1352667.8437866564, 7,21,17,40
+639,0.0,0.0, 7,21, 1,10,-99999999999999.0, 1,21,24,50
+651,0.0,0.0, 7,21, 1,10,-99999999999999.0, 1,21,24,50
+End of Data
+ Number of Records Written=          24
