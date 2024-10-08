@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.06.19 21:16
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2024.07.03 09:44
 ! <Version>, Version ID
  Version, 24.1
 ! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
@@ -66,7 +66,7 @@ Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.
  Zone Information, GARAGE ZONE,0.0,0.00,0.00,0.00,13.78,13.83,1.22,1,1,1,10.32,17.24,10.78,16.88,0.00,2.44,2.44,102.88,TARP,DOE-2,42.19,46.61,46.61,0.00,6,0,0,Yes
  Zone Information, ATTIC ZONE,0.0,0.00,0.00,0.00,9.57,6.97,3.01,1,1,1,0.00,17.24,0.00,16.88,2.44,4.68,1.05,244.85,TARP,DOE-2,228.03,29.19,29.19,0.00,12,0,0,Yes
 ! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
- Zone Internal Gains Nominal, LIVING ZONE,185.83,3.0,61.945,1.614E-002,5.381,0.166,0.000,0.000,0.000,0.000,5.547,No
+ Zone Internal Gains Nominal, LIVING ZONE,185.83,3.0,61.945,1.614E-002,5.381,7.529E-003,0.000,0.000,0.000,0.000,5.389,No
  Zone Internal Gains Nominal, GARAGE ZONE,42.19,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
  Zone Internal Gains Nominal, ATTIC ZONE,228.03,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
 ! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Nominal Minimum Number of People,Nominal Maximum Number of People,MRT Calculation Type,Work Efficiency, Clothing Insulation Calculation Method,Clothing Insulation Calculation Method Schedule,Clothing,Air Velocity,Fanger Calculation,Pierce Calculation,KSU Calculation,Cooling Effect Calculation,Ankle Draft Calculation
@@ -74,7 +74,7 @@ Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.
 ! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use Category,Nominal Minimum Lighting Level {W},Nominal Maximum Lighting Level {W}
  Lights Internal Gains Nominal, LIVING ZONE LIGHTS,HOUSE LIGHTING,LIVING ZONE,185.83,3.0,1000.000,5.381,333.333,0.000,0.200,0.200,0.600,0.000,GeneralLights,50.000,1000.000
 ! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Nominal Minimum Equipment Level {W},Nominal Maximum Equipment Level {W}
- ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,3.0,30.781,0.166,10.260,0.000,0.300,0.000,0.700,General,0.000,30.781
+ ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,3.0,1.399,7.529E-003,0.466,0.000,0.300,0.000,0.700,General,0.000,1.399
 ! <Shadowing/Sun Position Calculations Annual Simulations>, Shading Calculation Method, Shading Calculation Update Frequency Method, Shading Calculation Update Frequency {days}, Maximum Figures in Shadow Overlap Calculations {}, Polygon Clipping Algorithm, Pixel Counting Resolution, Sky Diffuse Modeling Algorithm, Output External Shading Calculation Results, Disable Self-Shading Within Shading Zone Groups, Disable Self-Shading From Shading Zone Groups to Other Zones
 Shadowing/Sun Position Calculations Annual Simulations,PolygonClipping,Periodic,20,15000,SutherlandHodgman,512,SimpleSkyDiffuseModeling,No,No,No
 ! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
@@ -127,17 +127,17 @@ Environment:Design Day Data,-17.30,0.00,DefaultMultipliers,Wetbulb,-17.30,{C},99
 Environment:Design Day Misc, 21,1229.0,0.1415,5.7310E-002,1.0,-11.15,-20.1,ASHRAEClearSky
 Environment:WarmupDays,  6
 ! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
- Warmup Convergence Information,LIVING ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,0.4554566738,0.2661550550,Pass,Pass,0.7221358929,0.5368779312,Pass,Pass
- Warmup Convergence Information,GARAGE ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,5.4180665940E-005,4.6684529458E-005,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
- Warmup Convergence Information,ATTIC ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,9.6005275754E-005,3.8354997952E-005,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,LIVING ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,0.4425993299,0.2588420397,Pass,Pass,0.7664049761,0.5777628961,Pass,Pass
+ Warmup Convergence Information,GARAGE ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,5.4558068586E-005,4.3517019446E-005,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,ATTIC ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL HEATING 99% DESIGN CONDITIONS DB,9.2547755971E-005,4.1871952468E-005,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
 Environment,CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,SizingPeriod:DesignDay,07/21,07/21,SummerDesignDay,1,N/A,N/A,N/A,N/A,N/A,N/A,Clark and Allen
 Environment:Daylight Saving,No,SizingPeriod:DesignDay
 Environment:Design Day Data,31.50,10.70,DefaultMultipliers,Wetbulb,23.00,{C},99063,230,5.3,1.00,No,No
 Environment:Design Day Misc,202,1084.4,0.2082,0.1365,1.0,-6.23,20.6,ASHRAEClearSky
 Environment:WarmupDays,  6
- Warmup Convergence Information,LIVING ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.4775703268,0.3329522856,Pass,Pass,0.4875197311,1.3119017311,Pass,Pass
- Warmup Convergence Information,GARAGE ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.1625729826,9.1052395050E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
- Warmup Convergence Information,ATTIC ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.4357075308,0.3584884319,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,LIVING ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.4539481002,0.3164483737,Pass,Pass,1.0893848285,5.9822996669,Pass,Pass
+ Warmup Convergence Information,GARAGE ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.1625880134,9.1156809534E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,ATTIC ZONE,SizingPeriod: CHICAGO_IL_USA ANNUAL COOLING 1% DESIGN CONDITIONS DB/MCWB,0.4355736454,0.3593102798,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
 ! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
 Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
 End of Data

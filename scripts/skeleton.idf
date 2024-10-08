@@ -1694,6 +1694,50 @@ WATERHEATER:MIXED,
     ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
     General;                  !- EndUse Subcategory
 
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    Electricity,              !- Heater Fuel Type
+    0.92,                     !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    Zone,                     !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    Appropriate Zone Name,    !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
+    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
+    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
+
 AvailabilityManager:Scheduled,
     Reheat System 1 Avail,    !- Name
     HVACAvailSched;           !- Schedule Name

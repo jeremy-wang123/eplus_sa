@@ -300,7 +300,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    17.225618700730596;       !- Field 4
+    20.59200792240393;        !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -308,7 +308,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    27.450503796899945;       !- Field 4
+    27.620624945744307;       !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -1267,7 +1267,7 @@ People,
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
     3,                        !- Number of People
-    0.02114015,               !- People per Floor Area
+    0.01036856,               !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
     ,                         !- Sensible Heat Fraction
@@ -1302,7 +1302,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    8.452773385913211,        !- Design Level
+    6.978612538775912,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1314,7 +1314,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     Flow/Area,                !- Design Flow Rate Calculation Method
-    1.2432517987271332,       !- Design Flow Rate
+    0.5260286726381795,       !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1687,7 +1687,51 @@ WATERHEATER:MIXED,
     Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
     Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
     1,                        !- Source Side Effectiveness
-    8.857795e-08,             !- Use Side Design Flow Rate
+    1.970158e-07,             !- Use Side Design Flow Rate
+    autosize,                 !- Source Side Design Flow Rate
+    1.5,                      !- Indirect Water Heating Recovery Time
+    IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
+    ,                         !- Indirect Alternate Setpoint Temperature Schedule Name
+    General;                  !- EndUse Subcategory
+
+WATERHEATER:MIXED,
+    New Water Heater,         !- Name
+    0.15,                     !- Tank Volume
+    Hot Water Setpoint Temp,    !- Setpoint Temperature Schedule Name
+    0,                        !- Deadband Temperature Difference
+    ,                         !- Maximum Temperature Limit
+    Cycle,                    !- Heater Control Type
+    2000,                     !- Heater Maximum Capacity
+    1000,                     !- Heater Minimum Capacity
+    0,                        !- Heater Ignition Minimum Flow Rate
+    0,                        !- Heater Ignition Delay
+    Electricity,              !- Heater Fuel Type
+    0.92,                     !- Heater Thermal Efficiency
+    ,                         !- Part Load Factor Curve Name
+    0,                        !- Off Cycle Parasitic Fuel Consumption Rate
+    ,                         !- Off Cycle Parasitic Fuel Type
+    0,                        !- Off Cycle Parasitic Heat Fraction to Tank
+    0,                        !- On Cycle Parasitic Fuel Consumption Rate
+    ,                         !- On Cycle Parasitic Fuel Type
+    0,                        !- On Cycle Parasitic Heat Fraction to Tank
+    Zone,                     !- Ambient Temperature Indicator
+    ,                         !- Ambient Temperature Schedule Name
+    Appropriate Zone Name,    !- Ambient Temperature Zone Name
+    ,                         !- Ambient Temperature Outdoor Air Node Name
+    ,                         !- Off Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- Off Cycle Loss Fraction to Zone
+    ,                         !- On Cycle Loss Coefficient to Ambient Temperature
+    1,                        !- On Cycle Loss Fraction to Zone
+    ,                         !- Peak Use Flow Rate
+    ,                         !- Use Flow Rate Fraction Schedule Name
+    ,                         !- Cold Water Supply Temperature Schedule Name
+    Hot Water Use Inlet Node,    !- Use Side Inlet Node Name
+    Hot Water Use Outlet Node,    !- Use Side Outlet Node Name
+    1,                        !- Use Side Effectiveness
+    Hot Water Source Inlet Node,    !- Source Side Inlet Node Name
+    Hot Water Source Outlet Node,    !- Source Side Outlet Node Name
+    1,                        !- Source Side Effectiveness
+    autosize,                 !- Use Side Design Flow Rate
     autosize,                 !- Source Side Design Flow Rate
     1.5,                      !- Indirect Water Heating Recovery Time
     IndirectHeatPrimarySetpoint,    !- Source Side Flow Control Mode
