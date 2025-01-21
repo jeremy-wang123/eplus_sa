@@ -1,7 +1,7 @@
 !- Darwin Line endings 
 
 Version,
-    24.1;                     !- Version Identifier
+    24.2;                     !- Version Identifier
 
 SimulationControl,
     No,                       !- Do Zone Sizing Calculation
