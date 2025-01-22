@@ -1,0 +1,16 @@
+ ReadVarsESO
+ processing:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/randomized_82.rvi
+ input file:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusout.eso
+ output file:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusout.csv
+ getting all vars from:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusout.eso
+  number variables requested for output=          21
+ ReadVars Run Time=00hr 00min  0.01sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/randomized_82.mvi
+ input file:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusout.mtr
+ output file:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusmtr.csv
+ getting all vars from:/Users/danielxu/Desktop/Dartmouth College/6. Keller Lab/24S/eplus_sensitivity/scripts/output/randomized_82/eplusout.mtr
+  number variables requested for output=          12
+ ReadVars Run Time=00hr 00min  0.00sec
+ ReadVarsESO program completed successfully.
