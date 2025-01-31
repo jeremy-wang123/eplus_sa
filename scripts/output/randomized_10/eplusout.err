@@ -1,37 +1,38 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 20:37,
-   ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Setpoint Temperature Schedule Name not found = HOT WATER SETPOINT TEMP
-   ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Ambient Temperature Zone not found = APPROPRIATE ZONE NAME
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.31 01:08,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
    ************* All Supply Air Paths passed integrity testing
    ************* Testing Individual Return Air Path Integrity
    ************* All Return Air Paths passed integrity testing
-   ** Severe  ** Node Connection Error, Node="HOT WATER USE INLET NODE", Inlet node did not find an appropriate matching "outlet" node.
-   **   ~~~   ** If this is an outdoor air inlet node, it must be listed in an OutdoorAir:Node or OutdoorAir:NodeList object.
-   **   ~~~   ** Reference Object=WaterHeater:Mixed, Name=NEW WATER HEATER
-   ** Severe  ** Node Connection Error, Node="HOT WATER SOURCE INLET NODE", Inlet node did not find an appropriate matching "outlet" node.
-   **   ~~~   ** If this is an outdoor air inlet node, it must be listed in an OutdoorAir:Node or OutdoorAir:NodeList object.
-   **   ~~~   ** Reference Object=WaterHeater:Mixed, Name=NEW WATER HEATER
-   ** Warning ** Node Connection Error for object WATERHEATER:MIXED=NEW WATER HEATER
-   **   ~~~   **   Use Side Water Nodes not on any Branch or Parent Object
-   **   ~~~   **   Inlet Node : HOT WATER USE INLET NODE
-   **   ~~~   **   Outlet Node: HOT WATER USE OUTLET NODE
-   ** Warning ** Node Connection Error for object WATERHEATER:MIXED=NEW WATER HEATER
-   **   ~~~   **   Source Side Water Nodes not on any Branch or Parent Object
-   **   ~~~   **   Inlet Node : HOT WATER SOURCE INLET NODE
-   **   ~~~   **   Outlet Node: HOT WATER SOURCE OUTLET NODE
-   ************* There were 4 node connection errors noted.
+   ************* No node connection errors were found.
    ************* Beginning Simulation
+   ** Warning ** Coil:Cooling:DX:MultiSpeed "ACDXCOIL 1" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed 1.
+   **   ~~~   **  Environment=RUN PERIOD 1, at Simulation time=01/02 11:29 - 11:30
+   **   ~~~   ** Expected range for VolumeFlowPerRatedTotalCapacity=[2.684E-005--6.713E-005] Current value is 6.723E-005 m3/s/W
+   **   ~~~   ** Possible causes include inconsistent air flow rates in system components or
+   **   ~~~   ** inconsistent supply air fan operation modes in coil and unitary system objects.
+   ** Warning ** Calculated Relative Humidity out of range (PsyRhFnTdbWPb) 
+   **   ~~~   **  Routine=Unknown, Environment=RUN PERIOD 1, at Simulation time=04/08 09:20 - 09:22
+   **   ~~~   **  Dry-Bulb= 33.12 Humidity Ratio= 3.402E-002 Calculated Relative Humidity [%]= 101.00
+   **   ~~~   ** Relative Humidity being reset to 100.0%
    ************* Simulation Error Summary *************
    *************
-   ************* ===== Final Error Summary =====
-   ************* The following error categories occurred.  Consider correcting or noting.
-   ************* Node Connection Errors
-   ************* ..Node connection errors are often caused by spelling mistakes in a node name field.
-   ************* ..To track down the problem, search the idf file for each node name listed to see if it
-   ************* ..occurs in the expected input fields.
+   ************* ===== Recurring Error Summary =====
+   ************* The following recurring error messages occurred.
+   *************
+   *************  ** Warning ** Coil:Cooling:DX:MultiSpeed "ACDXCOIL 1" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed 1 error continues...
+   *************  **   ~~~   **   This error occurred 197634 total times;
+   *************  **   ~~~   **   during Warmup 532 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=0.000072  Min=0.000067
+   *************
+   *************  ** Warning ** Calculated Relative Humidity out of range (PsyRhFnTdbWPb)
+   *************  **   ~~~   **   This error occurred 16 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=101.106074 %  Min=101.003856 %
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 2 Warning; 4 Severe Errors; Elapsed Time=00hr 00min  3.20sec
+   ************* EnergyPlus Completed Successfully-- 197650 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  4.21sec
