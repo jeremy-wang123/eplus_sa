@@ -300,7 +300,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    20.782807723555727;       !- Field 4
+    19.675170186390652;       !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -308,7 +308,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    25.9459755117076;         !- Field 4
+    25.506044318900464;       !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -1267,7 +1267,7 @@ People,
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
     3,                        !- Number of People
-    0.01887177,               !- People per Floor Area
+    0.02960813,               !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
     ,                         !- Sensible Heat Fraction
@@ -1302,7 +1302,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    4.177368361702916,        !- Design Level
+    7.194728713802873,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1315,7 +1315,7 @@ ZoneInfiltration:DesignFlowRate,
     INF-SCHED,                !- Schedule Name
     Flow/Area,                !- Design Flow Rate Calculation Method
     0.01,                     !- Design Flow Rate
-    0.7058886203353931,       !- Flow Rate per Floor Area
+    0.1406177834846582,       !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
     1,                        !- Constant Term Coefficient

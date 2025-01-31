@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:33,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -8,11 +8,14 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
    ************* No node connection errors were found.
    ************* Beginning Simulation
    ** Warning ** WetBulb not converged after 101 iterations(PsyTwbFnTdbWPb)
-   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=02/28 13:40 - 13:50
-   **   ~~~   **  Input Temperature = 3.72
-   **   ~~~   **  Input Humidity Ratio= 2.346426E-003
-   **   ~~~   **  Input Pressure = 99316.62
-   **   ~~~   **  Resultant Temperature= 6.21E-002
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=02/21 13:30 - 13:40
+   **   ~~~   **  Input Temperature = 4.51
+   **   ~~~   **  Input Humidity Ratio= 2.045201E-003
+   **   ~~~   **  Input Pressure = 98866.62
+   **   ~~~   **  Resultant Temperature= -0.31
+   ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=02/26 16:00 - 16:10
+   **   ~~~   **  Input Temperature=-458.72
    ************* Simulation Error Summary *************
    *************
    ************* ===== Recurring Error Summary =====
@@ -23,6 +26,12 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
    *************  **   ~~~   **   during Warmup 0 times;
    *************  **   ~~~   **   during Sizing 0 times.
    *************
+   *************  ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   *************  **   ~~~   **   This error occurred 15 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=-312.757385 C  Min=-1625.980713 C
+   *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 1 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.22sec
+   ************* EnergyPlus Completed Successfully-- 16 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.26sec

@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:06,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:36,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -7,22 +7,20 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:06,
    ************* All Return Air Paths passed integrity testing
    ************* No node connection errors were found.
    ************* Beginning Simulation
-   ** Warning ** WetBulb not converged after 101 iterations(PsyTwbFnTdbWPb)
-   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=01/23 13:50 - 14:00
-   **   ~~~   **  Input Temperature = 3.42
-   **   ~~~   **  Input Humidity Ratio= 2.420093E-003
-   **   ~~~   **  Input Pressure = 100500.00
-   **   ~~~   **  Resultant Temperature= -0.24
+   ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=02/02 16:20 - 16:30
+   **   ~~~   **  Input Temperature=-179.01
    ************* Simulation Error Summary *************
    *************
    ************* ===== Recurring Error Summary =====
    ************* The following recurring error messages occurred.
    *************
-   *************  ** Warning ** WetBulb not converged after max iterations(PsyTwbFnTdbWPb)
-   *************  **   ~~~   **   This error occurred 2 total times;
+   *************  ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   *************  **   ~~~   **   This error occurred 14 total times;
    *************  **   ~~~   **   during Warmup 0 times;
    *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=-100.841351 C  Min=-4180.266357 C
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 2 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.05sec
+   ************* EnergyPlus Completed Successfully-- 14 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.18sec

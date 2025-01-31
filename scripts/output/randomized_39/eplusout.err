@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:05,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:35,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -8,19 +8,19 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:05,
    ************* No node connection errors were found.
    ************* Beginning Simulation
    ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
-   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=01/09 15:40 - 15:50
-   **   ~~~   **  Input Temperature=-109.38
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=01/09 15:50 - 16:00
+   **   ~~~   **  Input Temperature=-1191.25
    ************* Simulation Error Summary *************
    *************
    ************* ===== Recurring Error Summary =====
    ************* The following recurring error messages occurred.
    *************
    *************  ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
-   *************  **   ~~~   **   This error occurred 7 total times;
+   *************  **   ~~~   **   This error occurred 8 total times;
    *************  **   ~~~   **   during Warmup 0 times;
    *************  **   ~~~   **   during Sizing 0 times.
-   *************  **   ~~~   **   Max=-109.389065 C  Min=-2904.891602 C
+   *************  **   ~~~   **   Max=-201.078941 C  Min=-1191.250183 C
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 7 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.12sec
+   ************* EnergyPlus Completed Successfully-- 8 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.03sec

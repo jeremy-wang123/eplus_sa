@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -8,11 +8,11 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
    ************* No node connection errors were found.
    ************* Beginning Simulation
    ** Warning ** WetBulb not converged after 101 iterations(PsyTwbFnTdbWPb)
-   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=04/06 18:33 - 18:37
-   **   ~~~   **  Input Temperature = 3.42
-   **   ~~~   **  Input Humidity Ratio= 2.436125E-003
-   **   ~~~   **  Input Pressure = 100100.00
-   **   ~~~   **  Resultant Temperature= -0.24
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=12/05 13:20 - 13:30
+   **   ~~~   **  Input Temperature = 2.86
+   **   ~~~   **  Input Humidity Ratio= 2.659145E-003
+   **   ~~~   **  Input Pressure = 100150.00
+   **   ~~~   **  Resultant Temperature= 2.50E-002
    ************* Simulation Error Summary *************
    *************
    ************* ===== Recurring Error Summary =====
@@ -25,4 +25,4 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04,
    *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 1 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.05sec
+   ************* EnergyPlus Completed Successfully-- 1 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.04sec

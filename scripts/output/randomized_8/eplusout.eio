@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:04
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
 ! <Version>, Version ID
  Version, 24.2
 ! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
@@ -68,7 +68,7 @@ Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.
  Zone Information, GARAGE ZONE,0.0,0.00,0.00,0.00,13.78,13.83,1.22,1,1,1,10.32,17.24,10.78,16.88,0.00,2.44,2.44,102.88,TARP,DOE-2,42.19,46.61,46.61,0.00,6,0,0,Yes
  Zone Information, ATTIC ZONE,0.0,0.00,0.00,0.00,9.57,6.97,3.01,1,1,1,0.00,17.24,0.00,16.88,2.44,4.68,1.05,244.85,TARP,DOE-2,228.03,29.19,29.19,0.00,12,0,0,Yes
 ! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
- Zone Internal Gains Nominal, LIVING ZONE,185.83,3.0,61.945,1.614E-002,5.381,9.049E-002,0.000,0.000,0.000,0.000,5.472,No
+ Zone Internal Gains Nominal, LIVING ZONE,185.83,3.0,61.945,1.614E-002,5.381,6.666E-002,0.000,0.000,0.000,0.000,5.448,No
  Zone Internal Gains Nominal, GARAGE ZONE,42.19,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
  Zone Internal Gains Nominal, ATTIC ZONE,228.03,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
 ! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Minimum Number of People for All Day Types,Maximum Number of People for All Day Types,Minimum Number of People for Weekdays, Maximum Number of People for Weekdays, Minimum Number of People for Weekends/Holidays, Maximum Number of People for Weekends /Holidays,Minimum Number of People for Summer Design Days, Maximum Number of People for Summer Design Days,Minimum Number of People for Winter Design Days, Maximum Number of People for Winter Design Days,MRT Calculation Type,Work Efficiency, Clothing Insulation Calculation Method,Clothing Insulation Calculation Method Schedule,Clothing,Air Velocity,Fanger Calculation,Pierce Calculation,KSU Calculation,Cooling Effect Calculation,Ankle Draft Calculation
@@ -76,9 +76,9 @@ Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.
 ! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use, Minimum Lighting Level for All Day Types {W},Maximum Lighting Level for All Day Types {W},Minimum Lighting Level for Weekdays {W}, Maximum Lighting Level for Weekdays {W},Minimum Lighting Level for Weekends/Holidays {W}, Maximum Lighting Level for Weekends /Holidays {W},Minimum Lighting Level for Summer Design Days {W}, Maximum Lighting Level for Summer Design Days {W},Minimum Lighting Level for Winter Design Days {W}, Maximum Lighting Level for Winter Design Days {W}
  Lights Internal Gains Nominal, LIVING ZONE LIGHTS,HOUSE LIGHTING,LIVING ZONE,185.83,3.0,1000.000,5.381,333.333,0.000,0.200,0.200,0.600,0.000,GeneralLights,50.000,1000.000,50.000,1000.0,50.000,50.000,50.000,50.000,50.000,50.000
 ! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Minimum Equipment Level for All Day Types {W},Maximum Equipment Level for All Day Types {W},Minimum Equipment Level for Weekdays {W}, Maximum Equipment Level for Weekdays {W},Minimum Equipment Level for Weekends/Holidays {W}, Maximum Equipment Level for Weekends /Holidays {W},Minimum Equipment Level for Summer Design Days {W}, Maximum Equipment Level for Summer Design Days {W},Minimum Equipment Level for Winter Design Days {W}, Maximum Equipment Level for Winter Design Days {W}
- ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,3.0,16.817,9.049E-002,5.606,0.000,0.300,0.000,0.700,General,0.000,16.817,0.000,16.817,0.000,0.000,0.000,0.000,0.000,0.000
+ ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,3.0,12.387,6.666E-002,4.129,0.000,0.300,0.000,0.700,General,0.000,12.387,0.000,12.387,0.000,0.000,0.000,0.000,0.000,0.000
 ! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
- ZoneInfiltration Airflow Stats Nominal, LIVING ZONE INFIL 1,INF-SCHED,LIVING ZONE,185.83,3.0,237.464,1.278,1.983,1886.558,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, LIVING ZONE INFIL 1,INF-SCHED,LIVING ZONE,185.83,3.0,113.513,0.611,0.948,901.815,1.000,0.000,0.000,0.000
  ZoneInfiltration Airflow Stats Nominal, ATTIC ZONE INFIL 1,INF-SCHED,ATTIC ZONE,228.03,0.0,5.000E-002,2.193E-004,1.810E-004,0.735,1.000,0.000,0.000,0.000
  ZoneInfiltration Airflow Stats Nominal, GARAGE ZONE INFIL 1,INF-SCHED,GARAGE ZONE,42.19,0.0,5.000E-002,1.185E-003,1.073E-003,1.750,1.000,0.000,0.000,0.000
 ! <ZoneVentilation Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/person Area {m3/s-person},ACH - Air Changes per Hour,Fan Type {Exhaust;Intake;Natural},Fan Pressure Rise {Pa},Fan Efficiency {},Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2},Minimum Indoor Temperature{C}/Schedule,Maximum Indoor Temperature{C}/Schedule,Delta Temperature{C}/Schedule,Minimum Outdoor Temperature{C}/Schedule,Maximum Outdoor Temperature{C}/Schedule,Maximum WindSpeed{m/s}
@@ -125,15 +125,15 @@ Environment,RUN PERIOD 1,WeatherFileRunPeriod,01/01/2013,12/31/2013,Tuesday,365,
 Environment:Daylight Saving,No,
 Environment:WarmupDays,  6
 ! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
- Warmup Convergence Information,LIVING ZONE,RunPeriod: RUN PERIOD 1,0.1775692955,0.3419152917,Pass,Pass,9.8202827625E-004,1.2780299128E-003,Pass,Pass
- Warmup Convergence Information,GARAGE ZONE,RunPeriod: RUN PERIOD 1,0.1004459929,0.1192939397,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
- Warmup Convergence Information,ATTIC ZONE,RunPeriod: RUN PERIOD 1,0.2414828283,0.2584349128,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,LIVING ZONE,RunPeriod: RUN PERIOD 1,0.1772812781,0.3413526384,Pass,Pass,1.0196545583E-003,1.2683553707E-003,Pass,Pass
+ Warmup Convergence Information,GARAGE ZONE,RunPeriod: RUN PERIOD 1,0.1004477639,0.1192666905,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,ATTIC ZONE,RunPeriod: RUN PERIOD 1,0.2414666886,0.2584433820,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
 Environment,RUN PERIOD 2,WeatherFileRunPeriod,07/07/2015,07/07/2015,Tuesday,1,Use RunPeriod Specified Day,Yes,Yes,No,Yes,No,Clark and Allen
 Environment:Daylight Saving,No,
 Environment:WarmupDays,  6
- Warmup Convergence Information,LIVING ZONE,RunPeriod: RUN PERIOD 2,0.1215120630,0.1455631024,Pass,Pass,8.5967897987E-003,8.1528169271E-002,Pass,Pass
- Warmup Convergence Information,GARAGE ZONE,RunPeriod: RUN PERIOD 2,0.1309845897,0.1109029515,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
- Warmup Convergence Information,ATTIC ZONE,RunPeriod: RUN PERIOD 2,0.4363825164,0.4335491041,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,LIVING ZONE,RunPeriod: RUN PERIOD 2,0.1207424147,0.1448246022,Pass,Pass,8.4634885278E-003,8.1520369586E-002,Pass,Pass
+ Warmup Convergence Information,GARAGE ZONE,RunPeriod: RUN PERIOD 2,0.1309839598,0.1109028091,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
+ Warmup Convergence Information,ATTIC ZONE,RunPeriod: RUN PERIOD 2,0.4363822378,0.4335568420,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
 ! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
 Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
 End of Data

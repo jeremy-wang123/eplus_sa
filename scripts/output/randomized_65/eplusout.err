@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:06,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:35,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -8,21 +8,30 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.22 00:06,
    ************* No node connection errors were found.
    ************* Beginning Simulation
    ** Warning ** WetBulb not converged after 101 iterations(PsyTwbFnTdbWPb)
-   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=11/11 16:40 - 16:43
-   **   ~~~   **  Input Temperature = 3.25
-   **   ~~~   **  Input Humidity Ratio= 2.514977E-003
-   **   ~~~   **  Input Pressure = 99800.00
-   **   ~~~   **  Resultant Temperature= -0.24
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=01/15 14:40 - 14:50
+   **   ~~~   **  Input Temperature = 3.26
+   **   ~~~   **  Input Humidity Ratio= 2.524163E-003
+   **   ~~~   **  Input Pressure = 99516.62
+   **   ~~~   **  Resultant Temperature= 1.24E-002
+   ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   **   ~~~   **  Routine=CalcMultiSpeedDXCoilCooling, Environment=RUN PERIOD 1, at Simulation time=03/09 23:40 - 23:50
+   **   ~~~   **  Input Temperature=-116.80
    ************* Simulation Error Summary *************
    *************
    ************* ===== Recurring Error Summary =====
    ************* The following recurring error messages occurred.
    *************
    *************  ** Warning ** WetBulb not converged after max iterations(PsyTwbFnTdbWPb)
-   *************  **   ~~~   **   This error occurred 1 total times;
+   *************  **   ~~~   **   This error occurred 2 total times;
    *************  **   ~~~   **   during Warmup 0 times;
    *************  **   ~~~   **   during Sizing 0 times.
    *************
+   *************  ** Warning ** Temperature out of range [-100. to 200.] (PsyPsatFnTemp)
+   *************  **   ~~~   **   This error occurred 1 total times;
+   *************  **   ~~~   **   during Warmup 0 times;
+   *************  **   ~~~   **   during Sizing 0 times.
+   *************  **   ~~~   **   Max=-116.803368 C  Min=-116.803368 C
+   *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 1 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  2.12sec
+   ************* EnergyPlus Completed Successfully-- 3 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  1.99sec
