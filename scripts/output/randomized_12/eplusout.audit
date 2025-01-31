@@ -16,8 +16,8 @@
  numTableEntry=        2206
  sizeCompSizeTableEntry=         100
  numCompSizeTableEntry=          15
- NumOfRVariable=        3485
- NumOfRVariable(Total)=        3485
+ NumOfRVariable=        3573
+ NumOfRVariable(Total)=        3573
  NumOfRVariable(Actual)=          39
  NumOfRVariable(Summed)=          28
  NumOfRVariable(Meter)=          28
@@ -40,5 +40,5 @@
  numInternalVariablesUsed=           0
  numEMSInternalVarsAvailable=           0
  maxEMSInternalVarsAvailable=           0
- NumOfNodeConnections=          30
+ NumOfNodeConnections=          34
  MaxNumOfNodeConnections=        1000

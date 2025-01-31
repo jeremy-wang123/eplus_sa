@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 20:37
 ! This file shows details about the branches, nodes, and other
 ! elements of the flow connections.
 ! This file is intended for use in "debugging" potential problems
@@ -8,7 +8,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
 ! schematic diagram of the HVAC system.
 ! ===============================================================
 ! #Nodes,<Number of Unique Nodes>
- #Nodes,12
+ #Nodes,16
 ! <Node>,<NodeNumber>,<Node Name>,<Node Fluid Type>,<# Times Node Referenced After Definition>
  Node,1,ZONE INLET NODE,Air,3
  Node,2,HEATING COIL AIR INLET NODE,Air,2
@@ -22,11 +22,19 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
  Node,10,ZONE INLET NODE ATINLET,Air,1
  Node,11,COOLING COIL AIR INLET NODE,Air,1
  Node,12,SUPPHEATING COIL AIR INLET NODE,Air,1
+ Node,13,HOT WATER USE INLET NODE,Water,0
+ Node,14,HOT WATER USE OUTLET NODE,Water,0
+ Node,15,HOT WATER SOURCE INLET NODE,Water,0
+ Node,16,HOT WATER SOURCE OUTLET NODE,Water,0
 ! ===============================================================
 ! Suspicious nodes have 0 references.  It is normal for some nodes, however.
 ! Listing nodes with 0 references (culled from previous list):
 ! <Suspicious Node>,<NodeNumber>,<Node Name>,<Node Fluid Type>,<# Times Node Referenced After Definition>
  Suspicious Node,5,ZONE NODE,Air,0
+ Suspicious Node,13,HOT WATER USE INLET NODE,Water,0
+ Suspicious Node,14,HOT WATER USE OUTLET NODE,Water,0
+ Suspicious Node,15,HOT WATER SOURCE INLET NODE,Water,0
+ Suspicious Node,16,HOT WATER SOURCE OUTLET NODE,Water,0
 ! ===============================================================
 ! <#Branch Lists>,<Number of Branch Lists>
  #Branch Lists,1
@@ -77,7 +85,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
  Outdoor Air Node,9,OUTDOOR CONDENSER AIR NODE
 ! ===============================================================
 ! <#Component Sets>,<Number of Component Sets>
- #Component Sets,6
+ #Component Sets,8
 ! <Component Set>,<Component Set Count>,<Parent Object Type>,<Parent Object Name>,<Component Type>,<Component Name>,<Inlet Node ID>,<Outlet Node ID>,<Description>
  Component Set,1,BRANCH,AIR LOOP MAIN BRANCH,AIRLOOPHVAC:UNITARYHEATPUMP:AIRTOAIR:MULTISPEED,TWOSPEED HEAT PUMP 1,AIR LOOP INLET NODE,AIR LOOP OUTLET NODE,Air Nodes
  Component Set,2,ZONEHVAC:AIRDISTRIBUTIONUNIT,ZONEDIRECTAIR ADU,AIRTERMINAL:SINGLEDUCT:CONSTANTVOLUME:NOREHEAT,ZONEDIRECTAIR,ZONE INLET NODE ATINLET,ZONE INLET NODE,Air Nodes
@@ -85,6 +93,8 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
  Component Set,4,AIRLOOPHVAC:UNITARYHEATPUMP:AIRTOAIR:MULTISPEED,TWOSPEED HEAT PUMP 1,COIL:COOLING:DX:MULTISPEED,ACDXCOIL 1,COOLING COIL AIR INLET NODE,HEATING COIL AIR INLET NODE,Air Nodes
  Component Set,5,AIRLOOPHVAC:UNITARYHEATPUMP:AIRTOAIR:MULTISPEED,TWOSPEED HEAT PUMP 1,COIL:HEATING:DX:MULTISPEED,HEAT PUMP DX HEATING COIL 1,HEATING COIL AIR INLET NODE,SUPPHEATING COIL AIR INLET NODE,Air Nodes
  Component Set,6,AIRLOOPHVAC:UNITARYHEATPUMP:AIRTOAIR:MULTISPEED,TWOSPEED HEAT PUMP 1,COIL:HEATING:FUEL,SUPP HEATING COIL 1,SUPPHEATING COIL AIR INLET NODE,AIR LOOP OUTLET NODE,Air Nodes
+ Component Set,7,UNDEFINED,UNDEFINED,WATERHEATER:MIXED,NEW WATER HEATER,HOT WATER USE INLET NODE,HOT WATER USE OUTLET NODE,Use Side Water Nodes
+ Component Set,8,UNDEFINED,UNDEFINED,WATERHEATER:MIXED,NEW WATER HEATER,HOT WATER SOURCE INLET NODE,HOT WATER SOURCE OUTLET NODE,Source Side Water Nodes
 ! ===============================================================
 ! <# Plant Loops>,<Number of Plant Loops>
  #Plant Loops,0
@@ -152,7 +162,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
  Parent Node Connection,AIR LOOP OUTLET NODE,AIRLOOPHVAC:UNITARYHEATPUMP:AIRTOAIR:MULTISPEED,TWOSPEED HEAT PUMP 1,Outlet,1
 ! ===============================================================
 ! <#Non-Parent Node Connections>,<Number of Non-Parent Node Connections>
- #Non-Parent Node Connections,19
+ #Non-Parent Node Connections,23
 ! <Non-Parent Node Connection>,<Node Name>,<Node ObjectType>,<Node ObjectName>,<Node ConnectionType>,<Node FluidStream>
  Non-Parent Node Connection,ZONE NODE,ZONEHVAC:EQUIPMENTCONNECTIONS,LIVING ZONE,ZoneNode,1
  Non-Parent Node Connection,ZONE INLET NODE,ZONEHVAC:EQUIPMENTCONNECTIONS,LIVING ZONE,ZoneInlet,1
@@ -173,3 +183,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:34
  Non-Parent Node Connection,SUPPHEATING COIL AIR INLET NODE,COIL:HEATING:DX:MULTISPEED,HEAT PUMP DX HEATING COIL 1,Outlet,1
  Non-Parent Node Connection,SUPPHEATING COIL AIR INLET NODE,COIL:HEATING:FUEL,SUPP HEATING COIL 1,Inlet,1
  Non-Parent Node Connection,AIR LOOP OUTLET NODE,COIL:HEATING:FUEL,SUPP HEATING COIL 1,Outlet,1
+ Non-Parent Node Connection,HOT WATER USE INLET NODE,WATERHEATER:MIXED,NEW WATER HEATER,Inlet,1
+ Non-Parent Node Connection,HOT WATER USE OUTLET NODE,WATERHEATER:MIXED,NEW WATER HEATER,Outlet,1
+ Non-Parent Node Connection,HOT WATER SOURCE INLET NODE,WATERHEATER:MIXED,NEW WATER HEATER,Inlet,2
+ Non-Parent Node Connection,HOT WATER SOURCE OUTLET NODE,WATERHEATER:MIXED,NEW WATER HEATER,Outlet,2

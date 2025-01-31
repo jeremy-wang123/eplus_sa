@@ -1,13 +1,54 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 19:33,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.01.30 20:34,
+   ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Setpoint Temperature Schedule Name not found = HOT WATER SETPOINT TEMP
+   ** Severe  ** WaterHeater:Mixed = NEW WATER HEATER:  Ambient Temperature Zone not found = APPROPRIATE ZONE NAME
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
    ************* All Supply Air Paths passed integrity testing
    ************* Testing Individual Return Air Path Integrity
    ************* All Return Air Paths passed integrity testing
-   ************* No node connection errors were found.
+   ** Severe  ** Node Connection Error, Node="HOT WATER USE INLET NODE", Inlet node did not find an appropriate matching "outlet" node.
+   **   ~~~   ** If this is an outdoor air inlet node, it must be listed in an OutdoorAir:Node or OutdoorAir:NodeList object.
+   **   ~~~   ** Reference Object=WaterHeater:Mixed, Name=NEW WATER HEATER
+   ** Severe  ** Node Connection Error, Node="HOT WATER SOURCE INLET NODE", Inlet node did not find an appropriate matching "outlet" node.
+   **   ~~~   ** If this is an outdoor air inlet node, it must be listed in an OutdoorAir:Node or OutdoorAir:NodeList object.
+   **   ~~~   ** Reference Object=WaterHeater:Mixed, Name=NEW WATER HEATER
+   ** Warning ** Node Connection Error for object WATERHEATER:MIXED=NEW WATER HEATER
+   **   ~~~   **   Use Side Water Nodes not on any Branch or Parent Object
+   **   ~~~   **   Inlet Node : HOT WATER USE INLET NODE
+   **   ~~~   **   Outlet Node: HOT WATER USE OUTLET NODE
+   ** Warning ** Node Connection Error for object WATERHEATER:MIXED=NEW WATER HEATER
+   **   ~~~   **   Source Side Water Nodes not on any Branch or Parent Object
+   **   ~~~   **   Inlet Node : HOT WATER SOURCE INLET NODE
+   **   ~~~   **   Outlet Node: HOT WATER SOURCE OUTLET NODE
+   ************* There were 4 node connection errors noted.
    ************* Beginning Simulation
+   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="LIVING ZONE" did not converge after 25 warmup days.
+   **   ~~~   ** See Warmup Convergence Information in .eio file for details.
+   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 2"
+   **   ~~~   ** ..Max Temp Comparison = 3.31E-004 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
+   **   ~~~   ** ..Min Temp Comparison = 7.51E-003 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
+   **   ~~~   ** ..Max Heat Load Comparison = 0.8395 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
+   **   ~~~   ** ..Max Cool Load Comparison = 6.3244E-006 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
    ************* Simulation Error Summary *************
-   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
+   *************
+   ************* ===== Final Error Summary =====
+   ************* The following error categories occurred.  Consider correcting or noting.
+   ************* Node Connection Errors
+   ************* ..Node connection errors are often caused by spelling mistakes in a node name field.
+   ************* ..To track down the problem, search the idf file for each node name listed to see if it
+   ************* ..occurs in the expected input fields.
+   ************* Loads Initialization did not Converge
+   ************* ..1) very high thermal mass such as very thick concrete (solution: increase max number of warmup
+   ************* ..   days in the BUILDING object);
+   ************* ..2) moderate mass and inadequate space conditioning such that the building keeps getting warmer
+   ************* ..   and warmer on successive days (solution: add HVAC, check building thermal properties,
+   ************* ..   check if infiltration is included, make sure HVAC properly controlled);
+   ************* ..3) a soil layer modeled below the concrete slab - (solution remove this layer and read about
+   ************* ..   ground temperatures in the Auxiliary Programs document).
+   ************* ..4) unreasonable (too small) limits in the BUILDING object for temperature (.4 default) or
+   ************* ..   loads tolerances (.04 default)
+   *************
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 1 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 0 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  1.98sec
+   ************* EnergyPlus Completed Successfully-- 2 Warning; 5 Severe Errors; Elapsed Time=00hr 00min  3.24sec
