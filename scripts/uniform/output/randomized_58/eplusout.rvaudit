@@ -1,0 +1,16 @@
+ ReadVarsESO
+ processing:output/randomized_58/randomized_58.rvi
+ input file:output/randomized_58/eplusout.eso
+ output file:output/randomized_58/eplusout.csv
+ getting all vars from:output/randomized_58/eplusout.eso
+  number variables requested for output=          21
+ ReadVars Run Time=00hr 00min  0.01sec
+ ReadVarsESO program completed successfully.
+ ReadVarsESO
+ processing:output/randomized_58/randomized_58.mvi
+ input file:output/randomized_58/eplusout.mtr
+ output file:output/randomized_58/eplusmtr.csv
+ getting all vars from:output/randomized_58/eplusout.mtr
+  number variables requested for output=          12
+ ReadVars Run Time=00hr 00min  0.00sec
+ ReadVarsESO program completed successfully.
