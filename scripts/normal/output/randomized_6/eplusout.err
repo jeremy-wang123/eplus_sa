@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 15:53,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:10,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -7,22 +7,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 15:53,
    ************* All Return Air Paths passed integrity testing
    ************* No node connection errors were found.
    ************* Beginning Simulation
-   ** Warning ** Coil:Cooling:DX:MultiSpeed "ACDXCOIL 1" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed 1.
-   **   ~~~   **  Environment=RUN PERIOD 1, at Simulation time=01/03 13:50 - 14:00
-   **   ~~~   ** Expected range for VolumeFlowPerRatedTotalCapacity=[2.684E-005--6.713E-005] Current value is 6.730E-005 m3/s/W
-   **   ~~~   ** Possible causes include inconsistent air flow rates in system components or
-   **   ~~~   ** inconsistent supply air fan operation modes in coil and unitary system objects.
    ************* Simulation Error Summary *************
-   *************
-   ************* ===== Recurring Error Summary =====
-   ************* The following recurring error messages occurred.
-   *************
-   *************  ** Warning ** Coil:Cooling:DX:MultiSpeed "ACDXCOIL 1" - Air volume flow rate per watt of rated total cooling capacity is out of range at speed 1 error continues...
-   *************  **   ~~~   **   This error occurred 129924 total times;
-   *************  **   ~~~   **   during Warmup 7446 times;
-   *************  **   ~~~   **   during Sizing 0 times.
-   *************  **   ~~~   **   Max=0.000073  Min=0.000067
-   *************
    ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 129924 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  3.89sec
+   ************* EnergyPlus Completed Successfully-- 0 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  3.46sec
