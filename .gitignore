@@ -2,5 +2,5 @@ data/ORNL Model America/
 data/RESSTD/
 scripts/normal/output/
 scripts/uniform/output
-scripts/normal/randomized_idfs
-scripts/uniform/randomized_idfs
+scripts/normal/randomized_idfs/
+scripts/uniform/randomized_idfs/

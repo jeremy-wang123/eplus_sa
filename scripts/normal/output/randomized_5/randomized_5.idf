@@ -231,7 +231,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    20.03;                    !- Field 4
+    21.13;                    !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -239,7 +239,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    25.03;                    !- Field 4
+    26.34;                    !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -1197,7 +1197,7 @@ People,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
-    2.9605592658968996,       !- Number of People
+    2.8812317100920284,       !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
@@ -1219,7 +1219,7 @@ Lights,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    925.176508525921,         !- Lighting Level
+    1055.3336783609798,       !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -1233,7 +1233,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    515.9252345430048,        !- Design Level
+    480.0177731986557,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1245,7 +1245,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.009699834,              !- Design Flow Rate
+    0.009908683,              !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1259,7 +1259,7 @@ ZoneInfiltration:DesignFlowRate,
     ATTIC ZONE,               !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.01025077,               !- Design Flow Rate
+    0.009644515,              !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1273,7 +1273,7 @@ ZoneInfiltration:DesignFlowRate,
     GARAGE ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.01007608,               !- Design Flow Rate
+    0.01004835,               !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour

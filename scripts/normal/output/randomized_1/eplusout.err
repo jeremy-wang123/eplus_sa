@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:10,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:21,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -7,23 +7,11 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:10,
    ************* All Return Air Paths passed integrity testing
    ************* No node connection errors were found.
    ************* Beginning Simulation
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="LIVING ZONE" did not converge after 25 warmup days.
+   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="ATTIC ZONE" did not converge after 25 warmup days.
    **   ~~~   ** See Warmup Convergence Information in .eio file for details.
    **   ~~~   ** ...Environment(RunPeriod)="YEARSIMULATION"
-   **   ~~~   ** ..Max Temp Comparison = 5.36E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Min Temp Comparison = 2.72E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 5.3638E-003 vs Loads Convergence Tolerance=1.00E-003 - Fail Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="GARAGE ZONE" did not converge after 25 warmup days.
-   **   ~~~   ** ...Environment(RunPeriod)="YEARSIMULATION"
-   **   ~~~   ** ..Max Temp Comparison = 2.81E-005 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
-   **   ~~~   ** ..Min Temp Comparison = 6.06E-003 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="ATTIC ZONE" did not converge after 25 warmup days.
-   **   ~~~   ** ...Environment(RunPeriod)="YEARSIMULATION"
-   **   ~~~   ** ..Max Temp Comparison = 2.41E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Min Temp Comparison = 4.98E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
+   **   ~~~   ** ..Max Temp Comparison = 1.18E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
+   **   ~~~   ** ..Min Temp Comparison = 2.15E-003 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
    **   ~~~   ** ..Max Heat Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
    **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
    ************* Simulation Error Summary *************
@@ -41,6 +29,6 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:10,
    ************* ..4) unreasonable (too small) limits in the BUILDING object for temperature (.4 default) or
    ************* ..   loads tolerances (.04 default)
    *************
-   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 3 Severe Errors.
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 1 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 0 Warning; 3 Severe Errors; Elapsed Time=00hr 00min  3.54sec
+   ************* EnergyPlus Completed Successfully-- 0 Warning; 1 Severe Errors; Elapsed Time=00hr 00min  3.50sec

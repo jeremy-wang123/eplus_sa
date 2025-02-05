@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:10
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.04 17:21
 ! <Version>, Version ID
  Version, 24.2
 ! <Timesteps per Hour>, #TimeSteps, Minutes per TimeStep {minutes}
@@ -68,21 +68,21 @@ Surface Heat Transfer Algorithm, CTF - ConductionTransferFunction,200,0.10,1000.
  Zone Information, GARAGE ZONE,0.0,0.00,0.00,0.00,13.78,13.83,1.22,1,1,1,10.32,17.24,10.78,16.88,0.00,2.44,2.44,102.88,TARP,DOE-2,42.19,46.61,46.61,0.00,6,0,0,Yes
  Zone Information, ATTIC ZONE,0.0,0.00,0.00,0.00,9.57,6.97,3.01,1,1,1,0.00,17.24,0.00,16.88,2.44,4.68,1.05,244.85,TARP,DOE-2,228.03,29.19,29.19,0.00,12,0,0,Yes
 ! <Zone Internal Gains Nominal>,Zone Name, Floor Area {m2},# Occupants,Area per Occupant {m2/person},Occupant per Area {person/m2},Interior Lighting {W/m2},Electric Load {W/m2},Gas Load {W/m2},Other Load {W/m2},Hot Water Eq {W/m2},Steam Equipment {W/m2},Sum Loads per Area {W/m2},Outdoor Controlled Baseboard Heat
- Zone Internal Gains Nominal, LIVING ZONE,185.83,3.2,58.553,1.708E-002,5.277,2.428,0.000,0.000,0.000,0.000,7.705,No
+ Zone Internal Gains Nominal, LIVING ZONE,185.83,2.7,68.907,1.451E-002,5.529,2.772,0.000,0.000,0.000,0.000,8.302,No
  Zone Internal Gains Nominal, GARAGE ZONE,42.19,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
  Zone Internal Gains Nominal, ATTIC ZONE,228.03,0.0,N/A,0.000,0.000,0.000,0.000,0.000,0.000,0.000,0.000,No
 ! <People Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Number of People {},People/Floor Area {person/m2},Floor Area per person {m2/person},Fraction Radiant,Fraction Convected,Sensible Fraction Calculation,Activity level,ASHRAE 55 Warnings,Carbon Dioxide Generation Rate,Minimum Number of People for All Day Types,Maximum Number of People for All Day Types,Minimum Number of People for Weekdays, Maximum Number of People for Weekdays, Minimum Number of People for Weekends/Holidays, Maximum Number of People for Weekends /Holidays,Minimum Number of People for Summer Design Days, Maximum Number of People for Summer Design Days,Minimum Number of People for Winter Design Days, Maximum Number of People for Winter Design Days,MRT Calculation Type,Work Efficiency, Clothing Insulation Calculation Method,Clothing Insulation Calculation Method Schedule,Clothing,Air Velocity,Fanger Calculation,Pierce Calculation,KSU Calculation,Cooling Effect Calculation,Ankle Draft Calculation
- People Internal Gains Nominal, LIVING ZONE PEOPLE,HOUSE OCCUPANCY,LIVING ZONE,185.83,3.2,3.2,1.708E-002,58.553,0.300,0.700,AutoCalculate,ACTIVITY SCH,No,3.8200E-008,0.0,3.2,0.3,3.2,0.0,0.0,0.0,0.0,0.0,0.0,Zone Averaged,WORK EFF SCH,Clothing Insulation Schedule,N/A,CLOTHING SCH,AIR VELO SCH,Yes,No,No,No,No
+ People Internal Gains Nominal, LIVING ZONE PEOPLE,HOUSE OCCUPANCY,LIVING ZONE,185.83,2.7,2.7,1.451E-002,68.907,0.300,0.700,AutoCalculate,ACTIVITY SCH,No,3.8200E-008,0.0,2.7,0.3,2.7,0.0,0.0,0.0,0.0,0.0,0.0,Zone Averaged,WORK EFF SCH,Clothing Insulation Schedule,N/A,CLOTHING SCH,AIR VELO SCH,Yes,No,No,No,No
 ! <Lights Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Lighting Level {W},Lights/Floor Area {W/m2},Lights per person {W/person},Fraction Return Air,Fraction Radiant,Fraction Short Wave,Fraction Convected,Fraction Replaceable,End-Use, Minimum Lighting Level for All Day Types {W},Maximum Lighting Level for All Day Types {W},Minimum Lighting Level for Weekdays {W}, Maximum Lighting Level for Weekdays {W},Minimum Lighting Level for Weekends/Holidays {W}, Maximum Lighting Level for Weekends /Holidays {W},Minimum Lighting Level for Summer Design Days {W}, Maximum Lighting Level for Summer Design Days {W},Minimum Lighting Level for Winter Design Days {W}, Maximum Lighting Level for Winter Design Days {W}
- Lights Internal Gains Nominal, LIVING ZONE LIGHTS,HOUSE LIGHTING,LIVING ZONE,185.83,3.2,980.600,5.277,308.970,0.000,0.200,0.200,0.600,0.000,GeneralLights,49.030,980.600,49.030,980.6,49.030,49.030,49.030,49.030,49.030,49.030
+ Lights Internal Gains Nominal, LIVING ZONE LIGHTS,HOUSE LIGHTING,LIVING ZONE,185.83,2.7,1027.556,5.529,381.017,0.000,0.200,0.200,0.600,0.000,GeneralLights,51.378,1027.556,51.378,1027.6,51.378,51.378,51.378,51.378,51.378,51.378
 ! <ElectricEquipment Internal Gains Nominal>,Name,Schedule Name,Zone Name,Zone Floor Area {m2},# Zone Occupants,Equipment Level {W},Equipment/Floor Area {W/m2},Equipment per person {W/person},Fraction Latent,Fraction Radiant,Fraction Lost,Fraction Convected,End-Use SubCategory,Minimum Equipment Level for All Day Types {W},Maximum Equipment Level for All Day Types {W},Minimum Equipment Level for Weekdays {W}, Maximum Equipment Level for Weekdays {W},Minimum Equipment Level for Weekends/Holidays {W}, Maximum Equipment Level for Weekends /Holidays {W},Minimum Equipment Level for Summer Design Days {W}, Maximum Equipment Level for Summer Design Days {W},Minimum Equipment Level for Winter Design Days {W}, Maximum Equipment Level for Winter Design Days {W}
- ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,3.2,451.184,2.428,142.160,0.000,0.300,0.000,0.700,General,0.000,451.184,0.000,451.184,0.000,0.000,0.000,0.000,0.000,0.000
+ ElectricEquipment Internal Gains Nominal, LIVING ZONE ELECEQ,INTERMITTENT,LIVING ZONE,185.83,2.7,515.200,2.772,191.036,0.000,0.300,0.000,0.700,General,0.000,515.200,0.000,515.200,0.000,0.000,0.000,0.000,0.000,0.000
 ! <ZoneInfiltration Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/Exterior Surface Area {m3/s-m2},ACH - Air Changes per Hour,Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2}
- ZoneInfiltration Airflow Stats Nominal, LIVING ZONE INFIL 1,INF-SCHED,LIVING ZONE,185.83,3.2,9.988E-003,5.374E-005,8.339E-005,7.935E-002,1.000,0.000,0.000,0.000
- ZoneInfiltration Airflow Stats Nominal, ATTIC ZONE INFIL 1,INF-SCHED,ATTIC ZONE,228.03,0.0,1.016E-002,4.455E-005,3.677E-005,0.149,1.000,0.000,0.000,0.000
- ZoneInfiltration Airflow Stats Nominal, GARAGE ZONE INFIL 1,INF-SCHED,GARAGE ZONE,42.19,0.0,1.063E-002,2.519E-004,2.280E-004,0.372,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, LIVING ZONE INFIL 1,INF-SCHED,LIVING ZONE,185.83,2.7,9.492E-003,5.108E-005,7.925E-005,7.541E-002,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, ATTIC ZONE INFIL 1,INF-SCHED,ATTIC ZONE,228.03,0.0,1.011E-002,4.433E-005,3.660E-005,0.149,1.000,0.000,0.000,0.000
+ ZoneInfiltration Airflow Stats Nominal, GARAGE ZONE INFIL 1,INF-SCHED,GARAGE ZONE,42.19,0.0,9.642E-003,2.285E-004,2.069E-004,0.337,1.000,0.000,0.000,0.000
 ! <ZoneVentilation Airflow Stats Nominal>,Name,Schedule Name,Zone Name, Zone Floor Area {m2}, # Zone Occupants,Design Volume Flow Rate {m3/s},Volume Flow Rate/Floor Area {m3/s-m2},Volume Flow Rate/person Area {m3/s-person},ACH - Air Changes per Hour,Fan Type {Exhaust;Intake;Natural},Fan Pressure Rise {Pa},Fan Efficiency {},Equation A - Constant Term Coefficient {},Equation B - Temperature Term Coefficient {1/C},Equation C - Velocity Term Coefficient {s/m}, Equation D - Velocity Squared Term Coefficient {s2/m2},Minimum Indoor Temperature{C}/Schedule,Maximum Indoor Temperature{C}/Schedule,Delta Temperature{C}/Schedule,Minimum Outdoor Temperature{C}/Schedule,Maximum Outdoor Temperature{C}/Schedule,Maximum WindSpeed{m/s}
- ZoneVentilation Airflow Stats Nominal, LIVING ZONE VENTL 1,INF-SCHED,LIVING ZONE,185.83,3.2,0.132,7.100E-004,4.157E-002,1.048,Balanced,400.000,0.9,0.606,3.636E-002,0.118,0.000,18.00,100.00,1.00,-100.00,100.00,40.00
+ ZoneVentilation Airflow Stats Nominal, LIVING ZONE VENTL 1,INF-SCHED,LIVING ZONE,185.83,2.7,0.132,7.100E-004,4.892E-002,1.048,Balanced,400.000,0.9,0.606,3.636E-002,0.118,0.000,18.00,100.00,1.00,-100.00,100.00,40.00
 ! <AirFlow Model>, Simple
  AirFlow Model, Simple
 ! <RoomAir Model>, Zone Name, Mixing/Mundt/UCSDDV/UCSDCV/UCSDUFI/UCSDUFE/User Defined
@@ -93,41 +93,3 @@ RoomAir Model,ATTIC ZONE,Mixing/Well-Stirred
 AirflowNetwork Model:Control,NoMultizoneOrDistribution
 ! <Zone Volume Capacitance Multiplier>, Sensible Heat Capacity Multiplier, Moisture Capacity Multiplier, Carbon Dioxide Capacity Multiplier, Generic Contaminant Capacity Multiplier
 Zone Volume Capacitance Multiplier,   1.000 ,   1.000,   1.000,   1.000
-! <Component Sizing Information>, Component Type, Component Name, Input Field Description, Value
- Component Sizing Information, AirTerminal:SingleDuct:ConstantVolume:NoReheat, ZONEDIRECTAIR, User-Specified Maximum Air Flow Rate [m3/s], 0.75510
- Component Sizing Information, AirLoopHVAC:UnitaryHeatPump:AirToAir:MultiSpeed, TWOSPEED HEAT PUMP 1, Fraction of Supply Air Flow That Goes Through the Controlling Zone, 1.00000
- Component Sizing Information, Fan:OnOff, SUPPLY FAN 1, User-Specified Maximum Flow Rate [m3/s], 0.75510
- Component Sizing Information, Fan:OnOff, SUPPLY FAN 1, Design Electric Power Consumption [W], 431.48571
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 2 Rated Air Flow Rate [m3/s], 0.75510
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 1 Rated Air Flow Rate [m3/s], 0.61350
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 2 Gross Rated Total Cooling Capacity [W], 13826.00000
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 1 Gross Rated Total Cooling Capacity [W], 10266.00000
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 2 Rated Sensible Heat Ratio, 0.75800
- Component Sizing Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, User-Specified Speed 1 Rated Sensible Heat Ratio, 0.81000
-! <DX Cooling Coil Standard Rating Information>, Component Type, Component Name, Standard Rating (Net) Cooling Capacity {W}, Standard Rating Net COP {W/W}, EER {Btu/W-h}, SEER User {Btu/W-h}, SEER Standard {Btu/W-h}, IEER {Btu/W-h}
- DX Cooling Coil Standard Rating Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, 13135.3, 3.40, 11.60, 14.10, 13.54, 0
-! <DX Cooling Coil AHRI 2023 Standard Rating Information>, Component Type, Component Name, Standard Rating (Net) Cooling Capacity {W}, Standard Rating Net COP2 {W/W}, EER2 {Btu/W-h}, SEER2 User {Btu/W-h}, SEER2 Standard {Btu/W-h}, IEER 2022 {Btu/W-h}
- DX Cooling Coil AHRI 2023 Standard Rating Information, Coil:Cooling:DX:MultiSpeed, ACDXCOIL 1, 13815.7, 3.12, 10.66, 12.65, 12.22, 11.7
- Component Sizing Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, User-Specified Speed 2 Rated Air Flow Rate [m3/s], 0.75510
- Component Sizing Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, User-Specified Speed 1 Rated Air Flow Rate [m3/s], 0.61350
- Component Sizing Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, User-Specified Speed 2 Gross Rated Heating Capacity [W], 13866.00000
- Component Sizing Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, User-Specified Speed 1 Gross Rated Heating Capacity [W], 10164.00000
-! <DX Heating Coil Standard Rating Information>, Component Type, Component Name, High Temperature Heating (net) Rating Capacity {W}, Low Temperature Heating (net) Rating Capacity {W}, HSPF {Btu/W-h}, Region Number
- DX Heating Coil Standard Rating Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, 13652.1, 8840.9, 8.28, 4
-! <DX Heating Coil AHRI 2023 Standard Rating Information>, Component Type, Component Name, High Temperature Heating (net) Rating Capacity {W}, Low Temperature Heating (net) Rating Capacity {W}, HSPF2 {Btu/W-h}, Region Number
- DX Heating Coil AHRI 2023 Standard Rating Information, Coil:Heating:DX:MultiSpeed, HEAT PUMP DX HEATING COIL 1, 13849.2, 9038.1, 7.40, 4
- Component Sizing Information, Coil:Heating:Fuel, SUPP HEATING COIL 1, User-Specified Nominal Capacity [W], 55000.00000
-! <Environment>,Environment Name,Environment Type, Start Date, End Date, Start DayOfWeek, Duration {#days}, Source:Start DayOfWeek,  Use Daylight Saving, Use Holidays, Apply Weekend Holiday Rule,  Use Rain Values, Use Snow Values, Sky Temperature Model
-! <Environment:Special Days>, Special Day Name, Special Day Type, Source, Start Date, Duration {#days}
-! <Environment:Daylight Saving>, Daylight Saving Indicator, Source, Start Date, End Date
-! <Environment:WarmupDays>, NumberofWarmupDays
-Environment,YEARSIMULATION,WeatherFileRunPeriod,01/01/2007,12/31/2007,Monday,365,Use RunPeriod Specified Day,Yes,Yes,No,Yes,Yes,Clark and Allen
-Environment:Daylight Saving,No,
-Environment:WarmupDays,  6
-! <Warmup Convergence Information>,Zone Name,Environment Type/Name,Average Warmup Temperature Difference {deltaC},Std Dev Warmup Temperature Difference {deltaC},Max Temperature Pass/Fail Convergence,Min Temperature Pass/Fail Convergence,Average Warmup Load Difference {W},Std Dev Warmup Load Difference {W},Heating Load Pass/Fail Convergence,Cooling Load Pass/Fail Convergence
- Warmup Convergence Information,LIVING ZONE,RunPeriod: YEARSIMULATION,0.2882447123,0.1848999429,Pass,Pass,0.7849317808,2.3790529097,Pass,Pass
- Warmup Convergence Information,GARAGE ZONE,RunPeriod: YEARSIMULATION,7.3528650002E-002,6.2960340008E-002,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
- Warmup Convergence Information,ATTIC ZONE,RunPeriod: YEARSIMULATION,0.3213121694,0.2235035299,Pass,Pass,0.0000000000,0.0000000000,Pass,Pass
-! <Program Control Information:Threads/Parallel Sims>, Threading Supported,Maximum Number of Threads, Env Set Threads (OMP_NUM_THREADS), EP Env Set Threads (EP_OMP_NUM_THREADS), IDF Set Threads, Number of Threads Used (Interior Radiant Exchange), Number Nominal Surfaces, Number Parallel Sims
-Program Control:Threads/Parallel Sims, No,1, N/A, N/A, N/A, N/A, N/A, N/A
-End of Data
