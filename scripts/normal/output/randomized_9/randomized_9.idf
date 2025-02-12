@@ -41,22 +41,91 @@ Site:Location,
     -6,                       !- Time Zone
     190;                      !- Elevation
 
-RUNPERIOD,
-    YearSimulation,           !- Name
+SizingPeriod:DesignDay,
+    CHICAGO_IL_USA Annual Heating 99% Design Conditions DB,    !- Name
+    1,                        !- Month
+    21,                       !- Day of Month
+    WinterDesignDay,          !- Day Type
+    -17.3,                    !- Maximum DryBulb Temperature
+    0,                        !- Daily DryBulb Temperature Range
+    ,                         !- DryBulb Temperature Range Modifier Type
+    ,                         !- DryBulb Temperature Range Modifier Day Schedule Name
+    Wetbulb,                  !- Humidity Condition Type
+    -17.3,                    !- Wetbulb or DewPoint at Maximum DryBulb
+    ,                         !- Humidity Condition Day Schedule Name
+    ,                         !- Humidity Ratio at Maximum DryBulb
+    ,                         !- Enthalpy at Maximum DryBulb
+    ,                         !- Daily WetBulb Temperature Range
+    99063,                    !- Barometric Pressure
+    4.9,                      !- Wind Speed
+    270,                      !- Wind Direction
+    No,                       !- Rain Indicator
+    No,                       !- Snow Indicator
+    No,                       !- Daylight Saving Time Indicator
+    ASHRAEClearSky,           !- Solar Model Indicator
+    ,                         !- Beam Solar Day Schedule Name
+    ,                         !- Diffuse Solar Day Schedule Name
+    ,                         !- ASHRAE Clear Sky Optical Depth for Beam Irradiance taub
+    ,                         !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance taud
+    0;                        !- Sky Clearness
+
+SizingPeriod:DesignDay,
+    CHICAGO_IL_USA Annual Cooling 1% Design Conditions DB/MCWB,    !- Name
+    7,                        !- Month
+    21,                       !- Day of Month
+    SummerDesignDay,          !- Day Type
+    31.5,                     !- Maximum DryBulb Temperature
+    10.7,                     !- Daily DryBulb Temperature Range
+    ,                         !- DryBulb Temperature Range Modifier Type
+    ,                         !- DryBulb Temperature Range Modifier Day Schedule Name
+    Wetbulb,                  !- Humidity Condition Type
+    23,                       !- Wetbulb or DewPoint at Maximum DryBulb
+    ,                         !- Humidity Condition Day Schedule Name
+    ,                         !- Humidity Ratio at Maximum DryBulb
+    ,                         !- Enthalpy at Maximum DryBulb
+    ,                         !- Daily WetBulb Temperature Range
+    99063,                    !- Barometric Pressure
+    5.3,                      !- Wind Speed
+    230,                      !- Wind Direction
+    No,                       !- Rain Indicator
+    No,                       !- Snow Indicator
+    No,                       !- Daylight Saving Time Indicator
+    ASHRAEClearSky,           !- Solar Model Indicator
+    ,                         !- Beam Solar Day Schedule Name
+    ,                         !- Diffuse Solar Day Schedule Name
+    ,                         !- ASHRAE Clear Sky Optical Depth for Beam Irradiance taub
+    ,                         !- ASHRAE Clear Sky Optical Depth for Diffuse Irradiance taud
+    1;                        !- Sky Clearness
+
+RunPeriod,
+    Run Period 1,             !- Name
     1,                        !- Begin Month
-    1,                        !- Begin Day of Month
+    14,                       !- Begin Day of Month
     ,                         !- Begin Year
-    12,                       !- End Month
-    31,                       !- End Day of Month
+    1,                        !- End Month
+    14,                       !- End Day of Month
     ,                         !- End Year
-    Monday,                   !- Day of Week for Start Day
+    Tuesday,                  !- Day of Week for Start Day
     Yes,                      !- Use Weather File Holidays and Special Days
     Yes,                      !- Use Weather File Daylight Saving Period
     No,                       !- Apply Weekend Holiday Rule
     Yes,                      !- Use Weather File Rain Indicators
-    Yes,                      !- Use Weather File Snow Indicators
-    No,                       !- Treat Weather as Actual
-    Hour24;                   !- First Hour Interpolation Starting Values
+    Yes;                      !- Use Weather File Snow Indicators
+
+RunPeriod,
+    Run Period 2,             !- Name
+    7,                        !- Begin Month
+    7,                        !- Begin Day of Month
+    ,                         !- Begin Year
+    7,                        !- End Month
+    7,                        !- End Day of Month
+    ,                         !- End Year
+    Tuesday,                  !- Day of Week for Start Day
+    Yes,                      !- Use Weather File Holidays and Special Days
+    Yes,                      !- Use Weather File Daylight Saving Period
+    No,                       !- Apply Weekend Holiday Rule
+    Yes,                      !- Use Weather File Rain Indicators
+    No;                       !- Use Weather File Snow Indicators
 
 Site:GroundTemperature:BuildingSurface,
     20.03,                    !- January Ground Temperature
@@ -231,7 +300,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    21.17;                    !- Field 4
+    20.31;                    !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -239,7 +308,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    26.69;                    !- Field 4
+    25.23;                    !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -1197,7 +1266,7 @@ People,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
-    2.8591913156834328,       !- Number of People
+    2.7777796804103367,       !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
@@ -1219,7 +1288,7 @@ Lights,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    1027.3497713266709,       !- Lighting Level
+    1021.7687421458857,       !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -1233,7 +1302,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    494.6061286194231,        !- Design Level
+    503.25754533956376,       !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1245,7 +1314,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.01045421,               !- Design Flow Rate
+    0.01008535,               !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1259,7 +1328,7 @@ ZoneInfiltration:DesignFlowRate,
     ATTIC ZONE,               !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.0105178,                !- Design Flow Rate
+    0.01055135,               !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1273,7 +1342,7 @@ ZoneInfiltration:DesignFlowRate,
     GARAGE ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.01041382,               !- Design Flow Rate
+    0.009270335,              !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
