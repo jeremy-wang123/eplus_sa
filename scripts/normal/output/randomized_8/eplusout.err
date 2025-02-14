@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.11 00:15,
+Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.12 11:46,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -9,17 +9,11 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.11 00:15,
    ************* Beginning Simulation
    ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="LIVING ZONE" did not converge after 25 warmup days.
    **   ~~~   ** See Warmup Convergence Information in .eio file for details.
-   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 2"
-   **   ~~~   ** ..Max Temp Comparison = 8.02E-004 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
-   **   ~~~   ** ..Min Temp Comparison = 2.77E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 0.9900 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 2.0403E-004 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="GARAGE ZONE" did not converge after 25 warmup days.
-   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 2"
-   **   ~~~   ** ..Max Temp Comparison = 1.64E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Min Temp Comparison = 2.58E-003 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
+   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 1"
+   **   ~~~   ** ..Max Temp Comparison = 3.63E-007 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
+   **   ~~~   ** ..Min Temp Comparison = 3.57E-004 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
+   **   ~~~   ** ..Max Heat Load Comparison = 1.4138E-005 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
+   **   ~~~   ** ..Max Cool Load Comparison = 1.1608E-002 vs Loads Convergence Tolerance=1.00E-003 - Fail Convergence
    ************* Simulation Error Summary *************
    *************
    ************* ===== Final Error Summary =====
@@ -35,6 +29,6 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.11 00:15,
    ************* ..4) unreasonable (too small) limits in the BUILDING object for temperature (.4 default) or
    ************* ..   loads tolerances (.04 default)
    *************
-   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 2 Severe Errors.
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 1 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 0 Warning; 2 Severe Errors; Elapsed Time=00hr 00min  3.82sec
+   ************* EnergyPlus Completed Successfully-- 0 Warning; 1 Severe Errors; Elapsed Time=00hr 00min  4.61sec
