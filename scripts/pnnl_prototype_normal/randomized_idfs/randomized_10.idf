@@ -1,7 +1,7 @@
 !- Linux Line endings 
 
 Version,
-    23.1;                     !- Version Identifier
+    24.2;                     !- Version Identifier
 
 SimulationControl,
     Yes,                      !- Do Zone Sizing Calculation
@@ -1683,7 +1683,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    21.56;                    !- Field 4
+    20.95;                    !- Field 4
 
 Schedule:Compact,
     cooling_sch,              !- Name
@@ -1691,7 +1691,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    24.66;                    !- Field 4
+    24.17;                    !- Field 4
 
 Schedule:Compact,
     heating_sch_HERSprogTstat,    !- Name
@@ -3507,7 +3507,7 @@ People,
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     Occupancy,                !- Number of People Schedule Name
     People,                   !- Number of People Calculation Method
-    2.9776871856771963,       !- Number of People
+    2.9880434506537936,       !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0,                        !- Fraction Radiant
@@ -3515,14 +3515,14 @@ People,
     activity_sch,             !- Activity Level Schedule Name
     ,                         !- Carbon Dioxide Generation Rate
     No,                       !- Enable ASHRAE 55 Comfort Warnings
-    ZoneAveraged;             !- Mean Radiant Temperature Calculation Type
+    EnclosureAveraged;        !- Mean Radiant Temperature Calculation Type
 
 Lights,
     Living Hardwired Lighting1,    !- Name
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     InteriorLightingHE,       !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    210.0529202884667,        !- Lighting Level
+    240.59850621805862,       !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -3652,7 +3652,7 @@ ElectricEquipment,
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     MiscPlugLoad,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    625.6706783692795,        !- Design Level
+    667.8515796180645,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0.06,                     !- Fraction Latent
@@ -3729,7 +3729,8 @@ AirflowNetwork:SimulationControl,
     0.75,                     !- Ratio of Building Width Along Short Axis to Width Along Long Axis
     ,                         !- Height Dependence of External Node Temperature
     ,                         !- Solver
-    Yes;                      !- Allow Unsupported Zone Equipment
+    Yes,                      !- Allow Unsupported Zone Equipment
+    ;                         !- Do Distribution Duct Sizing Calculation
 
 AirflowNetwork:MultiZone:Zone,
     living_unit1,             !- Zone Name
@@ -3939,7 +3940,7 @@ AirflowNetwork:MultiZone:Surface,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     ZoneLeak_LongWall,        !- Name
-    4.061755e-03,             !- Effective Leakage Area
+    4.036152e-03,             !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -3967,7 +3968,7 @@ AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     AtticVent,                !- Name
-    0.3566719206291494,       !- Effective Leakage Area
+    0.3606889089405142,       !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -4002,7 +4003,7 @@ AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     ZoneLeak_GarageShortWall,    !- Name
-    3.581942e-03,             !- Effective Leakage Area
+    3.673060e-03,             !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -4419,7 +4420,19 @@ Sizing:Zone,
     ,                         !- Heating Design Air Flow Rate
     0.002032,                 !- Heating Maximum Air Flow per Zone Floor Area
     0.1415762,                !- Heating Maximum Air Flow
-    0.3;                      !- Heating Maximum Air Flow Fraction
+    0.3,                      !- Heating Maximum Air Flow Fraction
+    ,                         !- Design Specification Zone Air Distribution Object Name
+    ,                         !- Account for Dedicated Outdoor Air System
+    ,                         !- Dedicated Outdoor Air System Control Strategy
+    ,                         !- Dedicated Outdoor Air Low Setpoint Temperature for Design
+    ,                         !- Dedicated Outdoor Air High Setpoint Temperature for Design
+    ,                         !- Zone Load Sizing Method
+    ,                         !- Zone Latent Cooling Design Supply Air Humidity Ratio Input Method
+    ,                         !- Zone Dehumidification Design Supply Air Humidity Ratio
+    ,                         !- Zone Cooling Design Supply Air Humidity Ratio Difference
+    ,                         !- Zone Latent Heating Design Supply Air Humidity Ratio Input Method
+    ,                         !- Zone Humidification Design Supply Air Humidity Ratio
+    ;                         !- Zone Humidification Design Supply Air Humidity Ratio Difference
 
 Sizing:System,
     Central System_unit1,     !- AirLoop Name
@@ -4604,7 +4617,10 @@ Coil:Cooling:DX:SingleSpeed,
     HPACCOOLEIRFT,            !- Energy Input Ratio Function of Temperature Curve Name
     HPACCOOLEIRFFF,           !- Energy Input Ratio Function of Flow Fraction Curve Name
     HPACCOOLPLFFPLR,          !- Part Load Fraction Correlation Curve Name
-    ;                         !- Minimum Outdoor DryBulb Temperature for Compressor Operation
+    ,                         !- Minimum Outdoor DryBulb Temperature for Compressor Operation
+    ,                         !- Nominal Time for Condensate Removal to Begin
+    ,                         !- Ratio of Initial Moisture Evaporation Rate and Steady State Latent Capacity
+    ;                         !- Maximum Cycling Rate
 
 Coil:Heating:Electric,
     Supp Heating Coil_unit1,    !- Name
@@ -4634,13 +4650,17 @@ Coil:Heating:DX:SingleSpeed,
     ,                         !- Outdoor DryBulb Temperature to Turn On Compressor
     5,                        !- Maximum Outdoor DryBulb Temperature for Defrost Operation
     200,                      !- Crankcase Heater Capacity
-    10.0,                     !- Crankcase Heater Capacity Function of Temperature Curve Name
-    ReverseCycle,             !- Maximum Outdoor DryBulb Temperature for Crankcase Heater Operation
-    OnDemand,                 !- Defrost Strategy
-    ,                         !- Defrost Control
+    ,                         !- Crankcase Heater Capacity Function of Temperature Curve Name
+    10,                       !- Maximum Outdoor DryBulb Temperature for Crankcase Heater Operation
+    ReverseCycle,             !- Defrost Strategy
+    OnDemand,                 !- Defrost Control
     ,                         !- Defrost Time Period Fraction
     ,                         !- Resistive Defrost Heater Capacity
-    ;                         !- Region number for calculating HSPF
+    ,                         !- Region number for calculating HSPF
+    ,                         !- Evaporator Air Inlet Node Name
+    ,                         !- Zone Name for Evaporator Placement
+    ,                         !- Secondary Coil Air Flow Rate
+    ;                         !- Secondary Coil Fan Flow Scaling Factor
 
 Coil:WaterHeating:AirToWaterHeatPump:Wrapped,
     Heat Pump Water Heater Evaporator_unit1,    !- Name
@@ -4655,13 +4675,14 @@ Coil:WaterHeating:AirToWaterHeatPump:Wrapped,
     Zone Exhaust Node1_unit1,    !- Evaporator Air Inlet Node Name
     Heat Pump Water Heater Fan Inlet Node_unit1,    !- Evaporator Air Outlet Node Name
     ,                         !- Crankcase Heater Capacity
-    10,                       !- Crankcase Heater Capacity Function of Temperature Curve Name
-    WetBulbTemperature,       !- Maximum Ambient Temperature for Crankcase Heater Operation
-    HPWH-Htg-Cap-fT,          !- Evaporator Air Temperature Type for Curve Objects
-    ,                         !- Heating Capacity Function of Temperature Curve Name
-    HPWH-Htg-COP-fT,          !- Heating Capacity Function of Air Flow Fraction Curve Name
-    ,                         !- Heating COP Function of Temperature Curve Name
-    HPWH-COP-fPLR;            !- Heating COP Function of Air Flow Fraction Curve Name
+    ,                         !- Crankcase Heater Capacity Function of Temperature Curve Name
+    10,                       !- Maximum Ambient Temperature for Crankcase Heater Operation
+    WetBulbTemperature,       !- Evaporator Air Temperature Type for Curve Objects
+    HPWH-Htg-Cap-fT,          !- Heating Capacity Function of Temperature Curve Name
+    ,                         !- Heating Capacity Function of Air Flow Fraction Curve Name
+    HPWH-Htg-COP-fT,          !- Heating COP Function of Temperature Curve Name
+    ,                         !- Heating COP Function of Air Flow Fraction Curve Name
+    HPWH-COP-fPLR;            !- Part Load Fraction Correlation Curve Name
 
 HeatExchanger:AirToAir:SensibleAndLatent,
     OA_Heat_Recovery_Unit1,    !- Name
@@ -4671,22 +4692,22 @@ HeatExchanger:AirToAir:SensibleAndLatent,
     0,                        !- Latent Effectiveness at 100 Heating Air Flow
     0.65,                     !- Sensible Effectiveness at 100 Cooling Air Flow
     0,                        !- Latent Effectiveness at 100 Cooling Air Flow
-    0.65,                     !- Supply Air Inlet Node Name
-    0,                        !- Supply Air Outlet Node Name
-    0.65,                     !- Exhaust Air Inlet Node Name
-    0,                        !- Exhaust Air Outlet Node Name
-    outdoor air node_unit1,    !- Nominal Electric Power
-    OA fan inlet node_unit1,    !- Supply Air Outlet Temperature Control
-    Zone Exhaust Node_unit1,    !- Heat Exchanger Type
-    ERVexhaustnode_unit1,     !- Frost Control Type
-    0,                        !- Threshold Temperature
-    No,                       !- Initial Defrost Time Fraction
-    Plate,                    !- Rate of Defrost Time Fraction Increase
-    None,                     !- Economizer Lockout
-    -16.8333337792644,        !- Sensible Effectiveness of Heating Air Flow Curve Name
-    0.083,                    !- Latent Effectiveness of Heating Air Flow Curve Name
-    2.15999989700318E-02,     !- Sensible Effectiveness of Cooling Air Flow Curve Name
-    No;                       !- Latent Effectiveness of Cooling Air Flow Curve Name
+    outdoor air node_unit1,    !- Supply Air Inlet Node Name
+    OA fan inlet node_unit1,    !- Supply Air Outlet Node Name
+    Zone Exhaust Node_unit1,    !- Exhaust Air Inlet Node Name
+    ERVexhaustnode_unit1,     !- Exhaust Air Outlet Node Name
+    0,                        !- Nominal Electric Power
+    No,                       !- Supply Air Outlet Temperature Control
+    Plate,                    !- Heat Exchanger Type
+    None,                     !- Frost Control Type
+    -16.8333337792644,        !- Threshold Temperature
+    0.083,                    !- Initial Defrost Time Fraction
+    0.0215999989700318,       !- Rate of Defrost Time Fraction Increase
+    No,                       !- Economizer Lockout
+    ,                         !- Sensible Effectiveness of Heating Air Flow Curve Name
+    ,                         !- Latent Effectiveness of Heating Air Flow Curve Name
+    ,                         !- Sensible Effectiveness of Cooling Air Flow Curve Name
+    ;                         !- Latent Effectiveness of Cooling Air Flow Curve Name
 
 AirLoopHVAC:UnitaryHeatPump:AirToAir,
     Heat Pump_unit1,          !- Name
