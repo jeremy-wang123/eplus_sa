@@ -1,7 +1,7 @@
 !- Linux Line endings 
 
 Version,
-    24.2;                     !- Version Identifier
+    24.1;                     !- Version Identifier
 
 SimulationControl,
     Yes,                      !- Do Zone Sizing Calculation
@@ -1683,7 +1683,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    22.54;                    !- Field 4
+    21.14;                    !- Field 4
 
 Schedule:Compact,
     cooling_sch,              !- Name
@@ -1691,7 +1691,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    24.69;                    !- Field 4
+    23.35;                    !- Field 4
 
 Schedule:Compact,
     heating_sch_HERSprogTstat,    !- Name
@@ -3507,7 +3507,7 @@ People,
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     Occupancy,                !- Number of People Schedule Name
     People,                   !- Number of People Calculation Method
-    2.9549688372170166,       !- Number of People
+    2.8515067842476842,       !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0,                        !- Fraction Radiant
@@ -3522,7 +3522,7 @@ Lights,
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     InteriorLightingHE,       !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    225.523690494582,         !- Lighting Level
+    256.2886207305798,        !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -3652,7 +3652,7 @@ ElectricEquipment,
     living_unit1,             !- Zone or ZoneList or Space or SpaceList Name
     MiscPlugLoad,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    659.9561284081738,        !- Design Level
+    609.5150519548087,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0.06,                     !- Fraction Latent
@@ -3940,7 +3940,7 @@ AirflowNetwork:MultiZone:Surface,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     ZoneLeak_LongWall,        !- Name
-    4.511958e-03,             !- Effective Leakage Area
+    4.118659e-03,             !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -3968,7 +3968,7 @@ AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     AtticVent,                !- Name
-    3.825107e-01,             !- Effective Leakage Area
+    3.794755e-01,             !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -4003,7 +4003,7 @@ AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
 
 AirflowNetwork:MultiZone:Surface:EffectiveLeakageArea,
     ZoneLeak_GarageShortWall,    !- Name
-    3.873640e-03,             !- Effective Leakage Area
+    3.865645e-03,             !- Effective Leakage Area
     1.15,                     !- Discharge Coefficient
     4,                        !- Reference Pressure Difference
     0.65;                     !- Air Mass Flow Exponent
@@ -6064,6 +6064,24 @@ Curve:Biquadratic,
     100,                      !- Maximum Value of x
     -100,                     !- Minimum Value of y
     100;                      !- Maximum Value of y
+
+Table:IndependentVariable,
+    HxAirFlowRatio,           !- Name
+    Linear,                   !- Interpolation Method
+    Linear,                   !- Extrapolation Method
+    0,                        !- Minimum Value
+    10,                       !- Maximum Value
+    ,                         !- Normalization Reference Value
+    Dimensionless,            !- Unit Type
+    ,                         !- External File Name
+    ,                         !- External File Column Number
+    ,                         !- External File Starting Row Number
+    0.75,                     !- Value 1
+    1;                        !- Value 2
+
+Table:IndependentVariableList,
+    effectiveness_IndependentVariableList,    !- Name
+    HxAirFlowRatio;           !- Independent Variable 1 Name
 
 Output:VariableDictionary,
     Regular;                  !- Key Field
