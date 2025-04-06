@@ -1,4 +1,4 @@
-Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.12 11:46,
+Program Version,EnergyPlus, Version 24.1.0-9d7789a3ac, YMD=2025.04.05 15:39,
    ************* Testing Individual Branch Integrity
    ************* All Branches passed integrity testing
    ************* Testing Individual Supply Air Path Integrity
@@ -7,34 +7,7 @@ Program Version,EnergyPlus, Version 24.2.0-94a887817b, YMD=2025.02.12 11:46,
    ************* All Return Air Paths passed integrity testing
    ************* No node connection errors were found.
    ************* Beginning Simulation
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="LIVING ZONE" did not converge after 25 warmup days.
-   **   ~~~   ** See Warmup Convergence Information in .eio file for details.
-   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 1"
-   **   ~~~   ** ..Max Temp Comparison = 4.16E-006 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
-   **   ~~~   ** ..Min Temp Comparison = 5.19E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 1.2365E-004 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   ** Severe  ** CheckWarmupConvergence: Loads Initialization, Zone="ATTIC ZONE" did not converge after 25 warmup days.
-   **   ~~~   ** ...Environment(RunPeriod)="RUN PERIOD 1"
-   **   ~~~   ** ..Max Temp Comparison = 4.27E-002 vs Temperature Convergence Tolerance=5.00E-003 - Fail Convergence
-   **   ~~~   ** ..Min Temp Comparison = 1.13E-004 vs Temperature Convergence Tolerance=5.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Heat Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
-   **   ~~~   ** ..Max Cool Load Comparison = 0.0000 vs Loads Convergence Tolerance=1.00E-003 - Pass Convergence
    ************* Simulation Error Summary *************
-   *************
-   ************* ===== Final Error Summary =====
-   ************* The following error categories occurred.  Consider correcting or noting.
-   ************* Loads Initialization did not Converge
-   ************* ..1) very high thermal mass such as very thick concrete (solution: increase max number of warmup
-   ************* ..   days in the BUILDING object);
-   ************* ..2) moderate mass and inadequate space conditioning such that the building keeps getting warmer
-   ************* ..   and warmer on successive days (solution: add HVAC, check building thermal properties,
-   ************* ..   check if infiltration is included, make sure HVAC properly controlled);
-   ************* ..3) a soil layer modeled below the concrete slab - (solution remove this layer and read about
-   ************* ..   ground temperatures in the Auxiliary Programs document).
-   ************* ..4) unreasonable (too small) limits in the BUILDING object for temperature (.4 default) or
-   ************* ..   loads tolerances (.04 default)
-   *************
-   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 2 Severe Errors.
+   ************* EnergyPlus Warmup Error Summary. During Warmup: 0 Warning; 0 Severe Errors.
    ************* EnergyPlus Sizing Error Summary. During Sizing: 0 Warning; 0 Severe Errors.
-   ************* EnergyPlus Completed Successfully-- 0 Warning; 2 Severe Errors; Elapsed Time=00hr 00min  3.84sec
+   ************* EnergyPlus Completed Successfully-- 0 Warning; 0 Severe Errors; Elapsed Time=00hr 00min  6.39sec

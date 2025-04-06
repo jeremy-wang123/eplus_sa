@@ -1,14 +1,14 @@
-!- Darwin Line endings 
+!- Linux Line endings 
 
 Version,
-    24.2;                     !- Version Identifier
+    24.1;                     !- Version Identifier
 
 SimulationControl,
     No,                       !- Do Zone Sizing Calculation
     No,                       !- Do System Sizing Calculation
     No,                       !- Do Plant Sizing Calculation
-    Yes,                      !- Run Simulation for Sizing Periods
-    No,                       !- Run Simulation for Weather File Run Periods
+    No,                       !- Run Simulation for Sizing Periods
+    Yes,                      !- Run Simulation for Weather File Run Periods
     No,                       !- Do HVAC Sizing Simulation for Sizing Periods
     1;                        !- Maximum Number of HVAC Sizing Simulation Passes
 
@@ -100,10 +100,10 @@ SizingPeriod:DesignDay,
 RunPeriod,
     Run Period 1,             !- Name
     1,                        !- Begin Month
-    14,                       !- Begin Day of Month
+    1,                        !- Begin Day of Month
     ,                         !- Begin Year
-    1,                        !- End Month
-    14,                       !- End Day of Month
+    12,                       !- End Month
+    31,                       !- End Day of Month
     ,                         !- End Year
     Tuesday,                  !- Day of Week for Start Day
     Yes,                      !- Use Weather File Holidays and Special Days
@@ -111,21 +111,6 @@ RunPeriod,
     No,                       !- Apply Weekend Holiday Rule
     Yes,                      !- Use Weather File Rain Indicators
     Yes;                      !- Use Weather File Snow Indicators
-
-RunPeriod,
-    Run Period 2,             !- Name
-    7,                        !- Begin Month
-    7,                        !- Begin Day of Month
-    ,                         !- Begin Year
-    7,                        !- End Month
-    7,                        !- End Day of Month
-    ,                         !- End Year
-    Tuesday,                  !- Day of Week for Start Day
-    Yes,                      !- Use Weather File Holidays and Special Days
-    Yes,                      !- Use Weather File Daylight Saving Period
-    No,                       !- Apply Weekend Holiday Rule
-    Yes,                      !- Use Weather File Rain Indicators
-    No;                       !- Use Weather File Snow Indicators
 
 Site:GroundTemperature:BuildingSurface,
     20.03,                    !- January Ground Temperature
@@ -300,7 +285,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    22.12;                    !- Field 4
+    19.19;                    !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -308,7 +293,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    25.96;                    !- Field 4
+    25.5;                     !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -442,7 +427,7 @@ WindowMaterial:Glazing,
     CLEAR 3MM,                !- Name
     SpectralAverage,          !- Optical Data Type
     ,                         !- Window Glass Spectral Data Set Name
-    0.003,                    !- Thickness
+    0.885,                    !- Thickness
     0.837,                    !- Solar Transmittance at Normal Incidence
     0.075,                    !- Front Side Solar Reflectance at Normal Incidence
     0.075,                    !- Back Side Solar Reflectance at Normal Incidence
@@ -1266,7 +1251,7 @@ People,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
-    3.2313952217768662,       !- Number of People
+    3.130858853407965,        !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
@@ -1288,7 +1273,7 @@ Lights,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    948.4422048762016,        !- Lighting Level
+    985.4332153605947,        !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -1302,7 +1287,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    504.24286979146524,       !- Design Level
+    498.0496339037864,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1314,7 +1299,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.01015264,               !- Design Flow Rate
+    0.009884589,              !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1328,7 +1313,7 @@ ZoneInfiltration:DesignFlowRate,
     ATTIC ZONE,               !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.009796754,              !- Design Flow Rate
+    0.01019732,               !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1342,7 +1327,7 @@ ZoneInfiltration:DesignFlowRate,
     GARAGE ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.00994378,               !- Design Flow Rate
+    0.01021987,               !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1356,7 +1341,7 @@ ZoneVentilation:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    0.131944,                 !- Design Flow Rate
+    0.121115,                 !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Person
     ,                         !- Air Changes per Hour
@@ -1431,8 +1416,8 @@ ZoneHVAC:EquipmentConnections,
 Fan:OnOff,
     Supply Fan 1,             !- Name
     HVACAvailSched,           !- Availability Schedule Name
-    0.7,                      !- Fan Total Efficiency
-    400,                      !- Pressure Rise
+    0.747,                    !- Fan Total Efficiency
+    453.5,                    !- Pressure Rise
     0.7551,                   !- Maximum Flow Rate
     0.9,                      !- Motor Efficiency
     1,                        !- Motor In Airstream Fraction
@@ -1504,7 +1489,7 @@ Coil:Heating:Fuel,
     Supp Heating Coil 1,      !- Name
     HVACAvailSched,           !- Availability Schedule Name
     NaturalGas,               !- Fuel Type
-    0.8,                      !- Burner Efficiency
+    0.806,                    !- Burner Efficiency
     55000,                    !- Nominal Capacity
     SuppHeating Coil Air Inlet Node,    !- Air Inlet Node Name
     Air Loop Outlet Node;     !- Air Outlet Node Name
@@ -1530,7 +1515,7 @@ Coil:Heating:DX:MultiSpeed,
     4,                        !- Region number for Calculating HSPF
     2,                        !- Number of Speeds
     10164,                    !- Speed 1 Gross Rated Heating Capacity
-    4.235,                    !- Speed 1 Gross Rated Heating COP
+    4.5584306348752985,       !- Speed 1 Gross Rated Heating COP
     0.6135,                   !- Speed 1 Rated Air Flow Rate
     573.3,                    !- 2017 Speed 1 Rated Supply Air Fan Power Per Volume Flow Rate
     934.4,                    !- 2023 Speed 1 Rated Supply Air Fan Power Per Volume Flow Rate
@@ -1542,7 +1527,7 @@ Coil:Heating:DX:MultiSpeed,
     0.2,                      !- Speed 1 Rated Waste Heat Fraction of Power Input
     HAPCHeatWHFT Speed 1,     !- Speed 1 Waste Heat Function of Temperature Curve Name
     13866,                    !- Speed 2 Gross Rated Heating Capacity
-    3.9,                      !- Speed 2 Gross Rated Heating COP
+    4.5584306348752985,       !- Speed 2 Gross Rated Heating COP
     0.7551,                   !- Speed 2 Rated Air Flow Rate
     673.3,                    !- 2017 Speed 2 Rated Supply Air Fan Power Per Volume Flow Rate
     934.4,                    !- 2023 Speed 2 Rated Supply Air Fan Power Per Volume Flow Rate
