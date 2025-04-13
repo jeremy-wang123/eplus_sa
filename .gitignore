@@ -1,7 +1,7 @@
 data/ORNL Model America/
 data/RESSTD/
-scripts/normal/output/
+scripts/main/output/
 scripts/uniform/output
-scripts/normal/randomized_idfs/
+scripts/main/randomized_idfs/
 scripts/uniform/randomized_idfs/
 scripts/tools/variable extraction/heating_objects_dataset.csv
