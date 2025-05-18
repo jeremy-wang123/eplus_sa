@@ -11,4 +11,4 @@ logs/
 scripts/main/analysis/combined_sims.csv/
 scripts/main/analysis/combined_sims.csv
 scripts/main/analysis/
-scripts/main/params/
+scripts/main/params/.DS_Store
