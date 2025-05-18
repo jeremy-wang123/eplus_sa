@@ -16,6 +16,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 from concurrent.futures import ProcessPoolExecutor, as_completed
+import time
+
+# Record Start
+start_ts = time.time()
 
 # --- Set working directories ---
 work_dir = "/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main"
@@ -129,7 +133,7 @@ plt.xlabel("Month")
 plt.ylabel("Electricity (J)")
 plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig(os.path.join(analysis_sim_dir, "boxplot_joules.png"))
+plt.savefig(os.path.join(analysis_sim_dir, "boxplot_joules.png"), dpi=300)
 plt.close()
 
 # --- 2. Line plot of each simulation's seasonal profile ---
@@ -145,7 +149,7 @@ plt.xlabel("Month")
 plt.ylabel("Electricity (J)")
 plt.xticks(rotation=45)
 plt.tight_layout()
-plt.savefig(os.path.join(analysis_sim_dir, "lineplot_joules.png"))
+plt.savefig(os.path.join(analysis_sim_dir, "lineplot_joules.png"), dpi=300)
 plt.close()
 
 # --- 3. KDE of annual total electricity ---
@@ -165,7 +169,7 @@ plt.title("Total Annual Electricity Clusters Around Central Values Despite Param
 plt.xlabel("Total Electricity (J)")
 plt.ylabel("Density")
 plt.tight_layout()
-g.savefig(os.path.join(analysis_sim_dir, "kde_total_joules.png"))
+g.savefig(os.path.join(analysis_sim_dir, "kde_total_joules.png"), dpi=300)
 plt.close()
 
 # --- 4. Correlation heatmap of monthly electricity end-uses (kWh) ---
@@ -182,12 +186,12 @@ if elec_kwh_cols:
     plt.title("End-Uses of Electricity Are Highly Correlated, Reflecting Shared Seasonal Drivers")
     plt.tight_layout()
     plt.subplots_adjust(bottom=0.25)
-    plt.savefig(os.path.join(analysis_sim_dir, "corr_heatmap_kwh.png"))
+    plt.savefig(os.path.join(analysis_sim_dir, "corr_heatmap_kwh.png"), dpi=300)
     plt.close()
 
 # --- 5. Violin plot of facility electricity by month (kWh) ---
 if "Electricity:Facility [kWh](Monthly)" in combined_df:
-    plt.figure(figsize=(12,6))
+    plt.figure(figsize=(10,6))
     sns.violinplot(
         x="Date/Time",
         y="Electricity:Facility [kWh](Monthly)",
@@ -198,7 +202,7 @@ if "Electricity:Facility [kWh](Monthly)" in combined_df:
     plt.ylabel("Electricity (kWh)")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig(os.path.join(analysis_sim_dir, "violin_facility_kwh.png"))
+    plt.savefig(os.path.join(analysis_sim_dir, "violin_facility_kwh.png"), dpi=300)
     plt.close()
 
 # --- 6. Average monthly electricity trend (kWh) ---
@@ -224,7 +228,7 @@ if elec_kwh_cols:
     plt.xticks(rotation=45)
     plt.legend()
     plt.tight_layout()
-    plt.savefig(os.path.join(analysis_sim_dir, "avg_electricity_kwh.png"))
+    plt.savefig(os.path.join(analysis_sim_dir, "avg_electricity_kwh.png"), dpi=300)
     plt.close()
 
 # --- 7. Correlation heatmap HVAC & gas (BTU) ---
@@ -240,7 +244,7 @@ if btu_cols:
     sns.heatmap(corr2, annot=True, cmap="viridis", fmt=".2f")
     plt.title("Electricity and Gas Loads for HVAC Systems Show Moderate Seasonal Coupling")
     plt.tight_layout()
-    plt.savefig(os.path.join(analysis_sim_dir, "corr_heatmap_btu.png"))
+    plt.savefig(os.path.join(analysis_sim_dir, "corr_heatmap_btu.png"), dpi=300)
     plt.close()
 
 # --- 8. FacetGrid histograms of facility electricity (kWh) ---
@@ -263,14 +267,14 @@ if "Electricity:Facility [kWh](Monthly)" in combined_df:
         y=1.02
     )
     plt.tight_layout()
-    fg.savefig(os.path.join(analysis_sim_dir, "facetgrid_facility_kwh.png"))
+    fg.savefig(os.path.join(analysis_sim_dir, "facetgrid_facility_kwh.png"), dpi=300)
     plt.close()
 
 # --- 9. PairPlot of electricity end-uses (kWh) ---
 if len(elec_kwh_cols) > 1:
     pp = sns.pairplot(combined_df[elec_kwh_cols])
     pp.fig.suptitle("Strong Linear Relationships Exist Among Electricity Subloads", y=1.02)
-    pp.savefig(os.path.join(analysis_sim_dir, "pairplot_electricity_kwh.png"))
+    pp.savefig(os.path.join(analysis_sim_dir, "pairplot_electricity_kwh.png"), dpi=300)
     plt.close()
 
 # --- 10. Spaghetti plot of all simulations (kWh) ---
@@ -294,7 +298,7 @@ if "Electricity:Facility [kWh](Monthly)" in combined_df:
     plt.ylabel("Electricity (kWh)")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.savefig(os.path.join(analysis_sim_dir, "spaghetti_monthly_facility_kwh.png"))
+    plt.savefig(os.path.join(analysis_sim_dir, "spaghetti_monthly_facility_kwh.png"), dpi=300)
     plt.close()
 
 # --- 11. Baseline model run and overlay ---
@@ -347,5 +351,11 @@ plt.xlabel("Total Annual Facility Electricity (kWh)")
 plt.ylabel("Density")
 plt.legend()
 plt.tight_layout()
-plt.savefig(os.path.join(analysis_sim_dir, "kde_with_baseline.png"))
+plt.savefig(os.path.join(analysis_sim_dir, "kde_with_baseline.png"), dpi=300)
 plt.close()
+
+# Record end
+end_ts = time.time()
+
+# Compute and print time 
+print(f"Elapsed time : {elapsed:.3f} seconds")
