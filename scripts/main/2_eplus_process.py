@@ -1,92 +1,142 @@
 #!/usr/bin/env python3
 """
 Runs EnergyPlus simulations using the previously generated randomized IDF files.
-Parallelized across multiple nodes with MPI (mpi4py).
-Each MPI rank processes a subset of the IDF files.
+Parallelized across MPI ranks (mpi4py).
+Processes multiple seed directories (seed_1 through seed_20) in a single invocation.
+Outputs are placed under output/<seed_i>.
 """
-
 import os
 import subprocess
 import shutil
+import time
+import argparse
 from mpi4py import MPI
 from eppy.modeleditor import IDF
+  
+# --- Argument parsing ---
+parser = argparse.ArgumentParser(
+    description="Run EnergyPlus sims for multiple seed directories."
+)
+parser.add_argument(
+    "--seeds",
+    default="1-20",
+    help="Which seed directories to process (e.g., '1-5' or '1,3,5' or '1-10,15,18-20')"
+)
+args = parser.parse_args()
 
+# Parse seed range input
+def parse_seed_range(seed_range_str):
+    seeds = []
+    parts = seed_range_str.split(',')
+    for part in parts:
+        if '-' in part:
+            start, end = map(int, part.split('-'))
+            seeds.extend(range(start, end + 1))
+        else:
+            seeds.append(int(part))
+    return [f"seed_{i}" for i in seeds]
+
+selected_seeds = parse_seed_range(args.seeds)
+  
 # --- Configuration ---
 work_dir = "/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main"
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd"
-output_idf_dir = os.path.join(work_dir, "randomized_idfs")
-weather_file = os.path.join(work_dir, "weather_data", "USA_IL_Chicago-OHare-Intl-AP.725300_AMY_2023.epw")
-output_sim_dir = os.path.join(work_dir, "output")
-
-# Ensure output directory exists
-os.makedirs(output_sim_dir, exist_ok=True)
-
-# MPI initialization
+base_output_idf_dir = os.path.join(work_dir, "randomized_idfs")
+weather_file = os.path.join(
+    work_dir, "weather_data",
+    "USA_IL_Chicago-OHare-Intl-AP.725300_AMY_2023.epw"
+)
+base_output_sim_dir = os.path.join(work_dir, "output")
+  
+# --- MPI initialization ---
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
-
+  
 # Change to working directory
 os.chdir(work_dir)
-print(f"Rank {rank}/{size} starting. Working dir: {work_dir}")
-
-# Rank 0: prepare list of IDF files and clean output
 if rank == 0:
-    # Clean the output simulation directory
-    if os.path.isdir(output_sim_dir):
-        for entry in os.listdir(output_sim_dir):
-            path = os.path.join(output_sim_dir, entry)
-            if os.path.isdir(path): shutil.rmtree(path)
-            else: os.remove(path)
-
-    # Gather all IDF files
-    idf_files = [f for f in os.listdir(output_idf_dir) if f.endswith('.idf')]
-    idf_files.sort()
-else:
-    idf_files = None
-
-# Broadcast the list of files to all ranks
-idf_files = comm.bcast(idf_files, root=0)
-
-# Each rank processes every size-th file
-local_files = idf_files[rank::size]
-print(f"Rank {rank}: Assigned {len(local_files)} files to simulate.")
-
-# Function to run one simulation
-def run_single_simulation(idf_file):
+    print(f"Processing seeds: {', '.join(selected_seeds)}")
+  
+# --- Simulation function ---
+def run_single_simulation(idf_file, output_idf_dir, output_sim_dir):
+    # Ensure EnergyPlus IDD
     IDF.setiddname(idd_file_path)
-
-    # create output subfolder
-    name = os.path.splitext(idf_file)[0]
-    sim_dir = os.path.join(output_sim_dir, name)
+    # Create per-model output folder
+    case_name = os.path.splitext(idf_file)[0]
+    sim_dir = os.path.join(output_sim_dir, case_name)
     os.makedirs(sim_dir, exist_ok=True)
-
-    # copy and validate IDF
+    # Load and save a validated copy
     src = os.path.join(output_idf_dir, idf_file)
     idf = IDF(src)
-    copy_path = os.path.join(sim_dir, idf_file)
-    idf.save(copy_path)
-
-    # run EnergyPlus
+    validated = os.path.join(sim_dir, idf_file)
+    idf.save(validated)
+    # Run EnergyPlus
     subprocess.run([
         '/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/energyplus',
         '--weather', weather_file,
         '--output-directory', sim_dir,
         '--idd', idd_file_path,
-        '--annual',
-        '--readvars',
-        copy_path
+        '--annual', '--readvars', validated
     ], check=True)
     print(f"Rank {rank}: Completed {idf_file}")
-
-# Execute local simulations
-for idf_file in local_files:
-    try:
-        run_single_simulation(idf_file)
-    except Exception as e:
-        print(f"Rank {rank}: Error with {idf_file}: {e}")
-
-# Synchronize and finish
+  
+# Broadcast seed list to all ranks
+if rank == 0:
+    seed_dirs = selected_seeds
+else:
+    seed_dirs = None
+seed_dirs = comm.bcast(seed_dirs, root=0)
+  
+overall_start = time.time()
+for seed_dir in seed_dirs:
+    seed_start = time.time()
+    output_idf_dir = os.path.join(base_output_idf_dir, seed_dir)
+    output_sim_dir = os.path.join(base_output_sim_dir, seed_dir)
+    
+    # Check if the seed directory exists
+    if not os.path.exists(output_idf_dir):
+        if rank == 0:
+            print(f"Warning: Directory {output_idf_dir} does not exist. Skipping.")
+        continue
+    
+    # Rank 0 prepares directories
+    if rank == 0:
+        os.makedirs(output_sim_dir, exist_ok=True)
+        # Clean existing simulations
+        for entry in os.listdir(output_sim_dir):
+            path = os.path.join(output_sim_dir, entry)
+            if os.path.isdir(path):
+                shutil.rmtree(path)
+            else:
+                os.remove(path)
+        idf_files = sorted(
+            f for f in os.listdir(output_idf_dir) if f.endswith('.idf')
+        )
+        print(f"[{seed_dir}] Found {len(idf_files)} IDF files to simulate")
+    else:
+        idf_files = None
+  
+    # Synchronize before broadcasting
+    comm.Barrier()
+    idf_files = comm.bcast(idf_files, root=0)
+  
+    # Distribute files across ranks
+    local_files = idf_files[rank::size]
+    print(f"Rank {rank} • {seed_dir}: {len(local_files)} files assigned")
+  
+    # Run local simulations
+    for idf_file in local_files:
+        try:
+            run_single_simulation(idf_file, output_idf_dir, output_sim_dir)
+        except Exception as e:
+            print(f"Rank {rank} • {seed_dir}: Error {idf_file}: {e}")
+  
+    comm.Barrier()
+    if rank == 0:
+        print(f"[{seed_dir}] completed in {time.time() - seed_start:.1f}s")
+  
+# Final sync and report
 comm.Barrier()
 if rank == 0:
-    print("All simulations completed.")
+    print(f"All done in {time.time() - overall_start:.1f}s")

@@ -8,5 +8,7 @@ scripts/tools/variable extraction/heating_objects_dataset.csv
 scripts/main/eplus1.sh
 scripts/main/eplus2.sh
 logs/
+scripts/main/analysis/combined_sims.csv/
 scripts/main/analysis/combined_sims.csv
-scripts/main/simulation_parameters.csv
+scripts/main/analysis/
+scripts/main/params/
