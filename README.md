@@ -24,12 +24,18 @@ Energy modeling plays a vital role in informing building decarbonization strateg
 Set up a Python environment (e.g., via Conda):
 
 ```bash
-conda create -n eplus_env python=3.10
+conda env create -f environment.yml
 conda activate eplus
-pip install -r requirements.txt
 ```
 
 Install [EnergyPlus v24.1.0](https://github.com/NREL/EnergyPlus/releases/tag/v24.1.0) and ensure it is callable from your system environment.
+
+### Parallelization and HPC Notes
+
+This project is MPI-compatible and designed to leverage high-performance computing (HPC) for scalable simulation. It was developed and run on Dartmouth College’s Thayer Babylon HPC clusters (225 cores), which provides multi-node access and job queuing via MPI.
+	•	The simulation scripts are parallelized with MPI for Python (mpi4py).
+	•	At least 64 CPU cores are strongly recommended to ensure timely convergence of simulation batches.
+	•	On HPC systems, use mpirun (https://mpi4py.readthedocs.io/en/stable/) to launch parallel jobs.
 
 ### Required Python Packages
 
@@ -46,7 +52,7 @@ Install [EnergyPlus v24.1.0](https://github.com/NREL/EnergyPlus/releases/tag/v24
 ### 1. Sampling: Generate Randomized IDFs
 
 ```bash
-python 1_eplus_sampling.py
+mpirun -np <num_cores> python 1_eplus_sampling.py
 ```
 
 - Uses Latin Hypercube Sampling on 14 key parameters.
@@ -105,3 +111,11 @@ This work was supported by:
 - Arthur L. Irving Institute for Energy & Society
 
 For more details, see the accompanying thesis PDF and results in the `/analysis` directory.
+
+
+
+
+
+
+
+
