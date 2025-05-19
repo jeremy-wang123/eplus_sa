@@ -39,8 +39,8 @@ def parse_seed_range(seed_range_str):
 selected_seeds = parse_seed_range(args.seeds)
   
 # --- Configuration ---
-work_dir = "/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main"
-idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd"
+work_dir = "/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main" # Change to your working directory
+idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
 base_output_idf_dir = os.path.join(work_dir, "randomized_idfs")
 weather_file = os.path.join(
     work_dir, "weather_data",

@@ -16,9 +16,9 @@ from mpi4py import MPI
 from scipy.stats import norm, qmc
 
 # --- Configurations ---
-idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd"
-skeleton_idf_path = Path("../../data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf")
-work_dir = Path("/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main")
+idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
+skeleton_idf_path = Path("../../data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf") # Change to your skeleton IDF path
+work_dir = Path("/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main") # Change to your working directory
 base_output_idf_dir = work_dir / "randomized_idfs"
 param_dir = work_dir / "params"
 
