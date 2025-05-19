@@ -1,125 +1,107 @@
-EnergyPlus Sensitivity Analysis
+# Improving Uncertainty Characterization in Home Energy Projections
 
-A reproducible workflow for quantifying the impact of parametric uncertainty on annual energy use in a single-family house model using EnergyPlus. We use Latin Hypercube Sampling (LHS) to generate randomized model inputs, run ensembles of simulations in parallel with MPI, and then analyze convergence and uncertainty diagnostics in Python.
+This repository supports the analysis and reproducibility of the undergraduate honors thesis titled **"Improving Uncertainty Characterization in Home Energy Projections"** by Daniel Xu at Dartmouth College. The study leverages Latin Hypercube Sampling and EnergyPlus simulations to examine how uncertainty in input parameters affects residential energy demand projections.
 
-⸻
+## Overview
 
-📂 Repository Layout
+Energy modeling plays a vital role in informing building decarbonization strategies. However, simplified assumptions and reduced-form prototypes can obscure how variation in key parameters—such as thermostat setpoints, infiltration rates, and HVAC efficiencies—affects projected energy use. This study develops an open-source, parallelized simulation workflow using EnergyPlus to quantify these uncertainties and assess potential prototype-induced biases.
 
-.
-├── 1_eplus_sampling.py      # Generate randomized IDF files & parameter CSVs via LHS
-├── 2_eplus_process.py       # Run EnergyPlus simulations in parallel (mpi4py)
-├── 3_eplus_analysis.ipynb   # Jupyter notebook: load results, process, and plot diagnostics
-├── data/
-│   └── SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf
-├── weather_data/            # (optional) downloaded EPW files
-├── randomized_idfs/         # output of script #1: per-seed IDF files
-├── output/                  # simulation outputs: eplusmtr.csv under output/seed_<i>/
-└── analysis/                # post-processing figures and CSVs
+## Repository Structure
 
+```
+├── 1_eplus_sampling.py       # Generates randomized IDFs using Latin Hypercube Sampling
+├── 2_eplus_process.py        # Runs parallelized EnergyPlus simulations for a given seed
+├── 3_eplus_analysis.ipynb    # Aggregates and visualizes simulation results
+├── data/                     # Contains input skeleton IDFs and weather files
+├── output/                   # Stores simulation results for each randomized configuration
+├── analysis/                 # Contains analysis outputs and figures
+```
 
-⸻
+## Getting Started
 
-🛠 Requirements
-	•	Python ≥ 3.8
-	•	EnergyPlus ≥ 24.1
-	•	MPI implementation (OpenMPI, MPICH, etc.)
-	•	Shell with mpirun
+### Prerequisites
 
-Python packages
+Set up a Python environment (e.g., via Conda):
 
-pip install eppy mpi4py numpy scipy pandas matplotlib seaborn geopandas
+```bash
+conda create -n eplus_env python=3.10
+conda activate eplus
+pip install -r requirements.txt
+```
 
-or with conda:
+Install [EnergyPlus v24.1.0](https://github.com/NREL/EnergyPlus/releases/tag/v24.1.0) and ensure it is callable from your system environment.
 
-conda create -n eplus-env python=3.9 eppy mpi4py numpy scipy pandas matplotlib seaborn geopandas
-conda activate eplus-env
+### Required Python Packages
 
+- `pandas`
+- `numpy`
+- `scipy`
+- `matplotlib`
+- `seaborn`
+- `eppy`
+- `mpi4py`
+- `jupyter`
+- `diyepw`
 
-⸻
+### 1. Sampling: Generate Randomized IDFs
 
-🚀 Quickstart
-	1.	Place IDD & skeleton IDF
-Update paths in 1_eplus_sampling.py if needed.
-	2.	Generate randomized IDFs
-Creates 20 ensembles (seeds 1–20) of 20 000 LHS samples each:
+```bash
+python 1_eplus_sampling.py
+```
 
-mpirun -np 225 python 1_eplus_sampling.py
+- Uses Latin Hypercube Sampling on 14 key parameters.
+- Outputs IDFs to structured directories for each sample and seed.
 
-	•	Produces randomized_idfs/seed_<n>/randomized_<i>.idf
-	•	Writes simulation_parameters_seed_<n>.csv
+### 2. Simulation: Run EnergyPlus Simulations
 
-	3.	Run EnergyPlus simulations
-For a single seed:
+Run for each seed in parallel (e.g., for `seed_1`):
 
-python 2_eplus_process.py --seed seed_3
+```bash
+mpirun -np <num_cores> python 2_eplus_process.py --seed seed_1
+```
 
-Or all seeds in a loop:
+- Requires a hostfile or resource manager for HPC clusters.
+- Outputs stored in `output/seed_1/randomized_<id>/`.
 
-for s in seed_{1..20}; do
-  mpirun -np 225 python 2_eplus_process.py --seed "$s"
-done
+### 3. Analysis: Aggregate and Visualize Outputs
 
-Results under output/seed_<n>/randomized_<i>/eplusmtr.csv.
+```bash
+jupyter notebook 3_eplus_analysis.ipynb
+```
 
-	4.	Analyze & plot
+- Aggregates results across simulations.
+- Converts units to kWh/BTU and produces plots.
+- Assesses uncertainty, sensitivity, and prototype bias.
 
-jupyter lab 3_eplus_analysis.ipynb
+## Reproducibility Commitments
 
-or export HTML:
+This repository follows best practices for reproducible computational research:
 
-jupyter nbconvert --to html 3_eplus_analysis.ipynb
+- **Open-source:** All scripts are publicly available.
+- **Modular scripts:** Each stage of the workflow (sampling, simulation, analysis) is separate and clearly documented.
+- **Version control:** All scripts and inputs are tracked via Git.
+- **Automation-ready:** Supports large-scale parallel execution and batch processing.
+- **Data integrity:** Handles missing/empty output files gracefully.
+- **Transparency:** Parameters, assumptions, and statistical distributions are clearly described and configurable.
 
+## Citation
 
+If you use this codebase, please cite the thesis:
 
-⸻
+```
+Xu, D. (2025). Improving Uncertainty Characterization in Home Energy Projections. Honors Thesis, Program in Quantitative Social Science, Dartmouth College.
+```
 
-🔄 Workflow Overview
-	1.	Sampling
-	•	Draw 14-dimensional LHS with SciPy
-	•	Transform to normal distributions around nominal means (± 5 %)
-	•	Enforce physical bounds (e.g. solar transmittance ∈ [0,1], COP > 0.7)
-	2.	Parallel Simulation
-	•	Distribute IDFs to MPI ranks
-	•	Run EnergyPlus (--annual --readvars)
-	•	Collect eplusmtr.csv per run
-	3.	Post-processing & Diagnostics
-	•	Convert J → kWh and BTU
-	•	Seasonal histograms with baseline overlay + box-whisker
-	•	Convergence of mean annual electricity vs. sample size
-	•	Criterion: 1.5×IQR whiskers within ± 5 % of median at 10⁵ samples
+## License
 
-⸻
+This project is licensed under the MIT License. See `LICENSE` for details.
 
-📈 Key Outputs
-	•	analysis/combined_sims.csv
-All seeds & simulations combined.
-	•	analysis/facetgrid_with_baseline.png
-Seasonal distribution + baseline line + box-whisker.
-	•	analysis/convergence_boxplot_all_seeds.png
-Convergence boxplots of mean annual use vs. LHS sample size.
-	•	analysis/kde_with_baseline.png
-PDF of total annual electricity with baseline comparison.
+## Acknowledgments
 
-⸻
+This work was supported by:
+- Professor Klaus Keller (Primary Advisor)
+- Adam Pollack and Hunter Snyder (Advisors)
+- Dartmouth Undergraduate Advising & Research (UGAR)
+- Arthur L. Irving Institute for Energy & Society
 
-🎯 Reproducibility & Best Practices
-	•	Lock dependencies in environment.yml or requirements.txt.
-	•	Parameterize paths at top of each script.
-	•	Tag EnergyPlus versions in git.
-	•	Document convergence criteria in code & README.
-	•	Automate figure generation via Makefile or CI.
-
-⸻
-
-🤝 Contributing
-	1.	Fork the repo
-	2.	Create feature branch
-	3.	Submit PR with tests & updated docs
-	4.	Ensure CI passes & figures regenerate
-
-⸻
-
-📜 License
-
-This project is licensed under the MIT License. See LICENSE for details.
+For more details, see the accompanying thesis PDF and results in the `/analysis` directory.
