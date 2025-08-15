@@ -140,3 +140,5 @@ for seed_dir in seed_dirs:
 comm.Barrier()
 if rank == 0:
     print(f"All done in {time.time() - overall_start:.1f}s")
+    
+# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 2_eplus_process.py
