@@ -21,7 +21,7 @@ from scipy.stats import norm, qmc
 # --- Configurations ---
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
 skeleton_idf_path = Path("../../data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf") # Change to your skeleton IDF path
-work_dir = Path("/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main") # Change to your working directory
+work_dir = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main") # Change to your working directory
 base_output_idf_dir = work_dir / "randomized_idfs"
 param_dir = work_dir / "params"
 
@@ -32,7 +32,11 @@ base_output_idf_dir.mkdir(exist_ok=True)
 param_dir.mkdir(exist_ok=True)
 
 # --- Latin Hypercube Sampling and Valid Samples Generation ---
+
+# output values is a list of dictionaries, with each dictionary containing the parameter values for the idf
 def generate_valid_samples(num_files, seed=None, verbose=True):
+
+    # each parameter is varied by 5% of its mean
     sd_frac = 0.05
     # Means for each parameter
     means = {
@@ -50,22 +54,29 @@ def generate_valid_samples(num_files, seed=None, verbose=True):
         'vent_flow_rate': 0.131944
     }
     # Standard deviations
-    sds = {k: v * sd_frac for k, v in means.items()}
-    sds['burner_eff'] = sd_frac
+    sds = {k: v * sd_frac for k, v in means.items()} # generates dictionary items and std values
+    sds['burner_eff'] = sd_frac # special case of making standard deviation equal to 0.05
+    # calculate difference in setpoint temp, then for uncertainty that the squareroot of each value squared
     gap_mean = means['cooling_sp'] - means['heating_sp']
     gap_sd = np.sqrt((sd_frac*means['heating_sp'])**2 + (sd_frac*means['cooling_sp'])**2)
     
     # Initialize sampler with seed if provided
-    rng = np.random.RandomState(seed) if seed is not None else None
+    rng = np.random.RandomState(seed) if seed is not None else None # assigns a seed number to whatever random sample is generated
     sampler = qmc.LatinHypercube(d=14, seed=rng)
-    sample_matrix = sampler.random(n=num_files * 2)
+    sample_matrix = sampler.random(n=num_files * 2) # table with columns representing parameters and rows representing samples generated
+    # sample_matrix contains weights from 0 to 1 that are scaled up later
     
     valid_samples = []
+
+    # looping through each of the rows (num_files*2) of the matrix
     for row in sample_matrix:
+        # using normal distribution calling mean and sds function for mu and sigma
         new_heating_sp = norm.ppf(row[0], loc=means['heating_sp'], scale=sds['heating_sp'])
-        new_gap = max(norm.ppf(row[1], loc=gap_mean, scale=gap_sd), 4.0)
-        new_cooling_sp = new_heating_sp + new_gap
+        # special case for cooling setpoint, enforces minimum gap of 4C, using std found for gap
+        new_gap = max(norm.ppf(row[1], loc=gap_mean, scale=gap_sd), 4.0)  
+        new_cooling_sp = new_heating_sp + new_gap # calculates new values
         
+        # norm fucnction takes in mu, sigma, and LHS weight (q) to calculate q percentile of the distribution
         new_values = {
             'people_per_area': norm.ppf(row[2], loc=means['people_per_area'], scale=sds['people_per_area']),
             'infil_flow_rate_living': norm.ppf(row[3], loc=means['infil_flow_rate'], scale=sds['infil_flow_rate']),
@@ -76,6 +87,7 @@ def generate_valid_samples(num_files, seed=None, verbose=True):
             'heating_COP': norm.ppf(row[8], loc=means['heating_COP'], scale=sds['heating_COP']),
             'fan_efficiency': norm.ppf(row[9], loc=means['fan_efficiency'], scale=sds['fan_efficiency']),
             'pressure_rise': norm.ppf(row[10], loc=means['pressure_rise'], scale=sds['pressure_rise']),
+            # clip limits the upper and lower bounds of the generated values
             'solar_transmittance': np.clip(
                 norm.ppf(row[11], loc=means['solar_transmittance'], scale=sds['solar_transmittance']), 0, 1
             ),
@@ -84,14 +96,17 @@ def generate_valid_samples(num_files, seed=None, verbose=True):
         }
         # Validate
         if (new_heating_sp > 0 and new_cooling_sp > 0 and
-            all(v >= 0 for v in new_values.values())):
+            all(v >= 0 for v in new_values.values())): # making sure values are not negative 
+            # creates a dictionary for each idf appending valid values
             valid_samples.append({
                 'heating_setpoint': new_heating_sp,
                 'cooling_setpoint': new_cooling_sp,
                 **new_values
             })
+        # ends the loop early if there are enough valid samples
         if len(valid_samples) >= num_files:
             break
+    # warning for insufficient samples
     if verbose and len(valid_samples) < num_files:
         print(f"Warning: only generated {len(valid_samples)} of {num_files} samples.")
     return valid_samples
