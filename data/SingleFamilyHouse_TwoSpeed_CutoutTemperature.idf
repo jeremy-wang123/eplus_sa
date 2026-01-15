@@ -1862,6 +1862,8 @@
     Air Loop Inlet Node,     !- Air Inlet Node Name
     Cooling Coil Air Inlet Node;  !- Air Outlet Node Name
 
+  Output:SQLite,SimpleAndTabular;
+
   Output:Variable,*,Cooling Coil Total Cooling Energy,TimeStep,ReportSch;
 
   Output:Variable,*,Heating Coil Heating Energy,TimeStep,ReportSch;
