@@ -112,15 +112,21 @@ def generate_valid_samples(num_files, seed=None, verbose=True):
     return valid_samples
 
 # --- IDF Update Function ---
+
+# writes the values from the previous sample generater into actual idf files
 def process_sample(args):
     i, params, output_idf_dir = args
     # Ensure each process has IDD loaded
-    IDF.setiddname(idd_file_path)
-    idf = IDF(str(skeleton_idf_path))
+    IDF.setiddname(idd_file_path) # indicates which IDD file to use
+    idf = IDF(str(skeleton_idf_path)) # loads template idf
     
+    ### helpful to imagine the energyplus idf has divided into "blocks", with parameters within the blocks indexed by order
+    # each block has a key (type of object), name, and field values contained inside
     def update_schedule_field(schedule, idx, val):
         try:
+            # checking to make sure the value stored is a number
             float(schedule.fieldvalues[idx])
+            # converting and rounding values into a string, putting into schedule
             schedule.fieldvalues[idx] = str(round(val, 2))
         except Exception:
             pass
@@ -144,7 +150,7 @@ def process_sample(args):
     except Exception as e:
         print(f"Error updating PEOPLE: {e}")
     
-    # Infiltration
+    # Infiltration (3 parameters relating to infiltration)
     for zone, key in [('Living', 'infil_flow_rate_living'),
                       ('Garage', 'infil_flow_rate_garage'),
                       ('Attic', 'infil_flow_rate_attic')]:
@@ -157,7 +163,7 @@ def process_sample(args):
     # Equipment & lighting
     try:
         eq = idf.getobject('ELECTRICEQUIPMENT', 'LIVING ZONE ElecEq')
-        eq.Design_Level = params['watts_equip']
+        eq.Design_Level = params['watts_equip'] # named attribute (no index)
     except Exception as e:
         print(f"Error updating electric equipment: {e}")
     try:
@@ -212,7 +218,7 @@ def run_simulation(seed_num):
     start = time.time()
     comm = MPI.COMM_WORLD
     rank = comm.Get_rank()
-    size = comm.Get_size()
+    size = comm.Get_size() # number of mpi ranks
     
     # Create a seed-specific output directory
     output_idf_dir = base_output_idf_dir / f"seed_{seed_num}"
@@ -220,7 +226,7 @@ def run_simulation(seed_num):
         output_idf_dir.mkdir(exist_ok=True)
     comm.Barrier()  # Ensure directory is created before other ranks try to use it
     
-    # Rank 0 generates samples & cleans output dir
+    # Rank 0 generates samples & cleans output dir (rank 0 is the "master" rank)
     if rank == 0:
         num_files = 10000
         seed = 42 + seed_num  # Different seed for each run
@@ -232,20 +238,20 @@ def run_simulation(seed_num):
                 item.unlink()
             elif item.is_dir():
                 shutil.rmtree(item)
-                
+        # i is the index, sample is the parameter value, and output_idf_dir is the destination folder        
         args = [(i, sample, output_idf_dir) for i, sample in enumerate(samples)]
     else:
         args = None
         samples = None
     
-    # Broadcast args and synchronize
+    # Broadcast args and synchronize ( sending data from rank 0 to all other ranks)
     args = comm.bcast(args, root=0)
     samples = comm.bcast(samples, root=0)
     comm.Barrier()
     
     # Divide work among ranks
     local = args[rank::size]
-    local_out = [process_sample(a) for a in local]
+    local_out = [process_sample(a) for a in local] # takes sample and modifies idf using local rank
     
     # Gather results
     all_out = comm.gather(local_out, root=0)
