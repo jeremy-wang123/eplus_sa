@@ -214,6 +214,7 @@ def process_sample(args):
     idf.save(str(out_path))
     return out_path.name
 
+# MPI
 def run_simulation(seed_num):
     start = time.time()
     comm = MPI.COMM_WORLD
@@ -273,7 +274,7 @@ def run_simulation(seed_num):
 if __name__ == '__main__':
     overall_start = time.time()
     
-    # Run for 5 different seeds
+    # Run for 20 different seeds
     for seed_num in range(1, 21):
         print(f"Starting ensemble generation with seed {seed_num}...")
         run_simulation(seed_num)

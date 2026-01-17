@@ -14,9 +14,11 @@ from mpi4py import MPI
 from eppy.modeleditor import IDF
   
 # --- Argument parsing ---
+# command line arguments
 parser = argparse.ArgumentParser(
     description="Run EnergyPlus sims for multiple seed directories."
 )
+# explains syntax for running specific seeds
 parser.add_argument(
     "--seeds",
     default="1-20",
@@ -28,6 +30,7 @@ args = parser.parse_args()
 def parse_seed_range(seed_range_str):
     seeds = []
     parts = seed_range_str.split(',')
+    # this basically just converts teh text into a string of numbers
     for part in parts:
         if '-' in part:
             start, end = map(int, part.split('-'))
@@ -36,10 +39,11 @@ def parse_seed_range(seed_range_str):
             seeds.append(int(part))
     return [f"seed_{i}" for i in seeds]
 
+# converting "1-3,5" to ["seed_1", "seed_2", "seed_3", "seed_5"]
 selected_seeds = parse_seed_range(args.seeds)
   
 # --- Configuration ---
-work_dir = "/jumbo/keller-lab/Daniel_Xu/eplus_sensitivity/scripts/main" # Change to your working directory
+work_dir = "/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main" # Change to your working directory
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
 base_output_idf_dir = os.path.join(work_dir, "randomized_idfs")
 weather_file = os.path.join(
@@ -59,6 +63,8 @@ if rank == 0:
     print(f"Processing seeds: {', '.join(selected_seeds)}")
   
 # --- Simulation function ---
+# output_idf_dir is the location where the idf is currently stored
+# output_sim_dir is where the outputs are saved to
 def run_single_simulation(idf_file, output_idf_dir, output_sim_dir):
     # Ensure EnergyPlus IDD
     IDF.setiddname(idd_file_path)
@@ -66,7 +72,7 @@ def run_single_simulation(idf_file, output_idf_dir, output_sim_dir):
     case_name = os.path.splitext(idf_file)[0]
     sim_dir = os.path.join(output_sim_dir, case_name)
     os.makedirs(sim_dir, exist_ok=True)
-    # Load and save a validated copy
+    # Load and save a validated copy (saving a copy of the idf in the output folder)
     src = os.path.join(output_idf_dir, idf_file)
     idf = IDF(src)
     validated = os.path.join(sim_dir, idf_file)
@@ -77,20 +83,22 @@ def run_single_simulation(idf_file, output_idf_dir, output_sim_dir):
         '--weather', weather_file,
         '--output-directory', sim_dir,
         '--idd', idd_file_path,
-        '--annual', '--readvars', validated
+        # annual indicates annual run, readvars processes outputs
+        '--annual', '--readvars', validated # validated is the idf
     ], check=True)
     print(f"Rank {rank}: Completed {idf_file}")
   
 # Broadcast seed list to all ranks
 if rank == 0:
-    seed_dirs = selected_seeds
+    seed_dirs = selected_seeds # make sure the seed list ot sent to rank 0
 else:
     seed_dirs = None
-seed_dirs = comm.bcast(seed_dirs, root=0)
+seed_dirs = comm.bcast(seed_dirs, root=0) # broadcasting to other ranks
   
 overall_start = time.time()
 for seed_dir in seed_dirs:
     seed_start = time.time()
+    # creating folder path for where idfs are located and outputs
     output_idf_dir = os.path.join(base_output_idf_dir, seed_dir)
     output_sim_dir = os.path.join(base_output_sim_dir, seed_dir)
     
@@ -102,6 +110,7 @@ for seed_dir in seed_dirs:
     
     # Rank 0 prepares directories
     if rank == 0:
+        # creates simulation output folder
         os.makedirs(output_sim_dir, exist_ok=True)
         # Clean existing simulations
         for entry in os.listdir(output_sim_dir):
@@ -110,9 +119,11 @@ for seed_dir in seed_dirs:
                 shutil.rmtree(path)
             else:
                 os.remove(path)
+        # identifies files that are idf files in the folder
         idf_files = sorted(
             f for f in os.listdir(output_idf_dir) if f.endswith('.idf')
         )
+        # prints the number idf files in the folder
         print(f"[{seed_dir}] Found {len(idf_files)} IDF files to simulate")
     else:
         idf_files = None
