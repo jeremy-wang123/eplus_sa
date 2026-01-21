@@ -104,6 +104,7 @@ def generate_valid_samples(num_files, seed=None, verbose=True):
                 **new_values
             })
         # ends the loop early if there are enough valid samples
+        # we generate 20000 LHS samples, and take the first valid 10000
         if len(valid_samples) >= num_files:
             break
     # warning for insufficient samples
@@ -284,6 +285,6 @@ if __name__ == '__main__':
     comm = MPI.COMM_WORLD
     if comm.Get_rank() == 0:
         overall_end = time.time()
-        print(f"All 5 simulations completed in {overall_end - overall_start:.2f} seconds")
+        print(f"All 20 simulations completed in {overall_end - overall_start:.2f} seconds")
 
 # mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 1_eplus_sampling.py
