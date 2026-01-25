@@ -18,6 +18,7 @@ from eppy.modeleditor import IDF
 parser = argparse.ArgumentParser(
     description="Run EnergyPlus sims for multiple seed directories."
 )
+
 # explains syntax for running specific seeds
 parser.add_argument(
     "--seeds",
