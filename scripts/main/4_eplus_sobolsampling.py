@@ -1,5 +1,4 @@
 # Sobol Sensitivity Analysis
-
 # Importing libraries
 from pathlib import Path
 import time
@@ -14,7 +13,6 @@ import SALib
 from SALib.sample import sobol
 
 # Configurations
-
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
 skeleton_idf_path = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf") # Change to your skeleton IDF path
 work_dir = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main") # Change to your working directory
@@ -26,8 +24,8 @@ IDF.setiddname(idd_file_path)
 os.chdir(work_dir)
 base_output_idf_dir.mkdir(exist_ok=True)
 param_dir.mkdir(exist_ok=True)
-### Sobol sequence random sample generation
 
+### Sobol sequence random sample generation
 # standard deviation for each paramter is 5% of its original value
 sd_frac = 0.05
 # Means for each parameter
@@ -52,11 +50,9 @@ means = {
 gap_mean = means['cooling_setpoint'] - means['heating_setpoint']
 gap_sd = np.sqrt((sd_frac*means['heating_setpoint'])**2 + (sd_frac*means['cooling_setpoint'])**2)
 min_gap = 4 # establish minimum 4 degrees between heating and cooling setpoint
+means['gap'] = gap_mean # gap to means dictionary
 
-# we can define the range as 99.7% interval around the mean, equivalent to 3 STD
-k = 3
-
-# generate the bounds for each of the parameters
+# creating a dictionary to store the std
 parameter_std = {}
 parameter_names = []
 
@@ -67,45 +63,49 @@ for name, mean in means.items():
     # adding std into dictionary
     parameter_std[name] = mean*sd_frac
 
-# appending on gap
-parameter_names.append('gap')
+parameter_names.append('gap') # appending on gap
 parameter_std['gap'] = gap_sd
-
-# manually change burner efficiency
-parameter_std['burner_eff'] = sd_frac
-
-# Creating parameter bounds
-parameter_bounds = []
-for name, mean in means.items():
-    lbound = mean - k*parameter_std[name]
-    ubound = mean + k*parameter_std[name]
-    parameter_bounds.append([lbound,ubound])
-
-# adding bounds for gap
-parameter_bounds.append([min_gap,(gap_mean + k*gap_sd)])
+parameter_std['burner_eff'] = sd_frac # manually change burner efficiency
 
 # creating problem dictionary for sobol sampling
 # requires first initially excluding the cooling setpoint because it is dependent on the heating setpoint
 problem = {}
-
 names_for_problem = [n for n in parameter_names if n != 'cooling_setpoint']
-bounds_for_problem = [b for n,b in zip(parameter_names, parameter_bounds) if n != 'cooling_setpoint']
 
-# this is the formatting needed for SA Lib to generate Sobol sequence from
+# dictionary formatted for Sobol sequence
 problem = {
     'num_vars': len(names_for_problem),
     'names': names_for_problem,
-    'bounds': bounds_for_problem
+    'bounds': [[0.0, 1.0]] * len(names_for_problem) # generating uniform distribution from 0 to 1
 }
 
 # conduct sobol sequence sampling
 N = 1024 # baseline number of samples
-param_values = sobol.sample(problem, N, calc_second_order=False) # array with dimensions [N*(P+2), P]
+uniform_sobol = sobol.sample(problem, N, calc_second_order=False) # array with dimensions [N*(P+2), P]
+
+## Inverse CDF transformations
+
+# create mean and std dictionaries without cooling set_point
+means_for_cdf = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
+std_for_cdf = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
+
+# inverse cdf transformation
+param_values = np.zeros_like(uniform_sobol)
+for i, name in enumerate(problem['names']):
+    param_values[:,i] = norm.ppf(
+        uniform_sobol[:,i],
+        loc = means_for_cdf[name],
+        scale = std_for_cdf[name]
+    )
+
 ## reintegrating the cooling setpoint into the generated sample
 
 # Find the column index of heating_sp
 heating_idx = problem['names'].index('heating_setpoint')
 gap_idx = problem['names'].index('gap')
+
+# truncate distribution of gap to enforce minimum gap of 4
+param_values[:, gap_idx] = np.maximum(param_values[:, gap_idx], min_gap)
 
 # Extract heating_sp samples from param_values
 heating_samples = param_values[:, heating_idx]
@@ -116,11 +116,11 @@ cooling_samples = heating_samples + gap_samples # calculate cooling samples
 param_values = np.insert(param_values, heating_idx+1, cooling_samples, axis=1) # inserting it in correct index
 param_values = np.delete(param_values, -1, axis=1) # deleting the gap column of values
 parameter_names.pop() # delete gap from list of parameters
-parameter_bounds.pop()
+del means['gap']
 
 # convert param_values into a list of dictionaries, where the keys correspond to the input parameters
 samples = []
-for i in range(param_values.shape[0]):
+for i in range(len(param_values)):
     sample_dict = {}
     for j in range(param_values.shape[1]):
         sample_dict[parameter_names[j]] = param_values[i,j]
@@ -130,18 +130,9 @@ for i in range(param_values.shape[0]):
 invalid_samples = []
 for i, dict in enumerate(samples):
     # making sure heating point is below cooling point
-    if  dict['heating_setpoint'] > dict['cooling_setpoint']:
+    if  (dict['cooling_setpoint'] - dict['heating_setpoint']) < min_gap:
+        print('Setpoint Error')
         invalid_samples.append(i)
-        continue 
-    # making sure samples are within the correct bounds
-    for name, value in dict.items():
-        idx = parameter_names.index(name)  
-        lower, upper = parameter_bounds[idx]
-        if name == 'cooling_setpoint':
-            continue  # skip bound check for cooling
-        if value < lower or value > upper:
-            invalid_samples.append(i)
-            break  # stop checking this sample
 
 if not invalid_samples:
     print("No invalid samples")
@@ -253,10 +244,15 @@ def process_sample(args):
     out_path = output_idf_dir / f"randomized_{i+1}.idf"
     idf.save(str(out_path))
 ### Running Simulation
+
 # creating folder to save output idf files (for test run)
 output_idf_dir = base_output_idf_dir / "test"
 output_idf_dir.mkdir(exist_ok=True)
 
+# args is a list of tuples: i is index, sample is the parameter space (dictionary), and output directory
+args = [(i, sample, output_idf_dir) for i, sample in enumerate(samples)]
+
+### DO NOT RUN CELL
 # Clean output directory
 for item in output_idf_dir.iterdir():
     if item.is_file() or item.is_symlink():
@@ -264,12 +260,10 @@ for item in output_idf_dir.iterdir():
     elif item.is_dir():
         shutil.rmtree(item)
 
-# args is a list of tuples: i is index, sample is the parameter space (dictionary), and output directory
-args = [(i, sample, output_idf_dir) for i, sample in enumerate(samples)]
-
 # running code serially
 for arg in args:
     process_sample(arg)
+# Adding csv with parameter values
 df = pd.DataFrame(samples)
 
 idf_names = []
