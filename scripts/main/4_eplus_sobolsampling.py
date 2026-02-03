@@ -26,118 +26,126 @@ base_output_idf_dir.mkdir(exist_ok=True)
 param_dir.mkdir(exist_ok=True)
 
 ### Sobol sequence random sample generation
-# standard deviation for each paramter is 5% of its original value
-sd_frac = 0.05
-# Means for each parameter
-means = {
-    'heating_setpoint': 22.0,
-    'cooling_setpoint': 26.6,
-    'people_per_area': 3.0,
-    'infil_flow_rate_living': 0.01,
-    'infil_flow_rate_garage': 0.01,
-    'infil_flow_rate_attic': 0.01,
-    'watts_equip': 500,
-    'watts_lights': 1000,
-    'heating_COP': 4.0,
-    'fan_efficiency': 0.7,
-    'pressure_rise': 400.0,
-    'solar_transmittance': 0.837,
-    'burner_eff': 0.8,
-    'vent_flow_rate': 0.131944
-}
 
-# additional variable for gap between heating and cooling
-gap_mean = means['cooling_setpoint'] - means['heating_setpoint']
-gap_sd = np.sqrt((sd_frac*means['heating_setpoint'])**2 + (sd_frac*means['cooling_setpoint'])**2)
-min_gap = 4 # establish minimum 4 degrees between heating and cooling setpoint
-means['gap'] = gap_mean # gap to means dictionary
+# Input: number of files generated for each seed (N), seed number
+# Output: Samples (list of dictionaries, with each dictionary containing parameters and corresponding values)
+def generate_sobol_sequence(num_files, seed = None):
+    # standard deviation for each paramter is 5% of its original value
+    sd_frac = 0.05
+    # Means for each parameter
+    means = {
+        'heating_setpoint': 22.0,
+        'cooling_setpoint': 26.6,
+        'people_per_area': 3.0,
+        'infil_flow_rate_living': 0.01,
+        'infil_flow_rate_garage': 0.01,
+        'infil_flow_rate_attic': 0.01,
+        'watts_equip': 500,
+        'watts_lights': 1000,
+        'heating_COP': 4.0,
+        'fan_efficiency': 0.7,
+        'pressure_rise': 400.0,
+        'solar_transmittance': 0.837,
+        'burner_eff': 0.8,
+        'vent_flow_rate': 0.131944
+    }
 
-# creating a dictionary to store the std
-parameter_std = {}
-parameter_names = []
+    # additional variable for gap between heating and cooling
+    gap_mean = means['cooling_setpoint'] - means['heating_setpoint']
+    gap_sd = np.sqrt((sd_frac*means['heating_setpoint'])**2 + (sd_frac*means['cooling_setpoint'])**2)
+    min_gap = 4 # establish minimum 4 degrees between heating and cooling setpoint
+    means['gap'] = gap_mean # gap to means dictionary
 
-for name, mean in means.items():
-    # add parameters to a list
-    parameter_names.append(name)
+    # creating a dictionary to store the std
+    parameter_std = {}
+    parameter_names = []
 
-    # adding std into dictionary
-    parameter_std[name] = mean*sd_frac
+    for name, mean in means.items():
+        # add parameters to a list
+        parameter_names.append(name)
+        # adding std into dictionary
+        parameter_std[name] = mean*sd_frac
 
-parameter_names.append('gap') # appending on gap
-parameter_std['gap'] = gap_sd
-parameter_std['burner_eff'] = sd_frac # manually change burner efficiency
+    parameter_std['gap'] = gap_sd
+    parameter_std['burner_eff'] = sd_frac # manually change burner efficiency
 
-# creating problem dictionary for sobol sampling
-# requires first initially excluding the cooling setpoint because it is dependent on the heating setpoint
-problem = {}
-names_for_problem = [n for n in parameter_names if n != 'cooling_setpoint']
+    # creating problem dictionary for sobol sampling
+    # requires first initially excluding the cooling setpoint because it is dependent on the heating setpoint
+    problem = {}
+    names_for_problem = [n for n in parameter_names if n != 'cooling_setpoint']
 
-# dictionary formatted for Sobol sequence
-problem = {
-    'num_vars': len(names_for_problem),
-    'names': names_for_problem,
-    'bounds': [[0.0, 1.0]] * len(names_for_problem) # generating uniform distribution from 0 to 1
-}
+    # dictionary formatted for Sobol sequence
+    problem = {
+        'num_vars': len(names_for_problem),
+        'names': names_for_problem,
+        'bounds': [[0.0, 1.0]] * len(names_for_problem) # generating uniform distribution from 0 to 1
+    }
 
-# conduct sobol sequence sampling
-N = 1024 # baseline number of samples
-uniform_sobol = sobol.sample(problem, N, calc_second_order=False) # array with dimensions [N*(P+2), P]
+    # establishing the seed for the random sample generation
+    if seed is not None:
+        np.random.seed(seed)
 
-## Inverse CDF transformations
+    # conduct sobol sequence sampling
+    N = num_files # baseline number of samples
+    uniform_sobol = sobol.sample(problem, N, calc_second_order=True) # array with dimensions [N*(2P+2), P]
 
-# create mean and std dictionaries without cooling set_point
-means_for_cdf = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
-std_for_cdf = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
+    ### Inverse CDF transformations
+    # create mean and std dictionaries without cooling set_point
+    means_for_cdf = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
+    std_for_cdf = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
 
-# inverse cdf transformation
-param_values = np.zeros_like(uniform_sobol)
-for i, name in enumerate(problem['names']):
-    param_values[:,i] = norm.ppf(
-        uniform_sobol[:,i],
-        loc = means_for_cdf[name],
-        scale = std_for_cdf[name]
-    )
+    # inverse cdf transformation
+    param_values = np.zeros_like(uniform_sobol)
+    for i, name in enumerate(problem['names']):
+        param_values[:,i] = norm.ppf(
+            uniform_sobol[:,i],
+            loc = means_for_cdf[name],
+            scale = std_for_cdf[name]
+        )
 
-## reintegrating the cooling setpoint into the generated sample
+    ### reintegrating the cooling setpoint into the generated sample
+    # Find the column index of heating_sp
+    heating_idx = problem['names'].index('heating_setpoint')
+    gap_idx = problem['names'].index('gap')
 
-# Find the column index of heating_sp
-heating_idx = problem['names'].index('heating_setpoint')
-gap_idx = problem['names'].index('gap')
+    # truncate distribution of gap to enforce minimum gap of 4
+    param_values[:, gap_idx] = np.maximum(param_values[:, gap_idx], min_gap)
 
-# truncate distribution of gap to enforce minimum gap of 4
-param_values[:, gap_idx] = np.maximum(param_values[:, gap_idx], min_gap)
+    # Extract heating_sp samples from param_values
+    heating_samples = param_values[:, heating_idx]
+    gap_samples = param_values[:, gap_idx]
+    cooling_samples = heating_samples + gap_samples # calculate cooling samples
 
-# Extract heating_sp samples from param_values
-heating_samples = param_values[:, heating_idx]
-gap_samples = param_values[:, gap_idx]
-cooling_samples = heating_samples + gap_samples # calculate cooling samples
+    #  update parameter values to reinsert cooling setpoint
+    param_values = np.insert(param_values, heating_idx+1, cooling_samples, axis=1) # inserting it in correct index
+    param_values = np.delete(param_values, gap_idx, axis=1) # deleting the gap column of values
+    parameter_names.remove('gap') # delete gap from list of parameters
+    del means['gap']
 
-#  update parameter values to reinsert cooling setpoint
-param_values = np.insert(param_values, heating_idx+1, cooling_samples, axis=1) # inserting it in correct index
-param_values = np.delete(param_values, -1, axis=1) # deleting the gap column of values
-parameter_names.pop() # delete gap from list of parameters
-del means['gap']
+    ### Creating samples
+    # convert param_values into a list of dictionaries, where the keys correspond to the input parameters
+    samples = []
+    for i in range(len(param_values)):
+        sample_dict = {}
+        for j in range(param_values.shape[1]):
+            sample_dict[parameter_names[j]] = param_values[i,j]
+        samples.append(sample_dict)
+    
+    ### validating samples 
+    invalid_samples = []
+    for i, dict in enumerate(samples):
+        # making sure heating point is below cooling point
+        if  (dict['cooling_setpoint'] - dict['heating_setpoint']) < min_gap:
+            print('Setpoint Error')
+            invalid_samples.append(i)
 
-# convert param_values into a list of dictionaries, where the keys correspond to the input parameters
-samples = []
-for i in range(len(param_values)):
-    sample_dict = {}
-    for j in range(param_values.shape[1]):
-        sample_dict[parameter_names[j]] = param_values[i,j]
-    samples.append(sample_dict)
+    if not invalid_samples:
+        print("No invalid samples")
+    else:
+        print("Invalid samples:", invalid_samples)
 
-# validating samples 
-invalid_samples = []
-for i, dict in enumerate(samples):
-    # making sure heating point is below cooling point
-    if  (dict['cooling_setpoint'] - dict['heating_setpoint']) < min_gap:
-        print('Setpoint Error')
-        invalid_samples.append(i)
-
-if not invalid_samples:
-    print("No invalid samples")
-else:
-    print("Invalid samples:", invalid_samples)
+    ### returning outputs
+    return samples
 
 ### IDF Update
 
@@ -243,35 +251,77 @@ def process_sample(args):
     # Save
     out_path = output_idf_dir / f"randomized_{i+1}.idf"
     idf.save(str(out_path))
-### Running Simulation
 
-# creating folder to save output idf files (for test run)
-output_idf_dir = base_output_idf_dir / "test"
-output_idf_dir.mkdir(exist_ok=True)
+### MPI
+def run_simulation(seed_num):
+    start = time.time()
+    comm = MPI.COMM_WORLD
+    rank = comm.Get_rank()
+    size = comm.Get_size() # number of mpi ranks
+    
+    # Create a seed-specific output directory
+    output_idf_dir = base_output_idf_dir / f"seed_{seed_num}"
+    if rank == 0:
+        output_idf_dir.mkdir(exist_ok=True)
+    comm.Barrier()  # Ensure directory is created before other ranks try to use it
+    
+    # Rank 0 generates samples & cleans output dir (rank 0 is the "master" rank)
+    if rank == 0:
+        num_files = 1000
+        seed = 42 + seed_num  # Different seed for each run
+        samples = generate_sobol_sequence(num_files, seed=seed)
+        
+        # Clean output directory
+        for item in output_idf_dir.iterdir():
+            if item.is_file() or item.is_symlink():
+                item.unlink()
+            elif item.is_dir():
+                shutil.rmtree(item)
+        # i is the index, sample is the parameter value, and output_idf_dir is the destination folder        
+        args = [(i, sample, output_idf_dir) for i, sample in enumerate(samples)]
+    else:
+        args = None
+        samples = None
+    
+    # Broadcast args and synchronize (sending data from rank 0 to all other ranks)
+    args = comm.bcast(args, root=0)
+    samples = comm.bcast(samples, root=0)
+    comm.Barrier()
+    
+    # Divide work among ranks
+    local = args[rank::size]
+    local_out = [process_sample(a) for a in local] # takes sample and modifies idf using local rank
+    
+    # Gather results
+    all_out = comm.gather(local_out, root=0)
+    
+    # Rank 0 writes CSV and timing
+    if rank == 0:
+        flat = [name for sub in all_out for name in sub]
+        df = pd.DataFrame(samples)
+        df.insert(0, 'IDF_file', flat) # row 0 is the idf file name
+        df.insert(1, 'seed', seed) # row 1 is the seed
+        csv_file = param_dir / f"simulation_parameters_seed_{seed_num}.csv"
+        df.to_csv(csv_file, index=False)
+        end = time.time()
+        print(f"Seed {seed_num}: Simulation parameters saved to {csv_file}")
+        print(f"Seed {seed_num}: Total execution time: {end - start:.2f} seconds")
+    
+    return
 
-# args is a list of tuples: i is index, sample is the parameter space (dictionary), and output directory
-args = [(i, sample, output_idf_dir) for i, sample in enumerate(samples)]
+if __name__ == '__main__':
+    overall_start = time.time()
+    
+    # Run for 20 different seeds
+    for seed_num in range(1, 21):
+        print(f"Starting ensemble generation with seed {seed_num}...")
+        run_simulation(seed_num)
+        print(f"Completed ensemble generation with seed {seed_num}")
+    
+    # Only rank 0 prints the final timing
+    comm = MPI.COMM_WORLD
+    if comm.Get_rank() == 0:
+        overall_end = time.time()
+        print(f"All 20 simulations completed in {overall_end - overall_start:.2f} seconds")
 
-### DO NOT RUN CELL
-# Clean output directory
-for item in output_idf_dir.iterdir():
-    if item.is_file() or item.is_symlink():
-        item.unlink()
-    elif item.is_dir():
-        shutil.rmtree(item)
-
-# running code serially
-for arg in args:
-    process_sample(arg)
-# Adding csv with parameter values
-df = pd.DataFrame(samples)
-
-idf_names = []
-for i in range(len(args)):
-    idf_names.append(f'randomized_{i+1}.idf')
-
-df.insert(0, 'IDF_file', idf_names)
-
-# Save CSV
-csv_file = param_dir / f"simulation_parameters_test.csv"
-df.to_csv(csv_file, index=False)
+# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_sobolsampling.py &
