@@ -52,18 +52,12 @@ weather_file = os.path.join(
     "USA_IL_Chicago-OHare-Intl-AP.725300_AMY_2023.epw"
 )
 base_output_sim_dir = os.path.join(work_dir, "output_sobol") # output_sobol stores values
-base_output_sim_dir.mkdir(exist_ok=True)
   
 # --- MPI initialization ---
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
 size = comm.Get_size()
-  
-# Change to working directory
-os.chdir(work_dir)
-if rank == 0:
-    print(f"Processing seeds: {', '.join(selected_seeds)}")
-  
+
 # --- Simulation function ---
 # output_idf_dir is the location where the idf is currently stored
 # output_sim_dir is where the outputs are saved to
@@ -115,12 +109,12 @@ for seed_dir in seed_dirs:
         # creates simulation output folder
         os.makedirs(output_sim_dir, exist_ok=True)
         # Clean existing simulations
-        for entry in os.listdir(output_sim_dir):
-            path = os.path.join(output_sim_dir, entry)
-            if os.path.isdir(path):
-                shutil.rmtree(path)
-            else:
-                os.remove(path)
+        # for entry in os.listdir(output_sim_dir):
+        #     path = os.path.join(output_sim_dir, entry)
+        #     if os.path.isdir(path):
+        #         shutil.rmtree(path)
+        #     else:
+        #         os.remove(path)
         # identifies files that are idf files in the folder
         idf_files = sorted(
             f for f in os.listdir(output_idf_dir) if f.endswith('.idf')
