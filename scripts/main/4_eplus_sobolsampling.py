@@ -251,6 +251,7 @@ def process_sample(args):
     # Save
     out_path = output_idf_dir / f"randomized_{i+1}.idf"
     idf.save(str(out_path))
+    return out_path.name
 
 ### MPI
 def run_simulation(seed_num):
@@ -312,8 +313,8 @@ def run_simulation(seed_num):
 if __name__ == '__main__':
     overall_start = time.time()
     
-    # Run for 20 different seeds
-    for seed_num in range(1, 21):
+    # Run for 5 different seeds
+    for seed_num in range(1, 6):
         print(f"Starting ensemble generation with seed {seed_num}...")
         run_simulation(seed_num)
         print(f"Completed ensemble generation with seed {seed_num}")
@@ -322,6 +323,6 @@ if __name__ == '__main__':
     comm = MPI.COMM_WORLD
     if comm.Get_rank() == 0:
         overall_end = time.time()
-        print(f"All 20 simulations completed in {overall_end - overall_start:.2f} seconds")
+        print(f"All 5 simulations completed in {overall_end - overall_start:.2f} seconds")
 
 # mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_sobolsampling.py &

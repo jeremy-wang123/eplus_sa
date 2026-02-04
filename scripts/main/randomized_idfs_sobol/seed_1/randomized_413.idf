@@ -229,7 +229,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    23.56;                    !- Field 4
+    23.05;                    !- Field 4
 
 Schedule:Compact,
     Dual Cooling Setpoints,    !- Name
@@ -237,7 +237,7 @@ Schedule:Compact,
     Through: 12/31,           !- Field 1
     For: AllDays,             !- Field 2
     Until: 24:00,             !- Field 3
-    27.56;                    !- Field 4
+    27.71;                    !- Field 4
 
 Schedule:Compact,
     Dual Zone Control Type Sched,    !- Name
@@ -371,7 +371,7 @@ WindowMaterial:Glazing,
     CLEAR 3MM,                !- Name
     SpectralAverage,          !- Optical Data Type
     ,                         !- Window Glass Spectral Data Set Name
-    0.772,                    !- Thickness
+    0.845,                    !- Thickness
     0.837,                    !- Solar Transmittance at Normal Incidence
     0.075,                    !- Front Side Solar Reflectance at Normal Incidence
     0.075,                    !- Back Side Solar Reflectance at Normal Incidence
@@ -1195,7 +1195,7 @@ People,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE OCCUPANCY,          !- Number of People Schedule Name
     people,                   !- Number of People Calculation Method
-    2.934835850990784,        !- Number of People
+    3.241906180453229,        !- Number of People
     ,                         !- People per Floor Area
     ,                         !- Floor Area per Person
     0.3,                      !- Fraction Radiant
@@ -1217,7 +1217,7 @@ Lights,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     HOUSE LIGHTING,           !- Schedule Name
     LightingLevel,            !- Design Level Calculation Method
-    980.1119115080927,        !- Lighting Level
+    1014.0641363790694,       !- Lighting Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Return Air Fraction
@@ -1231,7 +1231,7 @@ ElectricEquipment,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INTERMITTENT,             !- Schedule Name
     EquipmentLevel,           !- Design Level Calculation Method
-    504.0767176213645,        !- Design Level
+    509.5723349108364,        !- Design Level
     ,                         !- Watts per Floor Area
     ,                         !- Watts per Person
     0,                        !- Fraction Latent
@@ -1243,7 +1243,7 @@ ZoneInfiltration:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    9.961302e-03,             !- Design Flow Rate
+    9.888621e-03,             !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1257,7 +1257,7 @@ ZoneInfiltration:DesignFlowRate,
     ATTIC ZONE,               !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    1.021899e-02,             !- Design Flow Rate
+    9.960206e-03,             !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1271,7 +1271,7 @@ ZoneInfiltration:DesignFlowRate,
     GARAGE ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    1.123710e-02,             !- Design Flow Rate
+    1.139164e-02,             !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Exterior Surface Area
     ,                         !- Air Changes per Hour
@@ -1285,7 +1285,7 @@ ZoneVentilation:DesignFlowRate,
     LIVING ZONE,              !- Zone or ZoneList or Space or SpaceList Name
     INF-SCHED,                !- Schedule Name
     flow/zone,                !- Design Flow Rate Calculation Method
-    4.0,                      !- Design Flow Rate
+    4.662472,                 !- Design Flow Rate
     ,                         !- Flow Rate per Floor Area
     ,                         !- Flow Rate per Person
     ,                         !- Air Changes per Hour
@@ -1360,8 +1360,8 @@ ZoneHVAC:EquipmentConnections,
 Fan:OnOff,
     Supply Fan 1,             !- Name
     HVACAvailSched,           !- Availability Schedule Name
-    0.698,                    !- Fan Total Efficiency
-    418.0,                    !- Pressure Rise
+    0.73,                     !- Fan Total Efficiency
+    412.7,                    !- Pressure Rise
     0.7551,                   !- Maximum Flow Rate
     0.9,                      !- Motor Efficiency
     1,                        !- Motor In Airstream Fraction
@@ -1433,7 +1433,7 @@ Coil:Heating:Fuel,
     Supp Heating Coil 1,      !- Name
     HVACAvailSched,           !- Availability Schedule Name
     NaturalGas,               !- Fuel Type
-    0.767,                    !- Burner Efficiency
+    0.754,                    !- Burner Efficiency
     55000,                    !- Nominal Capacity
     SuppHeating Coil Air Inlet Node,    !- Air Inlet Node Name
     Air Loop Outlet Node;     !- Air Outlet Node Name
@@ -1459,7 +1459,7 @@ Coil:Heating:DX:MultiSpeed,
     4,                        !- Region number for Calculating HSPF
     2,                        !- Number of Speeds
     10164,                    !- Speed 1 Gross Rated Heating Capacity
-    3.93644519743775,         !- Speed 1 Gross Rated Heating COP
+    4.005297725256669,        !- Speed 1 Gross Rated Heating COP
     0.6135,                   !- Speed 1 Rated Air Flow Rate
     573.3,                    !- 2017 Speed 1 Rated Supply Air Fan Power Per Volume Flow Rate
     934.4,                    !- 2023 Speed 1 Rated Supply Air Fan Power Per Volume Flow Rate
@@ -1471,7 +1471,7 @@ Coil:Heating:DX:MultiSpeed,
     0.2,                      !- Speed 1 Rated Waste Heat Fraction of Power Input
     HAPCHeatWHFT Speed 1,     !- Speed 1 Waste Heat Function of Temperature Curve Name
     13866,                    !- Speed 2 Gross Rated Heating Capacity
-    3.93644519743775,         !- Speed 2 Gross Rated Heating COP
+    4.005297725256669,        !- Speed 2 Gross Rated Heating COP
     0.7551,                   !- Speed 2 Rated Air Flow Rate
     673.3,                    !- 2017 Speed 2 Rated Supply Air Fan Power Per Volume Flow Rate
     934.4,                    !- 2023 Speed 2 Rated Supply Air Fan Power Per Volume Flow Rate

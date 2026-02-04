@@ -22,7 +22,7 @@ parser = argparse.ArgumentParser(
 # explains syntax for running specific seeds
 parser.add_argument(
     "--seeds",
-    default="1-20",
+    default="1-5", # adjust accordingly
     help="Which seed directories to process (e.g., '1-5' or '1,3,5' or '1-10,15,18-20')"
 )
 args = parser.parse_args()
@@ -46,12 +46,13 @@ selected_seeds = parse_seed_range(args.seeds)
 # --- Configuration ---
 work_dir = "/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main" # Change to your working directory
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
-base_output_idf_dir = os.path.join(work_dir, "randomized_idfs")
+base_output_idf_dir = os.path.join(work_dir, "randomized_idfs_sobol") # change base output to sobol sequence generated
 weather_file = os.path.join(
     work_dir, "weather_data",
     "USA_IL_Chicago-OHare-Intl-AP.725300_AMY_2023.epw"
 )
-base_output_sim_dir = os.path.join(work_dir, "output")
+base_output_sim_dir = os.path.join(work_dir, "output_sobol") # output_sobol stores values
+base_output_sim_dir.mkdir(exist_ok=True)
   
 # --- MPI initialization ---
 comm = MPI.COMM_WORLD
