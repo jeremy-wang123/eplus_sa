@@ -1,1 +1,4 @@
 output_sobol/
+randomized_idfs_sobol/
+*.csv
+analysis_sobol/output_csv/*.csv
