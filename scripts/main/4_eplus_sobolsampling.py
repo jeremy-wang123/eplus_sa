@@ -69,39 +69,32 @@ def generate_sobol_sequence(num_files, seed = None):
     parameter_std['gap'] = gap_sd
     parameter_std['burner_eff'] = sd_frac # manually change burner efficiency
 
+
     # creating problem dictionary for sobol sampling
     # requires first initially excluding the cooling setpoint because it is dependent on the heating setpoint
     problem = {}
     names_for_problem = [n for n in parameter_names if n != 'cooling_setpoint']
+    means_for_problem = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
+    std_for_problem = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
+
+    # create normal distribution bounds for each parameter
+    bounds = []
+    for name in names_for_problem:
+        mean = means_for_problem[name]
+        sd = std_for_problem[name]
+        bounds.append([mean,sd])
 
     # dictionary formatted for Sobol sequence
     problem = {
         'num_vars': len(names_for_problem),
         'names': names_for_problem,
-        'bounds': [[0.0, 1.0]] * len(names_for_problem) # generating uniform distribution from 0 to 1
+        'bounds': bounds,
+        'dists': ['norm']*len(names_for_problem) # specify normal distribution for each parameter
     }
 
-    # establishing the seed for the random sample generation
-    if seed is not None:
-        np.random.seed(seed)
-
     # conduct sobol sequence sampling
-    N = num_files # baseline number of samples
-    uniform_sobol = sobol.sample(problem, N, calc_second_order=True) # array with dimensions [N*(2P+2), P]
-
-    ### Inverse CDF transformations
-    # create mean and std dictionaries without cooling set_point
-    means_for_cdf = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
-    std_for_cdf = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
-
-    # inverse cdf transformation
-    param_values = np.zeros_like(uniform_sobol)
-    for i, name in enumerate(problem['names']):
-        param_values[:,i] = norm.ppf(
-            uniform_sobol[:,i],
-            loc = means_for_cdf[name],
-            scale = std_for_cdf[name]
-        )
+    N = 1000 # baseline number of samples
+    param_values = sobol.sample(problem, N, calc_second_order=True) # array with dimensions [N*(2P+2), P]
 
     ### reintegrating the cooling setpoint into the generated sample
     # Find the column index of heating_sp
@@ -325,4 +318,4 @@ if __name__ == '__main__':
         overall_end = time.time()
         print(f"All 5 simulations completed in {overall_end - overall_start:.2f} seconds")
 
-# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_sobolsampling.py &
+# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_sobolsampling.py
