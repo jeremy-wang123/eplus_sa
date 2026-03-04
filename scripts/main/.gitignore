@@ -2,3 +2,7 @@ output_sobol/
 randomized_idfs_sobol/
 *.csv
 analysis_sobol/output_csv/*.csv
+.DS_Store
+**/.DS_Store
+figures_sobol/
+params_sobol/*.csv

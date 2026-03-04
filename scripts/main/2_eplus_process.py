@@ -52,7 +52,7 @@ weather_file = os.path.join(
     "USA_IL_Chicago-OHare-Intl-AP.725300_AMY_2023.epw"
 )
 base_output_sim_dir = os.path.join(work_dir, "output_sobol") # output_sobol stores values
-  
+
 # --- MPI initialization ---
 comm = MPI.COMM_WORLD
 rank = comm.Get_rank()
