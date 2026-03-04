@@ -29,7 +29,7 @@ param_dir.mkdir(exist_ok=True)
 
 # Input: number of files generated for each seed (N), seed number
 # Output: Samples (list of dictionaries, with each dictionary containing parameters and corresponding values)
-def generate_sobol_sequence(num_files, seed = None):
+def generate_sobol_sequence(num_files, seed):
     # standard deviation for each paramter is 5% of its original value
     sd_frac = 0.05
     # Means for each parameter
@@ -38,8 +38,8 @@ def generate_sobol_sequence(num_files, seed = None):
         'cooling_setpoint': 26.6,
         'people_per_area': 3.0,
         'infil_flow_rate_living': 0.01,
-        'infil_flow_rate_garage': 0.01,
-        'infil_flow_rate_attic': 0.01,
+        'infil_flow_rate_garage': 0.05,
+        'infil_flow_rate_attic': 0.05,
         'watts_equip': 500,
         'watts_lights': 1000,
         'heating_COP': 4.0,
@@ -94,7 +94,7 @@ def generate_sobol_sequence(num_files, seed = None):
 
     # conduct sobol sequence sampling
     N = 1000 # baseline number of samples
-    param_values = sobol.sample(problem, N, calc_second_order=True) # array with dimensions [N*(2P+2), P]
+    param_values = sobol.sample(problem, N, calc_second_order=True, seed = seed) # array with dimensions [N*(2P+2), P]
 
     ### reintegrating the cooling setpoint into the generated sample
     # Find the column index of heating_sp
@@ -111,7 +111,7 @@ def generate_sobol_sequence(num_files, seed = None):
 
     #  update parameter values to reinsert cooling setpoint
     param_values = np.insert(param_values, heating_idx+1, cooling_samples, axis=1) # inserting it in correct index
-    param_values = np.delete(param_values, gap_idx, axis=1) # deleting the gap column of values
+    param_values = np.delete(param_values, gap_idx+1, axis=1) # deleting the gap column of values
     parameter_names.remove('gap') # delete gap from list of parameters
     del means['gap']
 
@@ -220,10 +220,10 @@ def process_sample(args):
     except Exception as e:
         print(f"Error updating fan: {e}")
     
-    # Glazing
+    # Glazing - Some updating error is happening here
     try:
         glazing = idf.getobject('WINDOWMATERIAL:GLAZING', 'CLEAR 3MM')
-        glazing.fieldvalues[4] = str(round(params['solar_transmittance'], 3))
+        glazing.fieldvalues[5] = str(round(params['solar_transmittance'], 3))
     except Exception as e:
         print(f"Error updating glazing: {e}")
     
@@ -244,7 +244,7 @@ def process_sample(args):
     # Save
     out_path = output_idf_dir / f"randomized_{i+1}.idf"
     idf.save(str(out_path))
-    return out_path.name
+    return (i, out_path.name)
 
 ### MPI
 def run_simulation(seed_num):
@@ -291,9 +291,14 @@ def run_simulation(seed_num):
     
     # Rank 0 writes CSV and timing
     if rank == 0:
-        flat = [name for sub in all_out for name in sub]
+        flat_with_idx = [item for sub in all_out for item in sub]
+        flat_with_idx.sort(key=lambda x: x[0])  # sort by index i
+
+        # Need to extract just the filenames after sorting
+        sorted_filenames = [name for _, name in flat_with_idx]
+
         df = pd.DataFrame(samples)
-        df.insert(0, 'IDF_file', flat) # row 0 is the idf file name
+        df.insert(0, 'IDF_file', sorted_filenames) # row 0 is the idf file name
         df.insert(1, 'seed', seed) # row 1 is the seed
         csv_file = param_dir / f"simulation_parameters_seed_{seed_num}.csv"
         df.to_csv(csv_file, index=False)
