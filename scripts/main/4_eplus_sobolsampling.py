@@ -54,6 +54,7 @@ def generate_sobol_sequence(num_files, seed):
     gap_mean = means['cooling_setpoint'] - means['heating_setpoint']
     gap_sd = np.sqrt((sd_frac*means['heating_setpoint'])**2 + (sd_frac*means['cooling_setpoint'])**2)
     min_gap = 4 # establish minimum 4 degrees between heating and cooling setpoint
+    max_solar_transmittance = 1-0.075 # max solar transmittance
     means['gap'] = gap_mean # gap to means dictionary
 
     # creating a dictionary to store the std
@@ -77,6 +78,10 @@ def generate_sobol_sequence(num_files, seed):
     means_for_problem = {k: v for k, v in means.items() if k != 'cooling_setpoint'}
     std_for_problem = {k: v for k, v in parameter_std.items() if k != 'cooling_setpoint'}
 
+    # determine indexes for gap and solar transmittance (required truncated normal)
+    gap_idx = names_for_problem.index("gap")
+    solar_idx = names_for_problem.index("solar_transmittance")
+
     # create normal distribution bounds for each parameter
     bounds = []
     for name in names_for_problem:
@@ -84,12 +89,20 @@ def generate_sobol_sequence(num_files, seed):
         sd = std_for_problem[name]
         bounds.append([mean,sd])
 
+    bounds[gap_idx] = [min_gap, np.inf, means['gap'], parameter_std['gap']]
+    bounds[solar_idx] = [0, max_solar_transmittance, means['solar_transmittance'], parameter_std['solar_transmittance']]
+
+    # creating distributions
+    dists = ['norm'] * len(names_for_problem)
+    dists[gap_idx] = "truncnorm"
+    dists[solar_idx] = "truncnorm"
+
     # dictionary formatted for Sobol sequence
     problem = {
         'num_vars': len(names_for_problem),
         'names': names_for_problem,
         'bounds': bounds,
-        'dists': ['norm']*len(names_for_problem) # specify normal distribution for each parameter
+        'dists': dists
     }
 
     # conduct sobol sequence sampling
@@ -100,9 +113,6 @@ def generate_sobol_sequence(num_files, seed):
     # Find the column index of heating_sp
     heating_idx = problem['names'].index('heating_setpoint')
     gap_idx = problem['names'].index('gap')
-
-    # truncate distribution of gap to enforce minimum gap of 4
-    param_values[:, gap_idx] = np.maximum(param_values[:, gap_idx], min_gap)
 
     # Extract heating_sp samples from param_values
     heating_samples = param_values[:, heating_idx]
@@ -123,7 +133,7 @@ def generate_sobol_sequence(num_files, seed):
         for j in range(param_values.shape[1]):
             sample_dict[parameter_names[j]] = param_values[i,j]
         samples.append(sample_dict)
-    
+
     ### validating samples 
     invalid_samples = []
     for i, dict in enumerate(samples):
