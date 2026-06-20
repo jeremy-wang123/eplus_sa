@@ -1393,7 +1393,7 @@
     ,                        !- Control 3 Name
     ,                        !- Control 4 Object Type
     ,                        !- Control 4 Name
-    2.0;                     !- Temperature Difference Between Cutout And Setpoint {deltaC}
+    0;                       !- Temperature Difference Between Cutout And Setpoint {deltaC}
 
   ThermostatSetpoint:DualSetpoint,
     Setpoints,               !- Name

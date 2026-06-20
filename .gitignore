@@ -3,7 +3,9 @@ data/RESSTD/
 scripts/main/output/
 scripts/uniform/output
 scripts/main/randomized_idfs_uniform/
+scripts/main/randomized_idfs_realdata/
 scripts/main/output_uniform/
+scripts/main/output_realdata/
 scripts/main/randomized_idfs/
 scripts/uniform/randomized_idfs/
 scripts/tools/variable extraction/heating_objects_dataset.csv
