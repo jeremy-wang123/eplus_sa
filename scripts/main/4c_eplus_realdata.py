@@ -54,7 +54,7 @@ def generate_sobol_sequence(num_files, seed):
     }
 
     # param restrictions
-    min_gap = 0 
+    min_gap = 0 # 
     max_solar_transmittance = 1-0.075 # max solar transmittance
 
     # creating a dictionary to store the std
