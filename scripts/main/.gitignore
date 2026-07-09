@@ -3,9 +3,11 @@ randomized_idfs_sobol/
 randomized_idfs_uniform/
 randomized_idfs_beta/
 randomized_idfs_realdata/
+randomized_idfs_normal/
 output_uniform/
 output_beta/
 output_realdata/
+output_normal/
 *.csv
 analysis_sobol/output_csv/*.csv
 .DS_Store

@@ -16,8 +16,8 @@ from SALib.sample import sobol
 idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
 skeleton_idf_path = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf") # Change to your skeleton IDF path
 work_dir = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main") # Change to your working directory
-base_output_idf_dir = work_dir / "randomized_idfs_sobol"
-param_dir = work_dir / "params_sobol"
+base_output_idf_dir = work_dir / "randomized_idfs_normal"
+param_dir = work_dir / "params_normal"
 
 # Set IDD and working dir
 IDF.setiddname(idd_file_path)
@@ -334,4 +334,4 @@ if __name__ == '__main__':
         overall_end = time.time()
         print(f"All 5 simulations completed in {overall_end - overall_start:.2f} seconds")
 
-# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_sobolsampling.py
+# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 4_eplus_normalsampling.py
