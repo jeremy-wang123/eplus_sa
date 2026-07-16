@@ -13,7 +13,7 @@ import SALib
 from SALib.sample import sobol
 
 # Configurations
-idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
+idd_file_path = "/jumbo/keller-lab/Jeremy_Wang/eplus_sa/data/Energy+.idd" # Change to your IDD file path
 skeleton_idf_path = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/data/SingleFamilyHouse_TwoSpeed_CutoutTemperature.idf") # Change to your skeleton IDF path
 work_dir = Path("/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main") # Change to your working directory
 base_output_idf_dir = work_dir / "randomized_idfs_uniform"

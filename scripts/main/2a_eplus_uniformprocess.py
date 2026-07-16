@@ -45,7 +45,7 @@ selected_seeds = parse_seed_range(args.seeds)
   
 # --- Configuration ---
 work_dir = "/jumbo/keller-lab/Jeremy_Wang/eplus_sa/scripts/main" # Change to your working directory
-idd_file_path = "/jumbo/keller-lab/Applications/EnergyPlus-24-1-0/Energy+.idd" # Change to your IDD file path
+idd_file_path = "/jumbo/keller-lab/Jeremy_Wang/eplus_sa/data/Energy+.idd" # Change to your IDD file path
 base_output_idf_dir = os.path.join(work_dir, "randomized_idfs_uniform") # change base output to uniform sequence generated
 weather_file = os.path.join(
     work_dir, "weather_data",
@@ -148,4 +148,4 @@ comm.Barrier()
 if rank == 0:
     print(f"All done in {time.time() - overall_start:.1f}s")
     
-# mpirun -hostfile myhosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 2a_eplus_uniformprocess.py
+# mpirun -hostfile working_hosts -np 225 /jumbo/keller-lab/Applications/mambaforge/envs/eplus/bin/python 2a_eplus_uniformprocess.py
